@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import getStateOfAir from "../../../utils/getStateOfAir";
+import AirBar from "../../../components/Chart/AirBar";
 // import airPollutionGif from "../../../../assets/gif/air-pollution.gif";
 // eslint-disable-next-line no-unused-vars
-import { Chart as ChartJS } from "chart.js/auto";
-import { Bar } from "react-chartjs-2";
+
 const Current = ({ current }) => {
     const [stateOfAir] = useState(() =>
         getStateOfAir(current?.list[0].main.aqi)
@@ -16,25 +16,13 @@ const Current = ({ current }) => {
             </span>
         );
     };
-    const [data] = useState(() => {
-        const airData = current.list[0].components;
-        const labels = Object.keys(airData);
-        const datasets = [
-            {
-                label: "First dataset",
-                data: labels.map((label) => airData[label]),
-                borderWidth: 1,
-            },
-        ];
-        return {
-            labels,
-            datasets,
-        };
-    });
+
     return (
         <div>
             <div className="between mb-3">
-                <h1>Status: {stateOfAir?.status}</h1>
+                <h1 className="text-xl font-semibold mb-4">
+                    Status: {stateOfAir?.status}
+                </h1>
                 <div>{renderIcon()}</div>
             </div>
             <div className="w-full mb-3">
@@ -50,13 +38,13 @@ const Current = ({ current }) => {
                     ].map((item, index) => (
                         <div
                             key={item}
-                            className="w-[calc(100%/9)] px-3 border-b border-r border-t"
+                            className="w-[calc(100%/9)] border-b border-r border-t"
                         >
                             <div className="flex flex-col">
-                                <div className="font-semibold capitalize border-b">
+                                <div className="font-semibold capitalize border-b px-3">
                                     {item}
                                 </div>
-                                <div>
+                                <div className="px-3">
                                     {index !== 0 &&
                                         current.list[0].components[item]}
                                 </div>
@@ -65,23 +53,7 @@ const Current = ({ current }) => {
                     ))}
                 </div>
             </div>
-            <div className="h-[300px] w-full">
-                {/* <div
-                    className="h-[300px] bg-no-repeat bg-cover bg-center"
-                    style={{ backgroundImage: `url(${airPollutionGif})` }}
-                ></div> */}
-                <>
-                    <Bar
-                        options={{
-                            maintainAspectRatio: false,
-                            responsive: true,
-                        }}
-                        data={data}
-                        height={300}
-                        width="100%"
-                    />
-                </>
-            </div>
+            <AirBar datas={current.list} />
         </div>
     );
 };

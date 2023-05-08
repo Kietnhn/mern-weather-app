@@ -46,7 +46,7 @@ body {
         visibility: hidden !important;
     }
     .modal-content{
-        @apply dark:bg-[rgba(0,0,0,0.3)] bg-[rgba(255,255,255,0.3)] shadow-[0_4px_30px_rgba(255,255,255,0.1)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[4px];
+        @apply dark:bg-[rgba(0,0,0,0.3)] bg-[rgba(255,255,255,0.3)] dark:shadow-[0_4px_30px_rgba(255,255,255,0.1)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[4px];
     }
     .contact .leaflet-tile-loaded {
         filter: brightness(1) invert(1) grayscale(10);

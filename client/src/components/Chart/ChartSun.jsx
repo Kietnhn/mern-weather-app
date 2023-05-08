@@ -79,7 +79,6 @@ function ChartSun({ className, weather, timezone }) {
         };
     });
     const [options] = useState(() => {
-        console.log({ suntime });
         const image = getPointImage({ weather, timezone });
         const current = moment.unix(weather.dt).tz(timezone).format("HH");
         let sunPoint = arrayNull(48);
@@ -125,7 +124,7 @@ function ChartSun({ className, weather, timezone }) {
         };
     });
     return (
-        <div className={`${className} relative`}>
+        <div className={`${className || ""} relative`}>
             <div className="chart-sun">
                 <Line options={options} data={data} height={320} width="100%" />
             </div>

@@ -23,8 +23,37 @@ module.exports = {
                 slideShow: "slideShow .35s ease-in-out",
                 loadText: "loadText 5s linear infinite",
                 fadeLeft: "fadeLeft 1s cubic-bezier(0,0,0.2,1) ",
+                moveInSideWrap: "moveInSideWrap 15s linear infinite",
             },
             keyframes: {
+                moveInSideWrap:{
+                    "0%":{
+                        left:0,
+                        top:0,
+                    },
+                    "40%":{
+                        left: "100%",
+                        top: "100%",
+                        transform: "translate(-100%, -100%)"
+                    },
+                    "50%":{
+                        left: "100%",
+
+                        transform: "translate(-100%, 0)",
+                        top: 0
+                    },
+                    "90%":{
+                        left: 0,
+                        top: "100%",
+                        transform: "translate(0, -100%)"
+
+                    },
+                    "100%":{
+                        left: 0,
+                        top: 0
+                    },
+
+                },
                 fadeLeft: {
                     "0%": {
                         display: "none",

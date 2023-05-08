@@ -53,8 +53,8 @@ const DateForm = () => {
                 <div className="w-2/5 px-3" key={index}>
                     <div className="relative">
                         <input
-                            className="w-full py-2 px-3 text-[black]"
-                            placeholder={`Enter ${input} time`}
+                            className="w-full py-2 px-3 theme"
+                            placeholder={`Enter ${input} time as YYYY/MM/DD`}
                             value={inputs[input] || ""}
                             onBlur={handleValidateDate}
                             onChange={handleSetInput}

@@ -5,33 +5,8 @@ import { Line } from "react-chartjs-2";
 import moment from "moment-timezone";
 
 const AirChart = ({ list = [], timezone }) => {
-    console.log("list", list);
     const [data, setData] = useState(null);
-    const [options] = useState({
-        maintainAspectRatio: false,
-        responsive: true,
-        interaction: {
-            mode: "index",
-            intersect: false,
-        },
-        stacked: false,
-        plugins: {
-            legend: {
-                textTransform: "capitalize",
-                position: "bottom",
-            },
-            tooltip: {
-                callbacks: {
-                    title: function (chart) {
-                        return moment
-                            .unix(list[chart[0].dataIndex].dt)
-                            .tz(timezone)
-                            .format("YYYY/MM/DD-HH:mm");
-                    },
-                },
-            },
-        },
-    });
+    const [options, setOptions] = useState(null);
     useEffect(() => {
         const labels = list?.map((item) =>
             moment.unix(item.dt).tz(timezone).format("HH:mm")
@@ -49,6 +24,33 @@ const AirChart = ({ list = [], timezone }) => {
         setData(data);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [list]);
+    useEffect(() => {
+        setOptions({
+            maintainAspectRatio: false,
+            responsive: true,
+            interaction: {
+                mode: "index",
+                intersect: false,
+            },
+            stacked: false,
+            plugins: {
+                legend: {
+                    textTransform: "capitalize",
+                    position: "bottom",
+                },
+                tooltip: {
+                    callbacks: {
+                        title: function (chart) {
+                            return moment
+                                .unix(list[chart[0].dataIndex].dt)
+                                .tz(timezone)
+                                .format("YYYY/MM/DD-HH:mm");
+                        },
+                    },
+                },
+            },
+        });
+    }, [list, timezone]);
     useEffect(() => {
         console.log({ data });
     }, [data]);
