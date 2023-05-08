@@ -2,16 +2,16 @@ import React, { useState } from "react";
 // import navs from "../../routes/navigate";
 import today from "../../routes/today";
 import ToolTip from "../../components/ToolTip";
+import scrollToComponet from "../../utils/scrollToComponent";
 // import { NavLink } from "react-router-dom";
 const Navigation = () => {
     const [isActive, setIsActive] = useState(0);
     const handleScrollToComponent = (link, index) => {
-        const comp = document.querySelector(link);
-        comp.scrollIntoView({ behavior: "smooth", block: "start" });
+        scrollToComponet(link);
         setIsActive(index);
     };
     return (
-        <div className="fixed top-1/2 -translate-y-1/2 left-0  z-[9999]">
+        <div className="fixed top-1/2 -translate-y-1/2 left-0  z-[999]">
             <div className="p-2 flex-col between theme font-semibold navtoday">
                 {today.map((i, index) => {
                     const Icon = i.icon;
@@ -29,11 +29,9 @@ const Navigation = () => {
                              border-[transparent_white_transparent_transparent] dark:border-[transparent_black_transparent_transparent]`}
                             >
                                 <button
-                                    className={`px-3 py-2 ${
-                                        index === isActive
-                                            ? "text-theme"
-                                            : "text-[#ccc]"
-                                    }`}
+                                    className={`px-3 py-2 text-[#ccc] ${
+                                        index === isActive ? "text-theme" : ""
+                                    } ${i.link.replace("#", "")}`}
                                 >
                                     <Icon width="24px" height="24px" />
                                 </button>

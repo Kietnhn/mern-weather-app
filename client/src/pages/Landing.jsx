@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { LOCAL_STORAGE_TOKEN_NAME } from "../contexts/constants";
 import RecommendPosition from "../components/RecommendPosition";
 import SearchCountryState from "../views/Search/SearchCountryState";
+import CitiesLanding from "../components/CitiesLanding";
 // import { PositionContext } from "../contexts/PositionContext";
 // import landing1 from "../assets/img/landing1.jpg";
 // import landing2 from "../assets/img/landing2.jpg";
@@ -56,7 +57,7 @@ function Landing() {
     return (
         <div
             className={`bg-no-repeat bg-cover bg-center brightness-90 lg:brightness-100 w-full
-             h-screen dark:bg-[#101014] bg-white px-[26px] py-5 relative lg:w-screen overflow-hidden lg:h-screen lg:mx-auto  "
+             h-screen dark:bg-[#101014] bg-white px-[26px] relative lg:w-screen overflow-hidden lg:h-screen lg:mx-auto  "
             `}
             style={{ backgroundImage: `url(${homepage})` }}
         >
@@ -75,18 +76,20 @@ function Landing() {
                     </button>
                 </div>
             )}
-            <div className="relative mx-auto mt-5  w-[300px] z-[49] lg:w-[900px]  lg:py-4  ">
-                <div className="mb-4 lg:flex lg:justify-center lg:items-end">
-                    <h1 className="text-6xl font-bold text-center title ">
-                        WeT
-                    </h1>
+            <div className="relative mx-auto pt-5 pb-10  w-[300px] z-[49] lg:w-[900px] h-screen flex flex-col justify-between  ">
+                <div>
+                    <div className="mb-4 lg:flex lg:justify-center lg:items-end">
+                        <h1 className="text-6xl font-bold text-center title ">
+                            WeT
+                        </h1>
+                    </div>
+                    {/* <Search /> */}
+                    <SearchCountryState />
                 </div>
-                {/* <Search /> */}
-                <SearchCountryState />
+                {/* famous Cities using data default */}
+                <CitiesLanding />
             </div>
-            <div>
-                <RecommendPosition />
-            </div>
+            <RecommendPosition />
         </div>
     );
 }

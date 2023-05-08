@@ -4,7 +4,13 @@ import { Doughnut } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const SemiDoughnut = ({ name, percen, onClick, message = "",className="" }) => {
+const SemiDoughnut = ({
+    name,
+    percen,
+    onClick,
+    message = "",
+    className = "",
+}) => {
     return (
         <div className={className}>
             <div className="center">
@@ -13,10 +19,16 @@ const SemiDoughnut = ({ name, percen, onClick, message = "",className="" }) => {
                 </button>
             </div>
             <div className="relative px-4 my-4">
-                <div className="absolute top-[50%] left-1/2 -translate-x-1/2 -translate-y-1/2">
+                <div className="absolute top-[50%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+                    <h3 className="font-semibold capitalize text-center">
+                        {message}
+                    </h3>
+
                     <h2>{percen}%</h2>
                 </div>
                 <Doughnut
+                    height={260}
+                    width={260}
                     data={{
                         labels: [],
                         datasets: [
@@ -40,7 +52,6 @@ const SemiDoughnut = ({ name, percen, onClick, message = "",className="" }) => {
                     }}
                 />
             </div>
-            <h3 className="font-semibold capitalize text-center">{message}</h3>
         </div>
     );
 };

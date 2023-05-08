@@ -70,7 +70,7 @@ const WeatherContextProvider = ({ children }) => {
                 });
             dispatch({
                 type: ADD_COMPARE,
-                payload: data ,
+                payload: data,
             });
         } catch (e) {
             dispatch({
@@ -80,7 +80,33 @@ const WeatherContextProvider = ({ children }) => {
             console.log(e);
         }
     };
+    const getCurrentWeatherData = async ({ lat, lon }) => {
+        try {
+            const data = await axios
+                .get(`${apiUrl}/weather/only-current`, {
+                    params: {
+                        lat,
+                        lon,
+                    },
+                })
+                .then((res) => {
+                    const dataResponse = res.data.data;
 
+                    const { timezone, current, lat, lon } = dataResponse;
+
+                    return {
+                        timezone,
+                        currentWeather: current,
+                        lat,
+                        lon,
+                    };
+                });
+
+            return data;
+        } catch (error) {
+            console.error(error);
+        }
+    };
     const getWeatherData = async ({ lat, lon }) => {
         try {
             dispatch({
@@ -263,6 +289,7 @@ const WeatherContextProvider = ({ children }) => {
         getCompareWeatherData,
         getHistoryWeather2_5,
         getHistoryWeather,
+        getCurrentWeatherData,
         getSunData,
         weatherState,
         setUnitTemp,

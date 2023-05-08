@@ -34,7 +34,7 @@ const MainView = () => {
         <Wrapper id="mainview">
             <CompareMode />
 
-            <div className="p-3 flex -mx-3  flex-wrap">
+            <div className="flex p-3 h-full -mx-3  flex-wrap">
                 <div className="w-4/5 px-3 mb-3 ">
                     <ViewInfo
                         weather={weather()}
@@ -62,7 +62,7 @@ const MainView = () => {
                     </div>
                 </div>
                 <div className="w-4/5 px-3 mb-3">
-                    <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center justify-between ">
                         <h3 className="text-xl font-semibold">
                             Hourly weather infomation:
                             <span className="ml-1 capitalize">{dataChart}</span>
@@ -76,7 +76,7 @@ const MainView = () => {
                 </div>
                 <div className="w-1/5 px-3 mb-3">
                     <SemiDoughnut
-                        className="p-2 h-full between flex-col"
+                        className="p-2 h-full pt-12  between flex-col"
                         name="clouds"
                         percen={weather().clouds}
                         message={weather().weather[0].description}

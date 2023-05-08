@@ -1,6 +1,6 @@
 const Wrapper = ({ children, title = "", styleTitle, theme = "theme", id }) => {
     return (
-        <div className={`w-full h-screen pt-[52px] mb-5 ${theme}`} id={id}>
+        <div className={`w-full h-screen pt-[52px] pb-12 ${theme}`} id={id}>
             <div className="w-[1300px] mx-auto h-full">
                 {title && (
                     <h1

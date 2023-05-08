@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { WeatherContext } from "../../contexts/WeatherContext";
 import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -8,17 +8,18 @@ import MarkerMap from "./MarkerMap";
 import InfoMap from "./InfoMap";
 const WeatherMap = () => {
     const {
-        weatherState: {
-            weatherData: { currentWeather, lat, lon, timezone },
-        },
+        weatherState: { weatherData },
     } = useContext(WeatherContext);
+    const [weatherOnMap, setWeatherOnMap] = useState({ ...weatherData });
     const [map, setMap] = useState(null);
-
+    useEffect(() => {
+        console.log(weatherOnMap);
+    }, [weatherOnMap]);
     return (
         <div className="relative h-full">
             <MapContainer
                 className="markercluster-map h-full p-3"
-                center={[lat, lon]}
+                center={[weatherOnMap.lat, weatherOnMap.lon]}
                 zoom={10}
                 zoomControl={true}
                 scrollWheelZoom={true}
@@ -29,22 +30,28 @@ const WeatherMap = () => {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <Controls />
-                <MarkerMap weather={currentWeather} lat={lat} lon={lon} />
+                <MarkerMap
+                    setWeatherOnMap={setWeatherOnMap}
+                    lat={weatherOnMap.lat}
+                    lon={weatherOnMap.lon}
+                />
             </MapContainer>
             {map && (
                 <ResetLocation
+                    setWeatherOnMap={setWeatherOnMap}
                     map={map}
-                    center={[lat, lon]}
+                    center={[weatherOnMap.lat, weatherOnMap.lon]}
                     zoom={10}
                     className="absolute right-2.5 bottom-2.5 z-[999]"
                 />
             )}
             {map && (
                 <InfoMap
-                    timezone={timezone}
+                    setWeatherOnMap={setWeatherOnMap}
+                    timezone={weatherData.timezone}
                     map={map}
-                    weather={currentWeather}
-                    className="absolute top-20 left-2.5 bg-[white] z-[999]"
+                    weather={weatherOnMap}
+                    className="absolute top-20 left-2.5 z-[999]"
                 />
             )}
         </div>

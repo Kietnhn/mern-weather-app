@@ -17,7 +17,11 @@ const DesktopHeader = () => {
     return (
         <div className="fixed top-0 left-0 right-0 theme dark:border-[unset]   z-[9999]">
             <div className=" w-[1300px] mx-auto">
-                <div className="flex items-center -mx-3 ">
+                <div
+                    className={`flex items-center -mx-3 ${
+                        isCompare ? "h-[52px]" : ""
+                    }`}
+                >
                     <div className="w-4/5 px-3">
                         <div className="between">
                             <div className="flex items-center">
@@ -49,7 +53,7 @@ const DesktopHeader = () => {
                                     <SaveButton />
                                 </div>
                             </div>
-                            <SearchCountryState />
+                            <SearchCountryState size="small" />
                         </div>
                     </div>
 

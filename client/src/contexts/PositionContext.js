@@ -22,7 +22,7 @@ const PositionContextProvider = ({ children }) => {
             payload: true,
         });
         try {
-            const data = await axios
+            const response = await axios
                 .get(`${apiUrl}/position`, {
                     params: {
                         position,
@@ -30,20 +30,14 @@ const PositionContextProvider = ({ children }) => {
                     },
                 })
                 .then((res) => {
-                    if (res.data.data.length < 1) {
-                        return [];
-                    }
-                    return res.data.data;
+                    return res.data;
                 });
-            dispatch({
-                type: SET_POSITIONS,
-                payload: data,
-            });
-            console.log("positions", data);
-            if (data.length < 1) {
-                return { success: false, data, message: "No results found" };
+            if(response.success) {
+                return response.data;
+            }else{
+                return []
             }
-            return { success: true, data, message: "" };
+            
         } catch (error) {
             dispatch({
                 type: SET_LOADING,

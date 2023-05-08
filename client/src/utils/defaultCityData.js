@@ -2,6 +2,7 @@ import hanoiImg from "../assets/img/hanoi.jpg";
 import londonImg from "../assets/img/london.webp";
 import parisImg from "../assets/img/paris.webp";
 import tokyoImg from "../assets/img/tokyo.webp";
+import newyorkImg from "../assets/img/newyork.jpg";
 const data = [
     {
         lat: 51.5073219,
@@ -35,8 +36,17 @@ const data = [
         lon: 2.3200410217200766,
         weather: {
             name: "paris",
-            country: "FR",
+            country: "US",
             imgUrl: parisImg,
+        },
+    },
+    {
+        lat: 40.71277530,
+        lon: -74.00597280,
+        weather: {
+            name: "New York",
+            country: "FR",
+            imgUrl: newyorkImg
         },
     },
 ];

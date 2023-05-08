@@ -2,16 +2,26 @@ import React, { useCallback, useContext } from "react";
 import { PositionContext } from "../../contexts/PositionContext";
 import ToolTip from "../ToolTip";
 import { MarkerIcon, ReCenterIcon } from "../icons";
-const ResetLocation = ({ map, center, zoom, className }) => {
+import { WeatherContext } from "../../contexts/WeatherContext";
+import { useEffect } from "react";
+const ResetLocation = ({ map, center, zoom, className, setWeatherOnMap }) => {
     const {
         setAreaOnMap,
         positionState: { areaOnMap },
     } = useContext(PositionContext);
+    const {
+        weatherState: { weatherData },
+    } = useContext(WeatherContext);
     const onClick = useCallback(() => {
         setAreaOnMap("");
+        setWeatherOnMap(weatherData);
+
         map.setView(center, zoom);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [map]);
+    useEffect(() => {
+        map.setView(center, zoom);
+    }, [center, map, zoom]);
     const handleReCenter = () => {
         const { lat, lon } = areaOnMap;
         map.setView([lat, lon], zoom);

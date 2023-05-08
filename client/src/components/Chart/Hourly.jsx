@@ -24,12 +24,6 @@ const Hourly = ({ weathers = [] }) => {
         const labels = weathers.map((weather) =>
             moment.unix(weather.dt).tz(timezone).format("HH:mm")
         );
-        // if (!historyWeather) {
-        // } else {
-        //     labels = historyWeather.hourly.time.map(
-        //         (item) => item.split("T")[1]
-        //     );
-        // }
 
         // historyWeather
         const historyDatasets = [];
@@ -89,6 +83,7 @@ const Hourly = ({ weathers = [] }) => {
             },
             plugins: {
                 legend: {
+                    display: false,
                     textTransform: "capitalize",
                     position: "bottom",
                 },
@@ -125,24 +120,5 @@ const Hourly = ({ weathers = [] }) => {
         </>
     );
 };
-// if (typeof weather[dataChart] === "object") {
-//     return weather[dataChart][
-//         setTempByTime(
-//             moment
-//                 .unix(weather.dt)
-//                 .tz(timezone)
-//                 .format("HH")
-//         )
-//     ];
-// }
-// if (
-//     ["moonrise", "moonset", "sunrise", "sunset"].includes(
-//         dataChart
-//     )
-// ) {
-//     return moment
-//         .unix(weather[dataChart])
-//         .tz(timezone)
-//         .format("HH");
-// }
+
 export default Hourly;

@@ -1,11 +1,14 @@
 import { useState, useContext, useEffect } from "react";
 import { PositionContext } from "../../contexts/PositionContext";
-const InfoMap = ({ weather, map, className, timezone }) => {
+import SearchMap from "../../views/Search/SearchMap";
+import { WeatherContext } from "../../contexts/WeatherContext";
+import scrollToComponent from "../../utils/scrollToComponent";
+const InfoMap = ({ weather, map, className, timezone, setWeatherOnMap }) => {
     const {
         positionState: { areaOnMap },
     } = useContext(PositionContext);
+    const { getWeatherData } = useContext(WeatherContext);
     const [position] = useState(map.getCenter());
-    const [search, setSearch] = useState("");
     const [alert, setAlert] = useState(false);
     const [baseLayer, setBaseLayer] = useState("Temperature");
     const [customLatLon] = useState([
@@ -30,9 +33,15 @@ const InfoMap = ({ weather, map, className, timezone }) => {
             unit: "%",
         },
     });
-    const handleChangePosition = () => {
-        console.log("change");
+    const handleChangePosition = async () => {
+        const { lat, lon } = weather;
+        await getWeatherData({ lat, lon });
+        setAlert(false);
+        scrollToComponent("#mainview");
+        document.querySelector(".mainview").classList.toggle("text-theme");
+        document.querySelector(".weathermap").classList.toggle("text-theme");
     };
+
     useEffect(() => {
         map.on("baselayerchange", (e) => {
             setBaseLayer(e.name);
@@ -40,20 +49,17 @@ const InfoMap = ({ weather, map, className, timezone }) => {
     }, [map]);
     return (
         <div className={className}>
-            <div className="p-3">
-                <div>
-                    <input
-                        className="py-2"
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                        placeholder="Search..."
-                    />
-                </div>
+            <div className="p-3 theme modal-content">
+                <SearchMap
+                    map={map}
+                    zoom={10}
+                    setWeatherOnMap={setWeatherOnMap}
+                />
                 <div className=" font-bold mb-2 flex items-center gap-2">
                     <span className="text-lg text-text"> Marker at:</span>
                     <h1 className="text-xl">
                         {areaOnMap
-                            ? `${areaOnMap.name}-${areaOnMap.country}`
+                            ? `${areaOnMap.country}-${areaOnMap.name}`
                             : timezone}
                     </h1>
                 </div>
@@ -73,28 +79,64 @@ const InfoMap = ({ weather, map, className, timezone }) => {
                 </div>
                 <div className="info font-semibold mb-2">
                     <h2 className="text-xl">{baseLayer}</h2>
-                    <h2 className="text-6xl">
-                        {weather[customBaseLayer[baseLayer].attr]}
-                        {customBaseLayer[baseLayer].unit}
+                    <h2
+                        className={`text-6xl ${
+                            baseLayer === "Temperature" ? "flex" : ""
+                        }`}
+                    >
+                        {
+                            weather?.currentWeather[
+                                customBaseLayer[baseLayer].attr
+                            ]
+                        }
+                        <span className="text-4xl text-text">
+                            {customBaseLayer[baseLayer].unit}
+                        </span>
                     </h2>
                 </div>
                 <div>
-                    <button className="button" onClick={() => setAlert(true)}>
+                    <button
+                        className="button w-full"
+                        onClick={() => setAlert(true)}
+                    >
                         View more
                     </button>
                 </div>
             </div>
             {alert && (
-                <div className="fixed inset-0">
-                    <div className="absolute theme top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
-                        <p>This will change your current Position!</p>
-                        <div className="between">
-                            <button onClick={() => setAlert(false)}>
-                                Cancel
-                            </button>
-                            <button onClick={handleChangePosition}>
-                                Use this Position
-                            </button>
+                <div
+                    className="fixed inset-0 z-[9999]"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        setAlert(false);
+                    }}
+                >
+                    <div
+                        className="absolute  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 "
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <div className="theme modal-content p-3 font-semibold">
+                            <p className="text-xl mb-3">
+                                This will change your current Position!
+                            </p>
+                            <div className="between -mx-3">
+                                <div className="w-1/2 px-3">
+                                    <button
+                                        className="w-full button"
+                                        onClick={() => setAlert(false)}
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                                <div className="w-1/2 px-3">
+                                    <button
+                                        className="w-full button-reverse"
+                                        onClick={handleChangePosition}
+                                    >
+                                        Use this Position
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

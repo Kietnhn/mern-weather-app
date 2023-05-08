@@ -41,6 +41,13 @@ body {
     .show {
         @apply block;
     }
+    .hide{
+        display: none !important;
+        visibility: hidden !important;
+    }
+    .modal-content{
+        @apply dark:bg-[rgba(0,0,0,0.3)] bg-[rgba(255,255,255,0.3)] shadow-[0_4px_30px_rgba(255,255,255,0.1)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[4px];
+    }
     .contact .leaflet-tile-loaded {
         filter: brightness(1) invert(1) grayscale(10);
     }
@@ -50,6 +57,9 @@ body {
     .contact .leaflet-container .leaflet-control-attribution {
         background: none;
         background-color: #fff;
+    }
+    .text-theme{
+        @apply text-[black] dark:text-[white];
     }
 }
 @layer components {
@@ -62,9 +72,7 @@ body {
     .theme-reverse {
         @apply dark:bg-[white] dark:text-[black] text-[white] bg-dark dark:shadow-lg shadow-[rgba(255,255,255,.1)];
     }
-    .text-theme{
-        @apply text-[black] dark:text-[white];
-    }
+   
     .center {
         @apply flex items-center justify-center;
     }
