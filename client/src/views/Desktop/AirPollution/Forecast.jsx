@@ -8,11 +8,9 @@ const Forecast = ({ lat, lon, timezone }) => {
     } = useContext(AirContext);
 
     useEffect(() => {
-        if (!forecast) {
-            getForecastAirPollution({ lat, lon });
-        }
+        getForecastAirPollution({ lat, lon });
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [forecast]);
+    }, [lat, lon]);
     if (forecast) console.log({ forecast });
     return (
         <div>

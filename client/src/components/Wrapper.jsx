@@ -1,7 +1,18 @@
-const Wrapper = ({ children, title = "", styleTitle, theme = "theme", id }) => {
+const Wrapper = ({
+    children,
+    title = "",
+    styleTitle,
+    theme = "theme",
+    id,
+    sizeFull = false,
+}) => {
     return (
         <div className={`w-full h-screen pt-[52px] pb-12 ${theme}`} id={id}>
-            <div className="w-[1300px] mx-auto h-full">
+            <div
+                className={` mx-auto h-full ${
+                    sizeFull ? "w-full" : "w-[1300px]"
+                }`}
+            >
                 {title && (
                     <h1
                         className={

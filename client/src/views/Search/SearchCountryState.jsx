@@ -1,7 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { PositionContext } from "../../contexts/PositionContext";
 import { Country, State } from "country-state-city";
-import { ChevronDownIcon, SearchIcon } from "../../components/icons";
+import {
+    ChevronDownIcon,
+    ClearInputIcon,
+    SearchIcon,
+} from "../../components/icons";
 import { useNavigate } from "react-router-dom";
 import { WeatherContext } from "../../contexts/WeatherContext";
 import getFlagUrlByIsoCode from "../../utils/getFlagByIsoCode";
@@ -27,7 +31,7 @@ const SearchCountryState = ({ size = "normal" }) => {
     // function
     const handleSetCountry = (country) => {
         setCountry(country);
-        autoCompleteContryRef.current.classList.toggle("show");
+        autoCompleteContryRef.current.classList.remove("show");
 
         setInput("");
 
@@ -35,11 +39,7 @@ const SearchCountryState = ({ size = "normal" }) => {
     };
 
     const handleChangeInput = (e) => {
-        // if (!country) {
-        //     selectRef.current.focus();
-        //     return;
-        // }
-        autoCompleteContryRef.current.classList.toggle("show");
+        // autoCompleteContryRef.current.classList.re("show");
 
         setInput(e.target.value);
     };
@@ -63,7 +63,6 @@ const SearchCountryState = ({ size = "normal" }) => {
         }
     };
     const handleSearch = async () => {
-        console.log({ position });
         if (!position) return;
         const lat = position.latitude;
         const lon = position.longitude;
@@ -105,9 +104,18 @@ const SearchCountryState = ({ size = "normal" }) => {
                 <button
                     className={` h-full ${
                         size === "small" ? "min-w-[130px]" : "min-w-[160px]"
-                    } px-4 between`}
+                    }  between px-4`}
                     onClick={() =>
-                        autoCompleteContryRef.current.classList.toggle("show")
+                        autoCompleteContryRef.current.classList.add("show")
+                    }
+                    onBlur={() =>
+                        setTimeout(
+                            () =>
+                                autoCompleteContryRef.current.classList.remove(
+                                    "show"
+                                ),
+                            200
+                        )
                     }
                 >
                     {country && (
@@ -149,21 +157,6 @@ const SearchCountryState = ({ size = "normal" }) => {
                         </span>
                     ))}
                 </div>
-                {/* <select
-                    name="country"
-                    onChange={handleSetCountry}
-                    className="outline-none font-semibold h-full px-4 rounded-l-full  border-2 border-theme"
-                >
-                    {Country.getAllCountries().map((country) => (
-                        <option
-                            key={country.isoCode}
-                            value={country.isoCode}
-                            className="text-sm"
-                        >
-                            {country.isoCode} - {country.name}
-                        </option>
-                    ))}
-                </select> */}
             </div>
             <div className="relative">
                 <input
@@ -187,6 +180,18 @@ const SearchCountryState = ({ size = "normal" }) => {
                     }}
                     onBlur={() => setTimeout(() => setIsShowAuto(false), 250)}
                 />
+                {input && (
+                    <button
+                        onClick={() => setInput("")}
+                        className={`absolute top-1/2 -translate-y-1/2 ${
+                            size === "small" ? "right-[46px]" : "right-[66px]"
+                        } p-1`}
+                    >
+                        <span>
+                            <ClearInputIcon width="16px" height="16px" />
+                        </span>
+                    </button>
+                )}
                 {isShowAuto && (
                     <div
                         className="absolute top-full z-40 right-0"
@@ -214,7 +219,9 @@ const SearchCountryState = ({ size = "normal" }) => {
                 )}
             </div>
             <button
-                className="absolute top-[50%] right-4 -translate-y-1/2 "
+                className={`absolute right-0 top-0 bottom-0 ${
+                    size === "small" ? "w-10" : "w-14"
+                } rounded-r-full border-2 bg-text  center`}
                 onClick={handleSearch}
                 disabled={!position}
             >

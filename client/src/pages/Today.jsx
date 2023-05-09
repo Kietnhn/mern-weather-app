@@ -266,7 +266,7 @@ function Today() {
                     </div>
                 </div>
                 {/* chart sun */}
-                <ChartSun className="mt-4 mb-40" />
+                {/* <ChartSun className="mt-4 mb-40" /> */}
             </div>
         </>
     );

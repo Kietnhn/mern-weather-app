@@ -2,9 +2,9 @@ import Map from "./Map";
 import MainView from "./MainView";
 import AirPollution from "./AirPollution/AirPollution";
 import Sunview from "./Sunview";
-import Contact from "../Contact/Contact";
 import Navigation from "./Navigation";
 import Cities from "./Cities";
+import Footer from "../Footer/Footer";
 // import { Fade } from "react-awesome-reveal";
 const TodayDesktop = () => {
     return (
@@ -16,7 +16,7 @@ const TodayDesktop = () => {
             <AirPollution />
             <Sunview />
             <Map />
-            <Contact />
+            <Footer />
         </>
     );
 };

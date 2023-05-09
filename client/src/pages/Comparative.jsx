@@ -13,8 +13,8 @@ const Comparative = () => {
     } = useContext(WeatherContext);
     return (
         <Wrapper>
-            <div className="h-full flex flex-col justify-between ">
-                <div className="flex w-full flex-wrap">
+            <div className="h-full p-3 flex flex-col justify-between ">
+                <div className="flex w-full flex-wrap mb-3">
                     <div className="w-2/5 px-3 mb-3">
                         <DetailsInfo weather={hourlyWeather[0]} />
                     </div>

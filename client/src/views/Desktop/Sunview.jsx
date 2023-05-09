@@ -22,7 +22,7 @@ const Sunview = () => {
     return (
         <Wrapper title="Sun & Moon" id="sunmoon">
             <div className="relative h-[calc(100%-40px)] flex flex-col justify-end">
-                <div className="absolute top-0 left-0 bg-transparent animate-moveInSideWrap">
+                <div className="absolute min-w-[260px] top-0 left-0 bg-transparent animate-moveInSideWrap hover:pause">
                     {sunData && (
                         <div className="theme modal-content border-1 rounded-2xl p-3">
                             {[...Object.keys(sunData)].map((item) => (

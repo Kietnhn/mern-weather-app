@@ -1,5 +1,3 @@
-import Search from "../Search";
-
 import { Menu as ModalMenu } from "../../components/Modals/Menu";
 
 function Header() {
@@ -8,7 +6,7 @@ function Header() {
             <div className="flex items-center justify-between gap-4">
                 <ModalMenu className="" />
 
-                <Search />
+                {/* <Search /> */}
             </div>
         </div>
     );
