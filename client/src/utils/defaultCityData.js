@@ -36,7 +36,7 @@ const data = [
         lon: 2.3200410217200766,
         weather: {
             name: "paris",
-            country: "US",
+            country: "FR",
             imgUrl: parisImg,
         },
     },
@@ -45,7 +45,7 @@ const data = [
         lon: -74.00597280,
         weather: {
             name: "New York",
-            country: "FR",
+            country: "US",
             imgUrl: newyorkImg
         },
     },

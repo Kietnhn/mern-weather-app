@@ -55,7 +55,6 @@ const PositionContextProvider = ({ children }) => {
         try {
             const response = await axios(`${apiUrl}/position/current`);
             if (response.data.success) {
-                console.log("current Position", response.data.data);
                 dispatch({
                     type: SET_CURRENT_POSIITON,
                     payload: response.data.data,

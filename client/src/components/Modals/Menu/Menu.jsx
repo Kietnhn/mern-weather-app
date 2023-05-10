@@ -2,48 +2,9 @@ import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { WeatherContext } from "../../../contexts/WeatherContext";
-import {
-    AboutUsIcon,
-    CityIcon,
-    HomeIcon,
-    LogOutIcon,
-    MenuBarIcon,
-    SettingIcon,
-    ToolIcon,
-} from "../../icons";
+import { LogOutIcon, MenuBarIcon } from "../../icons";
+import menuData from "../../../routes/menu";
 
-const categories = [
-    {
-        title: "Home",
-        icon: HomeIcon,
-        to: "/",
-        isPublic: true,
-    },
-    {
-        title: "My City",
-        icon: CityIcon,
-        to: "/my-city",
-        isPublic: false,
-    },
-    {
-        title: "About Us",
-        icon: AboutUsIcon,
-        to: null,
-        isPublic: true,
-    },
-    {
-        title: "Setting",
-        icon: SettingIcon,
-        to: null,
-        isPublic: true,
-    },
-    {
-        title: "Terms & Conditions",
-        icon: ToolIcon,
-        to: null,
-        isPublic: true,
-    },
-];
 function Menu({ className }) {
     const {
         authState: { isAuthenticated, user },
@@ -70,7 +31,7 @@ function Menu({ className }) {
                 >
                     <div
                         onClick={(e) => e.stopPropagation()}
-                        className="absolute top-0 bottom-0 left-0 w-[80vw] p-6 dark:bg-secondDark dark:text-primaryText bg-primaryText text-dark rounded-r-xl shadow-[0_4px_16px_#000] animate-slideShow"
+                        className="absolute top-0 bottom-0 left-0 w-[80vw] p-6 rounded-r-xl theme modal-content animate-slideShow"
                     >
                         <div className="flex h-full flex-col justify-between">
                             <div>
@@ -108,7 +69,7 @@ function Menu({ className }) {
                                     </>
                                 )}
                                 <ul className="category flex flex-col">
-                                    {categories.map((category, index) => {
+                                    {menuData.map((category, index) => {
                                         const Icon = category.icon;
                                         return category.isPublic ||
                                             isAuthenticated ? (
