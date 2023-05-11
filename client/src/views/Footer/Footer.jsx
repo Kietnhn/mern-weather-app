@@ -9,16 +9,16 @@ const Footer = () => {
             <div className="h-full flex flex-col justify-end">
                 <Contact />
                 <footer className="theme-reverse pt-12 pb-24">
-                    <div className="w-[1300px] mx-auto">
-                        <div className="flex -mx-3">
-                            <div className="w-1/4 px-3"></div>
-                            <div className="w-1/4 px-3">
+                    <div className="w-full lg:max-w-full lg:w-[1300px] mx-auto">
+                        <div className="flex flex-wrap -mx-3">
+                            <div className="w-full lg:w-1/4 px-3"></div>
+                            <div className="w-full lg:w-1/4 px-3">
                                 <h3>Contact me</h3>
                                 <div>
                                     nguyenhoangkiet0810@gmail.com +84797372607
                                 </div>
                             </div>
-                            <div className="w-2/4 px-3">
+                            <div className="w-full lg:w-2/4 px-3">
                                 <div className="flex gap-4">
                                     {socials.map((social) => {
                                         const Icon = social.icon;

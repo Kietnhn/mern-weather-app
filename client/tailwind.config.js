@@ -24,35 +24,45 @@ module.exports = {
                 loadText: "loadText 5s linear infinite",
                 fadeLeft: "fadeLeft 1s cubic-bezier(0,0,0.2,1) ",
                 moveInSideWrap: "moveInSideWrap 15s linear infinite",
+                moveLeftToRight: "moveLeftToRight 5s linear infinite alternate",
             },
             keyframes: {
-                moveInSideWrap:{
-                    "0%":{
-                        left:0,
-                        top:0,
+                moveLeftToRight: {
+                    "0%": {
+                        left: 0,
+                        top: 0,
                     },
-                    "40%":{
+                    "100%": {
+                        left: "100%",
+                        transform: "translate(-100%, 0)",
+                        top: 0,
+                    },
+                },
+                moveInSideWrap: {
+                    "0%": {
+                        left: 0,
+                        top: 0,
+                    },
+                    "40%": {
                         left: "100%",
                         top: "100%",
-                        transform: "translate(-100%, -100%)"
+                        transform: "translate(-100%, -100%)",
                     },
-                    "50%":{
+                    "50%": {
                         left: "100%",
 
                         transform: "translate(-100%, 0)",
-                        top: 0
+                        top: 0,
                     },
-                    "90%":{
+                    "90%": {
                         left: 0,
                         top: "100%",
-                        transform: "translate(0, -100%)"
-
+                        transform: "translate(0, -100%)",
                     },
-                    "100%":{
+                    "100%": {
                         left: 0,
-                        top: 0
+                        top: 0,
                     },
-
                 },
                 fadeLeft: {
                     "0%": {

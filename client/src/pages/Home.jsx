@@ -1,6 +1,6 @@
 // import { Theme } from "../components/Theme";
 import Homepage from "../assets/img/homepage.png";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import useDetectGeoPermission from "../hooks/useDetectGeoPermission";
@@ -20,6 +20,7 @@ function Home() {
     const navigate = useNavigate();
     useEffect(() => {
         getLocation();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     useEffect(() => {
         if (isMobile && currentPosition) {
@@ -33,7 +34,13 @@ function Home() {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isMobile, currentPosition]);
-    if (isAuthenticated || !isMobile) return <Navigate to="/landing" />;
+    useEffect(() => {
+        if (isAuthenticated && !isMobile) {
+            navigate("/landing");
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isAuthenticated, isMobile]);
     return (
         <>
             <div className="w-full h-screen home relative dark:text-white text-black ">

@@ -7,7 +7,6 @@ const AirBar = ({ datas }) => {
     const [data, setData] = useState(null);
     const [options, setOptions] = useState(null);
     const [colorTheme] = useDarkMode();
-    console.log(data);
     useEffect(() => {
         setData(() => {
             const airData = datas[0].components;

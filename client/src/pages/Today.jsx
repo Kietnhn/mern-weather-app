@@ -47,8 +47,12 @@ function Today() {
                         <Hourly />
                         <Weekly />
                         <MoreInfo />
-                        {/* chart sun */}
-                        {/* <ChartSun className="mt-4 mb-40" /> */}
+                        {/* chart sun
+                        <ChartSun
+                            weather={currentWeather}
+                            timezone={timezone}
+                            className="mt-4 mb-40 h-[180px]"
+                        /> */}
                     </div>
                 </>
             ) : (

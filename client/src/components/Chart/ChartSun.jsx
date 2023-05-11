@@ -125,8 +125,13 @@ function ChartSun({ className, weather, timezone }) {
     });
     return (
         <div className={`${className || ""} relative`}>
-            <div className="chart-sun">
-                <Line options={options} data={data} height={320} width="100%" />
+            <div className="chart-sun h-full">
+                <Line
+                    options={options}
+                    data={data}
+                    height="100%"
+                    width="100%"
+                />
             </div>
         </div>
     );

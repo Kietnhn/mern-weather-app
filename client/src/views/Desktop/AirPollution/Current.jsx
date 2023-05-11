@@ -19,13 +19,16 @@ const Current = ({ current }) => {
 
     return (
         <div>
+            <h1 className="text-xl font-semibold mb-4">
+                Current Air Pollution:
+            </h1>
             <div className="between mb-3">
-                <h1 className="text-xl font-semibold mb-4">
+                <h3 className="text-2xl font-semibold mb-4">
                     Status: {stateOfAir?.status}
-                </h1>
+                </h3>
                 <div>{renderIcon()}</div>
             </div>
-            <div className="w-full mb-3">
+            <div className="w-full mb-3 hidden lg:block">
                 <div className="flex flex-wrap  border-t border-l">
                     <div className="ml-[calc(100%/9-1px)] w-[calc((100%/9)*8+1px)] px-3 border-r border-l ">
                         <div className="font-semibold capitalize text-center">

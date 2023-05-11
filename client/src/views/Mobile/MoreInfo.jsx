@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { WeatherContext } from "../../contexts/WeatherContext";
-
+import { viewInFoDataMobile } from "../../routes/viewInfoData";
 const MoreInfo = () => {
     const {
         weatherState: {
@@ -8,78 +8,36 @@ const MoreInfo = () => {
         },
     } = useContext(WeatherContext);
     return (
-        <div className="flex flex-wrap -m-2">
-            <div className="w-1/2 p-2">
-                <div
-                    className="p-4 bg-transparent border rounded-xl
-        mb-4 font-semibold  capitalize flex items-center justify-center
-        flex-col"
-                >
-                    <span className="text-xl ">
-                        {currentWeather?.feels_like}
-                    </span>
-                    <span className="text-text">feels like</span>
-                </div>
-            </div>
-            <div className="w-1/2 p-2">
-                <div
-                    className="p-4 bg-transparent border rounded-xl
-        mb-4 font-semibold  capitalize flex items-center justify-center
-        flex-col"
-                >
-                    <span className="text-xl ">
-                        {currentWeather?.clouds}
-                        {/* oktas */}
-                    </span>
-                    <span className="text-text">clouds</span>
-                </div>
-            </div>
-            <div className="w-1/2 p-2">
-                <div
-                    className="p-4 bg-transparent border rounded-xl
-        mb-4 font-semibold  capitalize flex items-center justify-center
-        flex-col"
-                >
-                    <span className="text-xl ">
-                        {currentWeather?.visibility}
-                    </span>
-                    <span className="text-text">visibility</span>
-                </div>
-            </div>
-            <div className="w-1/2 p-2">
-                <div
-                    className="p-4 bg-transparent border rounded-xl
-        mb-4 font-semibold  capitalize flex items-center justify-center
-        flex-col"
-                >
-                    <span className="text-xl ">
-                        {currentWeather?.wind_speed}
-                    </span>
-                    <span className="text-text">wind</span>
-                </div>
-            </div>
-            <div className="w-1/2 p-2">
-                <div
-                    className="p-4 bg-transparent border rounded-xl
-        mb-4 font-semibold  capitalize flex items-center justify-center
-        flex-col"
-                >
-                    <span className="text-xl ">{currentWeather?.pressure}</span>
-                    <span className="text-text">pressure</span>
-                </div>
-            </div>
-            <div className="w-1/2 p-2">
-                <div
-                    className="p-4 bg-transparent border rounded-xl
-        mb-4 font-semibold  capitalize flex items-center justify-center
-        flex-col"
-                >
-                    <span className="text-xl ">
-                        {currentWeather?.humidity}%
-                    </span>
-                    <span className="text-text">humidity</span>
-                </div>
-            </div>
+        <div className="flex flex-wrap -mx-2">
+            {viewInFoDataMobile.map((item) => {
+                const Icon = item.icon;
+                return (
+                    <div className="w-1/2 px-2 mb-4 " key={item.name}>
+                        <div className="px-3 py-2 bg-transparent border rounded-xl  font-semibold between gap-4">
+                            <span>
+                                <Icon width="24px" height="24px" />
+                            </span>
+                            <div>
+                                <h3 className="text-text font-normal capitalize">
+                                    {item.name.split("_").join(" ")}
+                                </h3>
+                                <span className="text-xl ">
+                                    {currentWeather[item.name]}
+                                    <span
+                                        className={`${
+                                            item.unit === "\u00B0"
+                                                ? ""
+                                                : "text-sm"
+                                        } ml-1`}
+                                    >
+                                        {item.unit}
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                );
+            })}
         </div>
     );
 };

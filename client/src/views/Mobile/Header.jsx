@@ -1,4 +1,5 @@
 import { Menu as ModalMenu } from "../../components/Modals/Menu";
+import SearchCountryState from "../Search/SearchCountryState";
 
 function Header() {
     return (
@@ -6,6 +7,7 @@ function Header() {
             <div className="flex items-center justify-between gap-4">
                 <ModalMenu className="" />
 
+                <SearchCountryState size="small" />
                 {/* <Search /> */}
             </div>
         </div>

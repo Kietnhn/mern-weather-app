@@ -1,10 +1,58 @@
-import { AboutUsIcon, CityIcon, HomeIcon, SettingIcon, ToolIcon } from "../components/icons";
+import {
+    AboutUsIcon,
+    AirPollutionIcon,
+    CalendarIcon,
+    CityIcon,
+    ContactIcon,
+    HomeIcon,
+    MapIcon,
+    SettingIcon,
+    SunMoonIcon,
+    ToolIcon,
+    WeekIcon,
+} from "../components/icons";
 
 const menu = [
     {
-        title: "Home",
+        title: "Today",
         icon: HomeIcon,
-        to: "/",
+        to: "/today",
+        isPublic: true,
+    },
+    {
+        title: "Week",
+        icon: WeekIcon,
+        to: "/next7Day",
+        isPublic: true,
+    },
+    {
+        title: "Calendar",
+        to: "/calendar",
+        icon: CalendarIcon,
+        isPublic: true,
+    },
+    {
+        title: "Air pollution",
+        icon: AirPollutionIcon,
+        to: "/air-pollution",
+        isPublic: true,
+    },
+    {
+        title: "Sun & Moon",
+        icon: SunMoonIcon,
+        to: "/sun-moon",
+        isPublic: true,
+    },
+    {
+        title: "Weather map",
+        icon: MapIcon,
+        to: "/weather-map",
+        isPublic: true,
+    },
+    {
+        title: "Get in touch",
+        icon: ContactIcon,
+        to: "/get-in-touch",
         isPublic: true,
     },
     {
@@ -32,4 +80,4 @@ const menu = [
         isPublic: true,
     },
 ];
-export default menu
+export default menu;

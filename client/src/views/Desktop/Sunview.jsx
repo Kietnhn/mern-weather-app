@@ -19,10 +19,13 @@ const Sunview = () => {
         fetchApi();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+    useEffect(() => {
+        console.log({ sunData });
+    }, [sunData]);
     return (
         <Wrapper title="Sun & Moon" id="sunmoon">
             <div className="relative h-[calc(100%-40px)] flex flex-col justify-end">
-                <div className="absolute min-w-[260px] top-0 left-0 bg-transparent animate-moveInSideWrap hover:pause">
+                <div className="absolute min-w-[260px] top-0 left-0 bg-transparent animate-moveLeftToRight lg:animate-moveInSideWrap hover:pause">
                     {sunData && (
                         <div className="theme modal-content border-1 rounded-2xl p-3">
                             {[...Object.keys(sunData)].map((item) => (
@@ -40,8 +43,12 @@ const Sunview = () => {
                     )}
                 </div>
 
-                <div className="">
-                    <ChartSun weather={currentWeather} timezone={timezone} />
+                <div className="mt-[260px] lg:mt-0">
+                    <ChartSun
+                        weather={currentWeather}
+                        timezone={timezone}
+                        className={"h-[180px] lg:h-[360px]"}
+                    />
                 </div>
             </div>
         </Wrapper>

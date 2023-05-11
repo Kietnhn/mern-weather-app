@@ -3,18 +3,28 @@ import { useState, useEffect } from "react";
 import { Chart as ChartJS } from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import moment from "moment-timezone";
+import useDetectUserDevice from "../../hooks/useDetectUserDevice";
+import useDarkMode from "../../hooks/useDarkMode";
 
 const AirChart = ({ list = [], timezone }) => {
     const [data, setData] = useState(null);
     const [options, setOptions] = useState(null);
+    const [isMobile] = useDetectUserDevice();
+    const [colorTheme] = useDarkMode();
+
     useEffect(() => {
-        const labels = list?.map((item) =>
+        let listData = [...list];
+
+        if (isMobile) {
+            listData = listData.filter((_, index) => index % 2 === 0);
+        }
+        const labels = listData?.map((item) =>
             moment.unix(item.dt).tz(timezone).format("HH:mm")
         );
-        const pollutants = [...Object.keys(list[0]?.components)];
+        const pollutants = [...Object.keys(listData[0]?.components)];
         const datasets = pollutants?.map((pollutant) => ({
             label: `${pollutant}`,
-            data: list?.map((item) => item.components[pollutant]),
+            data: listData?.map((item) => item.components[pollutant]),
         }));
 
         const data = {
@@ -23,7 +33,7 @@ const AirChart = ({ list = [], timezone }) => {
         };
         setData(data);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [list]);
+    }, [list, isMobile]);
     useEffect(() => {
         setOptions({
             maintainAspectRatio: false,
@@ -49,8 +59,25 @@ const AirChart = ({ list = [], timezone }) => {
                     },
                 },
             },
+            scales: {
+                x: {
+                    grid: {
+                        color: `${
+                            colorTheme === "light" ? "#e2e2e2" : "#dddddd"
+                        }`,
+                    },
+                },
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: `${
+                            colorTheme === "light" ? "#e2e2e2" : "#dddddd"
+                        }`,
+                    },
+                },
+            },
         });
-    }, [list, timezone]);
+    }, [list, timezone, colorTheme]);
     useEffect(() => {
         console.log({ data });
     }, [data]);

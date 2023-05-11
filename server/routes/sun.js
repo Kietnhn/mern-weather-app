@@ -20,10 +20,15 @@ routes.get("/", async (req, res) => {
             `https://api.sunrisesunset.io/json?lat=${lat}&lng=${lon}&timezone=${timezone}&date=${date}`
         ).then((res) => res.json());
         if (response.status === "OK") {
-            res.json({
+            return res.json({
                 success: true,
                 message: "Successfully",
                 data: response.results,
+            });
+        } else {
+            return res.json({
+                success: false,
+                message: "Fetch failed",
             });
         }
     } catch (error) {

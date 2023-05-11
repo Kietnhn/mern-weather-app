@@ -18,9 +18,9 @@ function Menu({ className }) {
     return (
         <>
             <div className={className}>
-                <button onClick={() => setShowMenu(true)}>
+                <button className="center" onClick={() => setShowMenu(true)}>
                     <span>
-                        <MenuBarIcon width="18px" height="18px" />
+                        <MenuBarIcon width="24px" height="24px" />
                     </span>
                 </button>
             </div>
@@ -76,10 +76,17 @@ function Menu({ className }) {
                                             <li
                                                 key={category.title}
                                                 className={`mb-2`}
+                                                onClick={() =>
+                                                    setShowMenu(false)
+                                                }
                                             >
                                                 <Link
                                                     to={category.to}
-                                                    className="flex justify-start items-center gap-2"
+                                                    className={`flex justify-start items-center gap-2  ${
+                                                        category.to
+                                                            ? ""
+                                                            : "text-text"
+                                                    }`}
                                                 >
                                                     <span>
                                                         <Icon
@@ -87,7 +94,7 @@ function Menu({ className }) {
                                                             height="20px"
                                                         />
                                                     </span>
-                                                    <span className="text-xl">
+                                                    <span className={`text-xl`}>
                                                         {category.title}
                                                     </span>
                                                 </Link>

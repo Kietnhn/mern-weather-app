@@ -6,16 +6,16 @@ const Forecast = ({ lat, lon, timezone }) => {
         airState: { forecast },
         getForecastAirPollution,
     } = useContext(AirContext);
+    console.log({ forecast, lat, lon });
 
     useEffect(() => {
         getForecastAirPollution({ lat, lon });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [lat, lon]);
-    if (forecast) console.log({ forecast });
     return (
         <div>
             <h1 className="text-xl font-semibold mb-4">
-                Forecast Air Pollution
+                Forecast Air Pollution:
             </h1>
             <div>
                 {forecast && (

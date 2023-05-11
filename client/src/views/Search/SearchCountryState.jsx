@@ -162,13 +162,8 @@ const SearchCountryState = ({ size = "normal" }) => {
                 <input
                     ref={positionRef}
                     className={`w-full ${
-                        size === "small" ? "p-1" : "p-4"
+                        size === "small" ? "p-1 pl-[146px]" : "p-4 pl-[176px]"
                     }  font-semibold rounded-full  border-2 border-theme  theme`}
-                    style={{
-                        paddingLeft: `${
-                            countryRef.current?.clientWidth + 16
-                        }px`,
-                    }}
                     placeholder="Enter place..."
                     value={input}
                     onChange={(e) => handleChangeInput(e)}
@@ -226,7 +221,10 @@ const SearchCountryState = ({ size = "normal" }) => {
                 disabled={!position}
             >
                 <span>
-                    <SearchIcon width="20px" height="20px" />
+                    <SearchIcon
+                        width={`${size === "small" ? "16px" : "20px"}`}
+                        height={`${size === "small" ? "16px" : "20px"}`}
+                    />
                 </span>
             </button>
         </div>

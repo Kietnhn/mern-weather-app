@@ -9,7 +9,7 @@ const Contact = () => {
                 className="w-full relative min-h-[360px] contact theme-reverse bg-no-repeat bg-cover bg-center "
                 style={{ backgroundImage: `url(${contactImage})` }}
             >
-                <div className="absolute w-[1300px] top-0 bottom-0 left-1/2 -translate-x-1/2 ">
+                <div className="absolute w-full lg:max-w-full  lg:w-[1300px] top-0 bottom-0 left-1/2 -translate-x-1/2 ">
                     <div className="absolute bottom-4 left-0">
                         <h1 className="text-5xl font-semibold  text-[white] pointer-events-none">
                             Get In Touch

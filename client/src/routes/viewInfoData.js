@@ -5,6 +5,8 @@ import {
     DropletIcon,
     WindIcon,
     TemperatureIcon,
+    TemperatureWindIcon,
+    DewPointIcon,
 } from "../components/icons";
 const viewInfoData = [
     {
@@ -15,7 +17,7 @@ const viewInfoData = [
     {
         name: "wind_deg",
         unit: "\u00B0",
-        icon: TemperatureIcon,
+        icon: TemperatureWindIcon,
     },
     {
         name: "wind_speed",
@@ -39,4 +41,17 @@ const viewInfoData = [
     },
 ];
 
+export const viewInFoDataMobile = [
+    {
+        name: "feels_like",
+        unit: "\u00B0",
+        icon: TemperatureIcon,
+    },
+    {
+        name: "dew_point",
+        unit: "\u00B0",
+        icon: DewPointIcon,
+    },
+    ...viewInfoData,
+];
 export default viewInfoData;

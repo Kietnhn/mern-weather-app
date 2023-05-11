@@ -51,7 +51,7 @@ const WeatherMap = () => {
                     timezone={weatherData.timezone}
                     map={map}
                     weather={weatherOnMap}
-                    className="absolute top-20 left-2.5 z-[999]"
+                    className="absolute bottom-2.5 left-2.5 z-[999]"
                 />
             )}
         </div>

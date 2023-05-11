@@ -12,12 +12,12 @@ function MainLayout({ children }) {
             weatherData: { currentWeather },
         },
     } = useContext(WeatherContext);
-    // const navigate = useNavigate();
-    // useEffect(() => {
-    //     if (!isLoading && !currentWeather) return navigate("/landing");
-    // }, [currentWeather, navigate, isLoading]);
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (!isLoading && !currentWeather) return navigate("/");
+    }, [currentWeather, navigate, isLoading]);
 
-    // if (!currentWeather) return <></>;
+    if (!currentWeather) return <></>;
     return (
         <>
             {isLoading ? (

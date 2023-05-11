@@ -18,7 +18,8 @@ import {
 import CityContextProvider from "./contexts/CityContext";
 import IntervalServerError from "./pages/IntervalServerError";
 import PageNotFound from "./pages/PageNotFound";
-
+import ProtectedRoutesIsMobile from "./layout/MainLayout/ProtectedRoutesIsMobile";
+import mobileRoutes from "./routes/mobileRoutes";
 function App() {
     return (
         <>
@@ -33,6 +34,10 @@ function App() {
 
                                         <Route path="/" element={<Home />} />
                                         <Route
+                                            path="/home"
+                                            element={<Home />}
+                                        />
+                                        <Route
                                             path="/landing"
                                             element={<Landing />}
                                         />
@@ -44,6 +49,22 @@ function App() {
                                                 </MainLayout>
                                             }
                                         />
+                                        {mobileRoutes.map((mobileRoute) => {
+                                            const Page = mobileRoute.element;
+                                            return (
+                                                <Route
+                                                    path={mobileRoute.path}
+                                                    element={
+                                                        <ProtectedRoutesIsMobile>
+                                                            <MainLayout>
+                                                                <Page />
+                                                            </MainLayout>
+                                                        </ProtectedRoutesIsMobile>
+                                                    }
+                                                />
+                                            );
+                                        })}
+
                                         <Route
                                             path="/calendar"
                                             element={
@@ -83,6 +104,10 @@ function App() {
                                                     <Comparative />
                                                 </MainLayout>
                                             }
+                                        />
+                                        <Route
+                                            path="/page-not-found"
+                                            element={<PageNotFound />}
                                         />
                                         <Route
                                             path="*"

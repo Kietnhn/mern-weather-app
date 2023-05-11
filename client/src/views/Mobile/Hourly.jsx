@@ -14,19 +14,24 @@ const Hourly = () => {
             {hourlyWeather.length > 0 &&
                 hourlyWeather.map((weather, index) => (
                     <div key={weather?.dt + index} className="px-1 w-1/5">
-                        <div className="bg-transparent p-2 text-center rounded-lg flex flex-col items-center justify-center">
+                        <div
+                            className={`${
+                                index === 0
+                                    ? "modal-content-reverse"
+                                    : "bg-transparent"
+                            } p-2 text-center rounded-lg flex-col center`}
+                        >
                             <p className="">
                                 {moment
                                     .unix(weather.dt)
                                     .tz(timezone)
-                                    .format("HH")}
-                                :00
+                                    .format("HH:mm")}
                             </p>
                             <div className="w-[42px] h-[42px]">
                                 <img
                                     alt="weather-s-icon"
                                     src={set2xIconUrl(weather.weather[0]?.icon)}
-                                    className="w-full h-full onject-cover"
+                                    className="w-full h-full object-cover"
                                 />
                             </div>
                             <p className="font-semibold text-base  ">

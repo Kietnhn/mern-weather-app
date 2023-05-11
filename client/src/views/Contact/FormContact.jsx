@@ -38,7 +38,7 @@ const FormContact = () => {
     };
 
     return (
-        <div className="theme h-full min-w-[360px] px-5 py-4 flex flex-col justify-between">
+        <div className="theme h-full lg:min-w-[360px] px-5 py-4 flex flex-col justify-between">
             <h3 className="uppercase text-xs font-semibold tracking-widest mb-5">
                 Feedback form
             </h3>
