@@ -4,6 +4,7 @@ import { Navigate } from "react-router-dom";
 import CitiesWeather from "../components/CitiesWeather";
 import { ChevronLeftIcon, PencilIcon, SaveEditIcon } from "../components/icons";
 import { AuthContext } from "../contexts/AuthContext";
+import { Wrapper } from "../components";
 const City = () => {
     const {
         authState: { isAuthenticated },
@@ -15,8 +16,8 @@ const City = () => {
     };
     if (!isAuthenticated) return <Navigate to="/login" />;
     return (
-        <div className="w-full flex flex-col items-center justify-between h-screen font-semibold text-base text-dark bg-[white] dark:bg-dark dark:text-primaryText text-center p-8">
-            <div className="fixed left-8 top-8">
+        <Wrapper className="fixed bottom-0 left-6 right-6 h-[80vh] overflow-auto">
+            {/* <div className="fixed left-8 top-8">
                 <button
                     className="p-2 rounded-full bg-[rgba(0,0,0,.4)] text-text"
                     onClick={() => window.history.back()}
@@ -25,10 +26,12 @@ const City = () => {
                         <ChevronLeftIcon width="18px" height="18px" />{" "}
                     </span>
                 </button>
-            </div>
-            <div className="fixed right-8 top-8">
+            </div> */}
+
+            <h1 className="text-3xl font-bold mb-2">
+                My Cities
                 <button
-                    className="p-2 rounded-full bg-[rgba(0,0,0,.4)] text-text"
+                    className="ml-2 p-2 rounded-full bg-[rgba(0,0,0,.4)] text-text"
                     onClick={handleEditCity}
                 >
                     <span>
@@ -39,12 +42,9 @@ const City = () => {
                         )}
                     </span>
                 </button>
-            </div>
-            <h1 className="text-3xl font-bold mb-2">My Cities</h1>
-            <div className="fixed bottom-0 left-0 right-0 h-[70vh] overflow-auto p-6">
-                <CitiesWeather isEdit={isEdit} />
-            </div>
-        </div>
+            </h1>
+            <CitiesWeather isEdit={isEdit} />
+        </Wrapper>
     );
 };
 

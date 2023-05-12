@@ -5,6 +5,7 @@ import {
     CityIcon,
     ContactIcon,
     HomeIcon,
+    MainViewIcon,
     MapIcon,
     SettingIcon,
     SunMoonIcon,
@@ -29,6 +30,12 @@ const menu = [
         title: "Calendar",
         to: "/calendar",
         icon: CalendarIcon,
+        isPublic: true,
+    },
+    {
+        title: "Chart",
+        icon: MainViewIcon,
+        to: "/chart-page",
         isPublic: true,
     },
     {
@@ -61,23 +68,23 @@ const menu = [
         to: "/my-city",
         isPublic: false,
     },
-    {
-        title: "About Us",
-        icon: AboutUsIcon,
-        to: null,
-        isPublic: true,
-    },
+    // {
+    //     title: "About Us",
+    //     icon: AboutUsIcon,
+    //     to: null,
+    //     isPublic: true,
+    // },
     {
         title: "Setting",
         icon: SettingIcon,
         to: null,
         isPublic: true,
     },
-    {
-        title: "Terms & Conditions",
-        icon: ToolIcon,
-        to: null,
-        isPublic: true,
-    },
+    // {
+    //     title: "Terms & Conditions",
+    //     icon: ToolIcon,
+    //     to: null,
+    //     isPublic: true,
+    // },
 ];
 export default menu;

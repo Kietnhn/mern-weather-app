@@ -53,6 +53,7 @@ function App() {
                                             const Page = mobileRoute.element;
                                             return (
                                                 <Route
+                                                    key={mobileRoute.path}
                                                     path={mobileRoute.path}
                                                     element={
                                                         <ProtectedRoutesIsMobile>
@@ -89,10 +90,7 @@ function App() {
                                             path="/register"
                                             element={<Register />}
                                         />
-                                        <Route
-                                            path="/my-city"
-                                            element={<City />}
-                                        />
+
                                         <Route
                                             path="/server-error"
                                             element={<IntervalServerError />}

@@ -5,41 +5,32 @@ import { Chart as ChartJS } from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import moment from "moment-timezone";
 import useDarkMode from "../../hooks/useDarkMode";
+// import setTempByTime from "../../utils/setTempByTime";
+import LoadingComponent from "../Loading/LoadingComponent";
 import setTempByTime from "../../utils/setTempByTime";
-import Alert from "../Alert";
-const CompareChart = ({ weatherType = "hourlyWeather", isAlert = false }) => {
-    // weatherType is "hourlyWeather" or "weeklyWeather"
+const Weekly = ({ weathers = [] }) => {
     const {
         weatherState: {
             dataChart,
-            compare,
             isLoading,
-
+            historyWeather,
             weatherData: { timezone },
         },
     } = useContext(WeatherContext);
     const [data, setData] = useState(null);
     const [options, setOptions] = useState(null);
     const [colorTheme] = useDarkMode();
+
     useEffect(() => {
-        const lengths = compare.map((i) => i[weatherType]?.length);
-        const loggestCompare = compare[lengths.indexOf(Math.max(...lengths))];
-        const labels = loggestCompare[weatherType].map((weather) =>
-            moment
-                .unix(weather.dt)
-                .tz(timezone)
-                .format(`${weatherType !== "hourlyWeather" ? "ddd" : "HH:mm"}`)
+        const labels = weathers.map((weather) =>
+            moment.unix(weather.dt).tz(timezone).format("DD/MM")
         );
 
-        if (weatherType !== "hourlyWeather") {
-            labels[0] = "Today";
-        }
-
-        const datasets = compare.map((weather) => {
-            return {
+        const datasets = [
+            {
                 fill: true,
-                label: weather.timezone,
-                data: weather[weatherType].map((weather) => {
+                label: timezone,
+                data: weathers.map((weather) => {
                     if (typeof weather[dataChart] === "object") {
                         return weather[dataChart][
                             setTempByTime(
@@ -50,43 +41,29 @@ const CompareChart = ({ weatherType = "hourlyWeather", isAlert = false }) => {
                             )
                         ];
                     }
-                    if (
-                        ["moonrise", "moonset", "sunrise", "sunset"].includes(
-                            dataChart
-                        )
-                    ) {
-                        return moment
-                            .unix(weather[dataChart])
-                            .tz(timezone)
-                            .format("HH");
-                    }
                     return weather[dataChart];
                 }),
-            };
-        });
+            },
+        ];
 
+        labels[0] = "Today";
         setData({ datasets, labels });
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [compare, dataChart, weatherType]);
+    }, [dataChart, historyWeather]);
 
     useEffect(() => {
         setOptions({
             maintainAspectRatio: false,
+            interaction: {
+                mode: "index",
+                intersect: false,
+            },
             plugins: {
                 legend: {
+                    display: false,
                     textTransform: "capitalize",
                     position: "bottom",
-                },
-                title: {
-                    display: true,
-                    position: "top",
-                    text: "Comapreing chart",
-                    font: {
-                        size: 24,
-                        weight: "bold",
-                        lineHeight: 1.2,
-                    },
                 },
             },
             scales: {
@@ -108,25 +85,18 @@ const CompareChart = ({ weatherType = "hourlyWeather", isAlert = false }) => {
             },
         });
     }, [colorTheme]);
-    if (!data || !compare) return <></>;
+    if (!data) return <></>;
     return (
         <>
             {isLoading ? (
                 <>
-                    <div className="w-full h-[360px] relative">
-                        <div className="h-20 w-20 mr-3 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 after:block after:content-[''] after:w-[64px] after:h-[64px] after:m-2 after:rounded-full after:border-[6px] after:border-[#000_transparent_#000_transparent] after:animate-spin"></div>
-                    </div>
+                    <LoadingComponent className="w-full h-[360px] relative" />
                 </>
             ) : (
-                <Line
-                    options={options}
-                    data={isAlert ? {} : data}
-                    height={360}
-                    width="100%"
-                />
+                <Line options={options} data={data} height={360} width="100%" />
             )}
-            {isAlert && <Alert />}
         </>
     );
 };
-export default CompareChart;
+
+export default Weekly;

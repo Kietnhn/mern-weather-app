@@ -8,8 +8,8 @@ import MainView from "../views/Mobile/MainView";
 import Hourly from "../views/Mobile/Hourly";
 import Weekly from "../views/Mobile/Weekly";
 import MoreInfo from "../views/Mobile/MoreInfo";
-import BackgroundGradient from "../views/Mobile/BackgroundGradient";
 import useDarkMode from "../hooks/useDarkMode";
+import SemiDoughnut from "../components/Chart/SemiDoughnut";
 // import useDarkMode from "../hooks/useDarkMode";
 function Today() {
     const {
@@ -40,19 +40,22 @@ function Today() {
         <>
             {isMobile ? (
                 <>
-                    {/* bg */}
-                    <BackgroundGradient />
                     <div className="fixed bottom-0 left-0 right-0 h-[70vh] overflow-auto p-6 lg:hidden">
                         <MainView />
                         <Hourly />
                         <Weekly />
                         <MoreInfo />
-                        {/* chart sun
-                        <ChartSun
-                            weather={currentWeather}
-                            timezone={timezone}
-                            className="mt-4 mb-40 h-[180px]"
-                        /> */}
+                        <div className="w-[240px] h-[240px] mx-auto mb-6">
+                            <SemiDoughnut
+                                className="h-full  between flex-col"
+                                percen={currentWeather.clouds}
+                                message={currentWeather.weather[0].description}
+                                onClick={() => {}}
+                            />
+                            <h3 className="font-semibold text-center text-xl">
+                                Clouds chart
+                            </h3>
+                        </div>
                     </div>
                 </>
             ) : (

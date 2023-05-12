@@ -54,11 +54,8 @@ function Home() {
                     <h3 className="text-lg font-semibold mt-2 mb-3">
                         Welcome to my website
                     </h3>
-                    <div className="btns flex items-center justify-between">
-                        <button className="px-3 py-2 rounded-full text-lg font-semibold bg-transparent border w-1/2 mx-2">
-                            <Link to="/login">Sign in</Link>
-                        </button>
-                        <button className="px-3 py-2 rounded-full text-lg font-semibold bg-transparent border w-1/2 mx-2">
+                    <div className="">
+                        <button className="text-lg font-semibold button rounded-full w-full">
                             <Link to="/landing">Continue</Link>
                         </button>
                     </div>

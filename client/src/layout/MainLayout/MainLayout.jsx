@@ -7,27 +7,27 @@ import LoadingPage from "../../components/Loading/LoadingPage";
 // import Footer from "../../views/Footer/Footer";
 function MainLayout({ children }) {
     const {
-        weatherState: {
-            isLoading,
-            weatherData: { currentWeather },
-        },
+        weatherState: { isLoading, weatherData },
     } = useContext(WeatherContext);
     const navigate = useNavigate();
     useEffect(() => {
-        if (!isLoading && !currentWeather) return navigate("/");
-    }, [currentWeather, navigate, isLoading]);
-
-    if (!currentWeather) return <></>;
+        if (!weatherData) return navigate("/landing");
+    }, [weatherData, navigate]);
+    console.log({ weatherData });
     return (
         <>
             {isLoading ? (
                 <LoadingPage />
-            ) : window.innerWidth > 992 ? (
-                <DesktopLayout>{children}</DesktopLayout>
+            ) : weatherData ? (
+                window.innerWidth > 992 ? (
+                    <DesktopLayout>{children}</DesktopLayout>
+                ) : (
+                    <div className="theme p-6 h-screen lg:brightness-100 brightness-[0.95] duration-200 lg:w-[unset] lg:h-[unset] lg:p-0">
+                        <MobileLayout>{children}</MobileLayout>
+                    </div>
+                )
             ) : (
-                <div className="theme p-6 h-screen lg:brightness-100 brightness-[0.95] duration-200 lg:w-[unset] lg:h-[unset] lg:p-0">
-                    <MobileLayout>{children}</MobileLayout>
-                </div>
+                <></>
             )}
         </>
     );

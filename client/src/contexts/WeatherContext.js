@@ -19,7 +19,7 @@ import getTodayHourlyWeatherData from "../utils/getTodayHourlyWeatherData";
 export const WeatherContext = createContext();
 const WeatherContextProvider = ({ children }) => {
     const [weatherState, dispatch] = useReducer(weatherReducer, {
-        weatherData: {},
+        weatherData: null,
         historyWeather: {
             history1_day: null,
             history3_day: null,

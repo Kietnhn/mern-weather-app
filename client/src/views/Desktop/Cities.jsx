@@ -14,7 +14,7 @@ const Cities = () => {
     return (
         <>
             {isShow ? (
-                <div className="fixed top-0 bottom-0 right-0 z-[9998] min-w-[260px] theme mt-[52px] p-4">
+                <div className="fixed top-0 bottom-0 right-0 z-[9998] min-w-[260px] theme modal-content mt-[52px] p-4">
                     <div className="absolute top-0 right-0">
                         <button
                             className="px-3 py-2 hover:cursor-pointer"

@@ -5,6 +5,7 @@ import { WeatherContext } from "../../contexts/WeatherContext";
 // import Navigation from "../../views/Mobile/Navigation";
 import Header from "../../views/Mobile/Header";
 import { useLocation } from "react-router-dom";
+import BackgroundGradient from "../../views/Mobile/BackgroundGradient";
 const MobileLayout = ({ children }) => {
     const {
         weatherState: {
@@ -19,8 +20,9 @@ const MobileLayout = ({ children }) => {
                 <Theme />
             </div>
             {/* <Navigation /> */}
+            <BackgroundGradient />
             <div className="w-full  relative z-20 lg:hidden">
-                {location.pathname !== "/get-in-touch" && (
+                {!["/my-city", "/get-in-touch"].includes(location.pathname) && (
                     <div className="relative my-4 z-10 flex items-center mt-10">
                         <h3 className="text-2xl font-semibold mr-2 ">
                             {timezone ? timezone : "Current Location"}

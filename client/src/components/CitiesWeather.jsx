@@ -45,11 +45,9 @@ const CitiesWeather = ({ isEdit, className }) => {
         }
     };
     const handleDeleteCity = async (weather) => {
-        if (isAuthenticated) {
-            const { _id } = weather;
-            await deleteCity(_id);
-            setAlert(null);
-        }
+        const { _id } = weather;
+        await deleteCity(_id);
+        setAlert(null);
     };
     const CityWeather = ({ weather }) => {
         return (
@@ -143,7 +141,7 @@ const CitiesWeather = ({ isEdit, className }) => {
                 </div>
             ) : (
                 <div className="flex-1">
-                    <h3 className="font-semibold text-xl">My Positions</h3>
+                    <h3 className="font-semibold text-xl mb-4">My Positions</h3>
                     {data.length > 0 ? (
                         <div className="h-full overflow-auto">
                             {data.map((weather) => (
@@ -164,7 +162,7 @@ const CitiesWeather = ({ isEdit, className }) => {
                 </div>
             )}
             <div>
-                <h3 className="font-semibold text-xl">Famoust cities</h3>
+                <h3 className="font-semibold text-xl mb-3">Famoust cities</h3>
                 <div>
                     {defaultData.map((weather) => (
                         <div key={`${weather._id || weather?.weather.imgUrl}`}>
