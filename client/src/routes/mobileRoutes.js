@@ -1,6 +1,5 @@
-import AirPollution from "../views/Desktop/AirPollution/AirPollution";
-import Map from "../views/Desktop/Map";
-import Sunview from "../views/Desktop/Sunview";
+import AirPollution from "../components/AirPollution/AirPollution";
+import { Map, Sunview } from "../components";
 import Footer from "../views/Footer/Footer";
 
 const mobileRoutes = [

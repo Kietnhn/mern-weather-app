@@ -1,9 +1,9 @@
 import React from "react";
-import { SaveIcon, UnsaveIcon } from "./icons";
-import { WeatherContext } from "../contexts/WeatherContext";
+import { SaveIcon, UnsaveIcon } from "../icons";
+import { WeatherContext } from "../../contexts/WeatherContext";
 import { useContext, useState } from "react";
-import { CityContext } from "../contexts/CityContext";
-import { AuthContext } from "../contexts/AuthContext";
+import { CityContext } from "../../contexts/CityContext";
+import { AuthContext } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 const SaveButton = () => {

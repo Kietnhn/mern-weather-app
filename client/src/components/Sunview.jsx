@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
-import ChartSun from "../../components/Chart/ChartSun";
-import Wrapper from "../../components/Wrapper";
-import { WeatherContext } from "../../contexts/WeatherContext";
+import ChartSun from "./Chart/ChartSun";
+import Wrapper from "./Wrapper";
+import { WeatherContext } from "../contexts/WeatherContext";
 
 const Sunview = () => {
     const {
@@ -43,7 +43,7 @@ const Sunview = () => {
                     )}
                 </div>
 
-                <div className="mt-[260px] lg:mt-0">
+                <div className="mt-[282px] lg:mt-0">
                     <ChartSun
                         weather={currentWeather}
                         timezone={timezone}

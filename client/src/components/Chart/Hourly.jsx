@@ -6,7 +6,7 @@ import { Line } from "react-chartjs-2";
 import moment from "moment-timezone";
 import useDarkMode from "../../hooks/useDarkMode";
 // import setTempByTime from "../../utils/setTempByTime";
-import LoadingComponent from "../LoadingComponent";
+import LoadingComponent from "../Loading/LoadingComponent";
 const Hourly = ({ weathers = [] }) => {
     const {
         weatherState: {

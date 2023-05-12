@@ -3,7 +3,7 @@ import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import DesktopLayout from "./DesktopLayout";
 import MobileLayout from "./MobileLayout";
-import LoadingPage from "../../components/LoadingPage";
+import LoadingPage from "../../components/Loading/LoadingPage";
 // import Footer from "../../views/Footer/Footer";
 function MainLayout({ children }) {
     const {

@@ -5,7 +5,6 @@ import {
     apiUrl,
     SET_CURRENT_POSIITON,
     SET_LOADING,
-    SET_POSITIONS,
     SET_AREA_ON_MAP,
 } from "./constants";
 export const PositionContext = createContext();
@@ -32,12 +31,11 @@ const PositionContextProvider = ({ children }) => {
                 .then((res) => {
                     return res.data;
                 });
-            if(response.success) {
+            if (response.success) {
                 return response.data;
-            }else{
-                return []
+            } else {
+                return [];
             }
-            
         } catch (error) {
             dispatch({
                 type: SET_LOADING,

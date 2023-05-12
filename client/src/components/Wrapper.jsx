@@ -5,10 +5,13 @@ const Wrapper = ({
     theme = "lg:theme",
     id,
     sizeFull = false,
+    className,
 }) => {
     return (
         <div
-            className={`w-full h-full lg:h-screen lg:pt-[52px] lg:pb-12 ${theme}`}
+            className={`${
+                className ? className : "fixed bottom-6 left-6 right-6"
+            } lg:static lg:w-full  lg:h-screen lg:pt-[52px] lg:pb-12 ${theme}`}
             id={id}
         >
             <div

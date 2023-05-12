@@ -1,5 +1,5 @@
-import WeatherMap from "../../components/Map/WeatherMap";
-import Wrapper from "../../components/Wrapper";
+import WeatherMap from "./Map/WeatherMap";
+import Wrapper from "./Wrapper";
 const Map = () => {
     return (
         <Wrapper title="Weather Map" id="weathermap">

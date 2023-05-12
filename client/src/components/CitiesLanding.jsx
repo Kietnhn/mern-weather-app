@@ -1,14 +1,10 @@
 import { WeatherContext } from "../contexts/WeatherContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { CityContext } from "../contexts/CityContext";
 import data from "../utils/defaultCityData";
 
 const CitiesLanding = () => {
     const { getWeatherData } = useContext(WeatherContext);
-    const {
-        cityState: { cities },
-    } = useContext(CityContext);
 
     const navigate = useNavigate();
     const handleSelectPosition = async ({ lat, lon }) => {

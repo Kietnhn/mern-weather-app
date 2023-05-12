@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import Search from "../views/Search";
 import { Menu as ModalMenu } from "../components/Modals/Menu";
 import homepage from "../assets/img/homepage.png";
 import { ChevronLeftIcon } from "../components/icons";
@@ -10,6 +9,8 @@ import { LOCAL_STORAGE_TOKEN_NAME } from "../contexts/constants";
 import RecommendPosition from "../components/RecommendPosition";
 import SearchCountryState from "../views/Search/SearchCountryState";
 import CitiesLanding from "../components/CitiesLanding";
+import useDetectUserDevice from "../hooks/useDetectUserDevice.js";
+import { useNavigate } from "react-router-dom";
 // import { PositionContext } from "../contexts/PositionContext";
 // import landing1 from "../assets/img/landing1.jpg";
 // import landing2 from "../assets/img/landing2.jpg";
@@ -23,6 +24,8 @@ function Landing() {
     const {
         authState: { isAuthenticated },
     } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const [isMobile] = useDetectUserDevice();
     // const {
     //     positionState: { currentPosition },
     // } = useContext(PositionContext);
@@ -54,6 +57,9 @@ function Landing() {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+    useEffect(() => {
+        if (isMobile) navigate("/");
+    }, [isMobile, navigate]);
     return (
         <div
             className={`bg-no-repeat bg-cover bg-center brightness-90 lg:brightness-100 w-full

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { LocationIcon, TimesIcon } from "./icons";
 import { PositionContext } from "../contexts/PositionContext";
 const RecommendPosition = () => {
-    const { getWeatherData, setCompare } = useContext(WeatherContext);
+    const { getWeatherData } = useContext(WeatherContext);
     const {
         positionState: { currentPosition },
     } = useContext(PositionContext);

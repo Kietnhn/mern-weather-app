@@ -1,15 +1,15 @@
 import { useContext, useState } from "react";
-import { WeatherContext } from "../../contexts/WeatherContext";
-import Weekly from "../../components/Desktop/Weekly";
-import Hourly from "../../components/Chart/Hourly";
-import Minutely from "../../components/Chart/Minutely";
-import SemiDoughnut from "../../components/Chart/SemiDoughnut";
+import { WeatherContext } from "../contexts/WeatherContext";
+import Weekly from "./Desktop/Weekly";
+import Hourly from "./Chart/Hourly";
+import Minutely from "./Chart/Minutely";
+import SemiDoughnut from "./Chart/SemiDoughnut";
 
-import ShowHistoryButton from "../../components/Button/ShowHistoryButton";
-import ViewInfo from "../../components/Desktop/MainView";
-import Wrapper from "../../components/Wrapper";
-import Alert from "../../components/Alert";
-import CompareMode from "../../components/Button/CompareMode";
+import ShowHistoryButton from "./Button/ShowHistoryButton";
+import ViewInfo from "./Desktop/MainView";
+import Wrapper from "./Wrapper";
+import Alert from "./Alert";
+import CompareMode from "./Button/CompareMode";
 
 const MainView = () => {
     const [indexActive, setIndexActive] = useState(0);

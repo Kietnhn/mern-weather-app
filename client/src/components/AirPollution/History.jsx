@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { AirContext } from "../../../contexts/AirContext";
+import { AirContext } from "../../contexts/AirContext";
 import DateForm from "./DateForm";
-import AirChart from "../../../components/Chart/AirChart";
+import AirChart from "../Chart/AirChart";
 
 const History = ({ timezone }) => {
     const {

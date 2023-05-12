@@ -1,9 +1,7 @@
-import Map from "./Map";
-import MainView from "./MainView";
-import AirPollution from "./AirPollution/AirPollution";
-import Sunview from "./Sunview";
+import AirPollution from "../../components/AirPollution/AirPollution";
 import Navigation from "./Navigation";
 import Cities from "./Cities";
+import { MainView, Sunview, Map } from "../../components";
 import Footer from "../Footer/Footer";
 // import { Fade } from "react-awesome-reveal";
 const TodayDesktop = () => {

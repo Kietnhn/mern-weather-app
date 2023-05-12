@@ -1,6 +1,12 @@
-const ToolTip = ({ children, position = "", message, arrow = "" }) => {
+const ToolTip = ({
+    children,
+    position = "",
+    message,
+    arrow = "",
+    className,
+}) => {
     return (
-        <div className="relative tooltip">
+        <div className={`relative  ${className} tooltip`}>
             {children}
             <div
                 className={`tooltip-message z-[9999] ${

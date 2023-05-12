@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
-import { AirContext } from "../../../contexts/AirContext";
-import AirChart from "../../../components/Chart/AirChart";
+import { AirContext } from "../../contexts/AirContext";
+import AirChart from "../Chart/AirChart";
 const Forecast = ({ lat, lon, timezone }) => {
     const {
         airState: { forecast },

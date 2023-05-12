@@ -5,6 +5,7 @@ import TextArea from "./TextArea";
 import { UploadFileIcon, InfoIcon } from "../../components/icons";
 import UserInfo from "../../components/UserInfo";
 import { AuthContext } from "../../contexts/AuthContext";
+import ToolTip from "../../components/ToolTip";
 const FormContact = () => {
     const {
         authState: { isAuthenticated },
@@ -38,10 +39,32 @@ const FormContact = () => {
     };
 
     return (
-        <div className="theme h-full lg:min-w-[360px] px-5 py-4 flex flex-col justify-between">
-            <h3 className="uppercase text-xs font-semibold tracking-widest mb-5">
-                Feedback form
-            </h3>
+        <div className="mt-10 lg:m-0 theme h-full lg:min-w-[360px] px-5 py-4 flex flex-col justify-between">
+            <div className="mb-5 center justify-start">
+                <h3 className="uppercase inline-block text-xs font-semibold tracking-widest mr-2">
+                    Feedback form
+                </h3>
+                <ToolTip
+                    className="flex"
+                    message={
+                        <span className="text-xs font-normal">
+                            We only use your email to send thanks <br />
+                            Click{" "}
+                            <span className="text-[#4a9cdb] underline">
+                                <Link to="/">Terms and Conditions</Link>
+                            </span>{" "}
+                            to more details
+                        </span>
+                    }
+                    arrow="top-0 left-1/2 -translate-x-1/2 -translate-y-full 
+                    border-[transparent_transparent_white_transparent] dark:border-[transparent_transparent_black_transparent]"
+                    position="top-1 left-1/2 -translate-x-1/2 translate-y-1/2 w-[240px]"
+                >
+                    <span className="">
+                        <InfoIcon width="16px" height="16px" />
+                    </span>
+                </ToolTip>
+            </div>
             <form
                 onSubmit={handleSendEmail}
                 className="flex-1 flex flex-col justify-between"
@@ -72,21 +95,6 @@ const FormContact = () => {
                     maxHeight={isAuthenticated ? 136 : 88}
                 />
 
-                {!isAuthenticated && (
-                    <div className="-mt-4 mb-4 text-sm">
-                        <div className="flex items-center">
-                            <span className="mr-2">
-                                <InfoIcon width="16px" height="16px" />
-                            </span>
-                            We only use your email to send thanks
-                        </div>
-                        Please check the
-                        <span className="text-[#4a9cdb] underline mx-2">
-                            <Link to="/">Terms and Conditions</Link>
-                        </span>
-                        for more details
-                    </div>
-                )}
                 <div className="between">
                     <div className="">
                         <label

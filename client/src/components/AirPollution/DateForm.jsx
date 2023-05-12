@@ -1,7 +1,7 @@
 import moment from "moment-timezone";
 import React, { useContext, useState } from "react";
-import { WeatherContext } from "../../../contexts/WeatherContext";
-import { AirContext } from "../../../contexts/AirContext";
+import { WeatherContext } from "../../contexts/WeatherContext";
+import { AirContext } from "../../contexts/AirContext";
 
 const DateForm = () => {
     const {

@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from "react";
-import LoadingComponent from "../../../components/LoadingComponent";
-import Wrapper from "../../../components/Wrapper";
-import { AirContext } from "../../../contexts/AirContext";
-import { WeatherContext } from "../../../contexts/WeatherContext";
+import LoadingComponent from "../Loading/LoadingComponent";
+import Wrapper from "../Wrapper";
+import { AirContext } from "../../contexts/AirContext";
+import { WeatherContext } from "../../contexts/WeatherContext";
 import Current from "./Current";
 import History from "./History";
 import Forecast from "./Forecast";

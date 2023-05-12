@@ -2,7 +2,7 @@ import { useContext } from "react";
 import User from "../../components/Desktop/User";
 import { NavLink } from "react-router-dom";
 import { WeatherContext } from "../../contexts/WeatherContext";
-import SaveButton from "../../components/SaveButton";
+import SaveButton from "../../components/Button/SaveButton";
 import Theme from "../../components/Theme/Theme";
 import SearchCountryState from "../Search/SearchCountryState";
 

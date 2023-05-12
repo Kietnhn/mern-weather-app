@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import getStateOfAir from "../../../utils/getStateOfAir";
-import AirBar from "../../../components/Chart/AirBar";
+import getStateOfAir from "../../utils/getStateOfAir";
+import AirBar from "../Chart/AirBar";
 // import airPollutionGif from "../../../../assets/gif/air-pollution.gif";
 // eslint-disable-next-line no-unused-vars
 
