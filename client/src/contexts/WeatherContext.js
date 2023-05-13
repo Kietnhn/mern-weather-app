@@ -4,7 +4,6 @@ import axios from "axios";
 import {
     SET_WEATHER_DATA,
     SET_LOADING,
-    SET_UNIT,
     SET_IS_USE_ANIMATE_BACKGROUND,
     apiUrl,
     SET_DATA_CHART,
@@ -37,7 +36,7 @@ const WeatherContextProvider = ({ children }) => {
         compare: [],
         sunData: null,
     });
-    const getCompareWeatherData = async ({ lat, lon }) => {
+    const getCompareWeatherData = async ({ lat, lon, units = "metric" }) => {
         try {
             dispatch({
                 type: SET_LOADING,
@@ -48,6 +47,7 @@ const WeatherContextProvider = ({ children }) => {
                     params: {
                         lat,
                         lon,
+                        units,
                     },
                 })
                 .then((res) => {
@@ -107,7 +107,7 @@ const WeatherContextProvider = ({ children }) => {
             console.error(error);
         }
     };
-    const getWeatherData = async ({ lat, lon }) => {
+    const getWeatherData = async ({ lat, lon, units = "metric" }) => {
         try {
             dispatch({
                 type: SET_LOADING,
@@ -119,6 +119,7 @@ const WeatherContextProvider = ({ children }) => {
                     params: {
                         lat,
                         lon,
+                        units,
                     },
                 })
                 .then((res) => {
@@ -281,9 +282,7 @@ const WeatherContextProvider = ({ children }) => {
     const setIsUseAnimateBackground = (payload) => {
         dispatch({ type: SET_IS_USE_ANIMATE_BACKGROUND, payload });
     };
-    const setUnitTemp = (payload) => {
-        dispatch({ type: SET_UNIT, payload });
-    };
+
     const weatherContextData = {
         getWeatherData,
         getCompareWeatherData,
@@ -292,7 +291,6 @@ const WeatherContextProvider = ({ children }) => {
         getCurrentWeatherData,
         getSunData,
         weatherState,
-        setUnitTemp,
         setIsUseAnimateBackground,
         setDataChart,
         setIsCompare,

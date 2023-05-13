@@ -6,91 +6,76 @@ import AllDetail from "../components/Desktop/AllDetail";
 import moment from "moment-timezone";
 import setBackgroundGradient from "../utils/setBackgroundGradient";
 import { ModalCompare } from "../components/Modals";
+import convertCelsiusToFahrenheit from "../utils/convertCelsiusToFahrenheit";
+import setTempByTime from "../utils/setTempByTime";
+import { SettingsContext } from "../contexts/SettingsContext";
 function Next7Day() {
     const {
         weatherState: { isCompare, dataChart, weatherData },
         setCompare,
         setIsCompare,
     } = useContext(WeatherContext);
+    const {
+        settingsState: { units },
+    } = useContext(SettingsContext);
     const [indexActive, setIndexActive] = useState(0);
     const ActiveDay = ({ weather }) => {
         return (
-            <>
-                <div className="flex flex-wrap w-full">
-                    <div className="w-1/2">
-                        <div>
-                            <span className="text-text font-semibold">
-                                Clouds:{" "}
-                            </span>
-                            {weather?.clouds}
-                        </div>
-                        <div>
-                            <span className="text-text font-semibold">
-                                Feels:{" "}
-                            </span>
-                            {weather?.feels_like.day}
-                        </div>
-                        <div>
-                            <span className="text-text font-semibold">
-                                Humidity:{" "}
-                            </span>
-                            {weather?.humidity}
-                        </div>
-                        <div>
-                            <span className="text-text font-semibold">
-                                Pop:{" "}
-                            </span>
-                            {weather?.pop}
-                        </div>
-                        <div>
-                            <span className="text-text font-semibold">
-                                Pressure:{" "}
-                            </span>
-                            {weather?.pressure}
-                        </div>
-                        <div>
-                            <span className="text-text font-semibold">
-                                Wind speed:{" "}
-                            </span>
-                            {weather?.wind_speed}
-                        </div>
-                    </div>
-                    <div className="w-1/2 flex flex-col justify-end">
-                        <div>
-                            <span className="text-text font-semibold">
-                                Temp max:{" "}
-                            </span>
-                            {weather?.temp?.max}
-                            &deg;
-                        </div>
-                        <div>
-                            <span className="text-text font-semibold">
-                                Temp min:{" "}
-                            </span>
-                            {weather?.temp?.min}
-                            &deg;
-                        </div>
-                        <div>
-                            <span className="text-text font-semibold">
-                                Sunrise:{" "}
-                            </span>
-                            {moment
-                                .unix(weather?.sunrise)
-                                .tz(weatherData.timezone)
-                                .format("LT")}
-                        </div>
-                        <div>
-                            <span className="text-text font-semibold">
-                                Sunset:{" "}
-                            </span>
-                            {moment
-                                .unix(weather?.sunset)
-                                .tz(weatherData.timezone)
-                                .format("LT")}
-                        </div>
-                    </div>
+            <div className="flex flex-wrap w-full">
+                <div className="w-1/2">
+                    {[
+                        "clouds",
+                        "feels_like",
+                        "humidity",
+                        "pop",
+                        "pressure",
+                        "wind_speed",
+                    ].map((item) => {
+                        return (
+                            <div key={item}>
+                                <span className="text-text font-semibold capitalize">
+                                    {item.split("_").join(" ")}
+                                </span>
+                                {item === "feels_like"
+                                    ? convertCelsiusToFahrenheit(
+                                          weather.feels_like[
+                                              setTempByTime(
+                                                  moment
+                                                      .unix(weather.dt)
+                                                      .tz(weatherData.timezone)
+                                                      .format("HH")
+                                              )
+                                          ],
+                                          units !== "metric"
+                                      )
+                                    : weather[item]}
+                            </div>
+                        );
+                    })}
                 </div>
-            </>
+                <div className="w-1/2 flex flex-col justify-end">
+                    {["max", "min"].map((item) => (
+                        <div key={item}>
+                            <span className="text-text font-semibold">
+                                Temp {item}:{" "}
+                            </span>
+                            {weather?.temp[item]}
+                            &deg;
+                        </div>
+                    ))}
+                    {["sunrise", "sunset"].map((item) => (
+                        <div key={item}>
+                            <span className="text-text font-semibold capitalize">
+                                {item}:{" "}
+                            </span>
+                            {moment
+                                .unix(weather[item])
+                                .tz(weatherData.timezone)
+                                .format("LT")}
+                        </div>
+                    ))}
+                </div>
+            </div>
         );
     };
     useEffect(() => {
@@ -168,12 +153,25 @@ function Next7Day() {
                                                     : "text-3xl   "
                                             }`}
                                         >
-                                            {weather.temp.day.toFixed(0)}&deg;
+                                            {convertCelsiusToFahrenheit(
+                                                weather.temp[
+                                                    setTempByTime(
+                                                        moment
+                                                            .unix(weather.dt)
+                                                            .tz(
+                                                                weatherData.timezone
+                                                            )
+                                                            .format("HH")
+                                                    )
+                                                ],
+                                                units !== "metric"
+                                            )}
+                                            &deg;
                                         </h4>
                                         <div
                                             className={` duration-100 ${
                                                 indexActive === index
-                                                    ? "w-1/2 flex items-center justify-center translate-y-8"
+                                                    ? "w-1/2 center translate-y-8"
                                                     : ""
                                             }`}
                                         >

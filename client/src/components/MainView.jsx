@@ -34,7 +34,7 @@ const MainView = () => {
         <Wrapper id="mainview">
             <CompareMode />
 
-            <div className="flex p-3 h-full -mx-3  flex-wrap">
+            <div className="flex h-full -mx-3  flex-wrap">
                 <div className="w-4/5 px-3 mb-3 ">
                     <ViewInfo
                         weather={weather()}

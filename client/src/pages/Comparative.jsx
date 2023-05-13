@@ -16,7 +16,7 @@ const Comparative = () => {
                 <div className="flex w-full flex-wrap mb-3">
                     <div className="w-2/5 px-3 mb-3 flex flex-wrap">
                         <div>
-                            <h2 className="lg:text-2xl lg:font-semibold">
+                            <h2 className="lg:text-2xl lg:font-semibold lg:mb-3">
                                 Weather Type:
                             </h2>
                             <div className="flex gap-4">

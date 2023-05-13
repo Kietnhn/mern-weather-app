@@ -7,6 +7,8 @@ import moment from "moment-timezone";
 import useDarkMode from "../../hooks/useDarkMode";
 import setTempByTime from "../../utils/setTempByTime";
 import Alert from "../Alert";
+import convertCelsiusToFahrenheit from "../../utils/convertCelsiusToFahrenheit";
+import { SettingsContext } from "../../contexts/SettingsContext";
 const CompareChart = ({ weatherType = "hourlyWeather", isAlert = false }) => {
     // weatherType is "hourlyWeather" or "weeklyWeather"
     const {
@@ -18,10 +20,14 @@ const CompareChart = ({ weatherType = "hourlyWeather", isAlert = false }) => {
             weatherData: { timezone },
         },
     } = useContext(WeatherContext);
+    const {
+        settingsState: { units },
+    } = useContext(SettingsContext);
     const [data, setData] = useState(null);
     const [options, setOptions] = useState(null);
     const [colorTheme] = useDarkMode();
     useEffect(() => {
+        console.log({ compare });
         const lengths = compare.map((i) => i[weatherType]?.length);
         const loggestCompare = compare[lengths.indexOf(Math.max(...lengths))];
         const labels = loggestCompare[weatherType].map((weather) =>
@@ -35,7 +41,7 @@ const CompareChart = ({ weatherType = "hourlyWeather", isAlert = false }) => {
             labels[0] = "Today";
         }
 
-        const datasets = compare.map((weather) => {
+        let datasets = compare.map((weather) => {
             return {
                 fill: true,
                 label: weather.timezone,
@@ -64,11 +70,24 @@ const CompareChart = ({ weatherType = "hourlyWeather", isAlert = false }) => {
                 }),
             };
         });
+        console.log("before", datasets);
+        if (["temp", "feels_like"].includes(dataChart)) {
+            datasets = datasets.map((dataset) => ({
+                ...dataset,
+                data: dataset.data.map((temp) => {
+                    return +convertCelsiusToFahrenheit(
+                        temp,
+                        units !== "metric"
+                    );
+                }),
+            }));
+        }
+        console.log("after", datasets);
 
         setData({ datasets, labels });
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [compare, dataChart, weatherType]);
+    }, [compare, dataChart, weatherType, units]);
 
     useEffect(() => {
         setOptions({

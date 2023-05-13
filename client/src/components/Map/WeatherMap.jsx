@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { WeatherContext } from "../../contexts/WeatherContext";
 import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -12,9 +12,7 @@ const WeatherMap = () => {
     } = useContext(WeatherContext);
     const [weatherOnMap, setWeatherOnMap] = useState({ ...weatherData });
     const [map, setMap] = useState(null);
-    useEffect(() => {
-        console.log(weatherOnMap);
-    }, [weatherOnMap]);
+
     return (
         <div className="relative h-full">
             <MapContainer

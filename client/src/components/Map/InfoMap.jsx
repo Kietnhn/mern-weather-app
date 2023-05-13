@@ -5,11 +5,16 @@ import { WeatherContext } from "../../contexts/WeatherContext";
 import scrollToComponent from "../../utils/scrollToComponent";
 import { ExpendBoxIcon, MiniSize } from "../icons";
 import ToolTip from "../ToolTip";
+import convertCelsiusToFahrenheit from "../../utils/convertCelsiusToFahrenheit";
+import { SettingsContext } from "../../contexts/SettingsContext";
 const InfoMap = ({ weather, map, className, timezone, setWeatherOnMap }) => {
     const {
         positionState: { areaOnMap },
     } = useContext(PositionContext);
     const { getWeatherData } = useContext(WeatherContext);
+    const {
+        settingsState: { units },
+    } = useContext(SettingsContext);
     const [position] = useState(map.getCenter());
     const [alert, setAlert] = useState(false);
     const [isShow, setIsShow] = useState(false);
@@ -44,7 +49,12 @@ const InfoMap = ({ weather, map, className, timezone, setWeatherOnMap }) => {
         document.querySelector(".mainview").classList.toggle("text-theme");
         document.querySelector(".weathermap").classList.toggle("text-theme");
     };
-
+    const handleShowAlert = () => {
+        setAlert(true);
+        setTimeout(() => {
+            setAlert(false);
+        }, 3000);
+    };
     useEffect(() => {
         map.on("baselayerchange", (e) => {
             setBaseLayer(e.name);
@@ -107,11 +117,16 @@ const InfoMap = ({ weather, map, className, timezone, setWeatherOnMap }) => {
                                     baseLayer === "Temperature" ? "flex" : ""
                                 }`}
                             >
-                                {
-                                    weather?.currentWeather[
-                                        customBaseLayer[baseLayer].attr
-                                    ]
-                                }
+                                {baseLayer === "Temperature"
+                                    ? convertCelsiusToFahrenheit(
+                                          weather?.currentWeather[
+                                              customBaseLayer[baseLayer].attr
+                                          ],
+                                          units !== "metric"
+                                      )
+                                    : weather?.currentWeather[
+                                          customBaseLayer[baseLayer].attr
+                                      ]}
                                 <span className="text-4xl text-text">
                                     {customBaseLayer[baseLayer].unit}
                                 </span>
@@ -120,7 +135,7 @@ const InfoMap = ({ weather, map, className, timezone, setWeatherOnMap }) => {
                         <div>
                             <button
                                 className="button w-full"
-                                onClick={() => setAlert(true)}
+                                onClick={handleShowAlert}
                             >
                                 View more
                             </button>

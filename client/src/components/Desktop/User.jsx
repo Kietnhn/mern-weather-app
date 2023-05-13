@@ -1,13 +1,18 @@
 import React, { useContext, useState } from "react";
-import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
+import { SettingsContext } from "../../contexts/SettingsContext";
 
 const User = () => {
     const {
         authState: { isAuthenticated, user },
         logoutUser,
     } = useContext(AuthContext);
+    const { toggleModalLogin } = useContext(SettingsContext);
     const [isShowMenu, setIsShowMenu] = useState(false);
+    const handleShowModalLogin = () => {
+        console.log("show");
+        toggleModalLogin(true);
+    };
     return (
         <div className="h-full flex justify-end items-center">
             {isAuthenticated ? (
@@ -46,12 +51,9 @@ const User = () => {
                     )}
                 </div>
             ) : (
-                <NavLink
-                    to="/login"
-                    className="border px-4 py-2 rounded-lg bg-primaryText text-dark"
-                >
+                <button onClick={handleShowModalLogin} className="button">
                     Sign in
-                </NavLink>
+                </button>
             )}
         </div>
     );

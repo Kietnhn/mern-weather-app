@@ -2,9 +2,9 @@ import React from "react";
 import useDetectUserDevice from "../../hooks/useDetectUserDevice";
 import { Navigate } from "react-router-dom";
 
-const ProtectedRoutesIsMobile = ({ children }) => {
+const ProtectedRoutesDesktop = ({ children }) => {
     const [isMobile] = useDetectUserDevice();
-    return isMobile ? children : <Navigate to="/page-not-found" />;
+    return !isMobile ? children : <Navigate to="/page-not-found" />;
 };
 
-export default ProtectedRoutesIsMobile;
+export default ProtectedRoutesDesktop;

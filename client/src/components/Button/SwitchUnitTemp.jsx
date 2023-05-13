@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
-import { WeatherContext } from "../../contexts/WeatherContext";
+import { SettingsContext } from "../../contexts/SettingsContext";
 
 const SwitchUnitTemp = () => {
     const {
-        weatherState: { unit },
-        setUnitTemp,
-    } = useContext(WeatherContext);
+        settingsState: { units },
+        changeUnitsTemperature,
+    } = useContext(SettingsContext);
     const handleSwitchUnitTemp = () => {
-        const result = unit === "C" ? "F" : "C";
-        setUnitTemp(result);
+        const result = units === "metric" ? "imperial" : "metric";
+        changeUnitsTemperature(result);
     };
     return (
         <button
@@ -20,10 +20,12 @@ const SwitchUnitTemp = () => {
             <div
                 className={`absolute top-0 bottom-0 left-0 w-2/3 h-8 rounded-full shadow-[0_0_5px_2px_#ccc] theme-reverse
                 center
-                ${unit === "C" ? "" : "left-[unset] right-0"}
+                ${units === "metric" ? "" : "left-[unset] right-0"}
             `}
             >
-                <h3 className="font-bold text-xl">{unit}&deg;</h3>
+                <h3 className="font-bold text-xl">
+                    {units === "metric" ? "C" : "F"}&deg;
+                </h3>
             </div>
         </button>
     );

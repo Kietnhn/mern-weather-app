@@ -11,7 +11,7 @@ const Navigation = () => {
         setIsActive(index);
     };
     return (
-        <div className="fixed  modal-content top-1/2 -translate-y-1/2 left-0  z-[999]">
+        <div className="fixed  modal-content top-1/2 -translate-y-1/2 left-0  z-[9999]">
             <div className="p-2 flex-col between  font-semibold navtoday">
                 {today.map((i, index) => {
                     const Icon = i.icon;

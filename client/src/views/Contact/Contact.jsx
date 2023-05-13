@@ -15,7 +15,7 @@ const Contact = () => {
                             Get In Touch
                         </h1>
                     </div>
-                    <div className="relative -translate-y-[1px]">
+                    <div className="relative lg:h-full -translate-y-[1px]">
                         <FormContact />
                         <div className="hidden lg:block absolute theme top-full -z-[1] left-0 right-0 h-10 "></div>
                     </div>

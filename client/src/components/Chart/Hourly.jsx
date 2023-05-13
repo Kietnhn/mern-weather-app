@@ -7,6 +7,8 @@ import moment from "moment-timezone";
 import useDarkMode from "../../hooks/useDarkMode";
 // import setTempByTime from "../../utils/setTempByTime";
 import LoadingComponent from "../Loading/LoadingComponent";
+import { SettingsContext } from "../../contexts/SettingsContext";
+import convertCelsiusToFahrenheit from "../../utils/convertCelsiusToFahrenheit";
 const Hourly = ({ weathers = [] }) => {
     const {
         weatherState: {
@@ -16,6 +18,9 @@ const Hourly = ({ weathers = [] }) => {
             weatherData: { timezone },
         },
     } = useContext(WeatherContext);
+    const {
+        settingsState: { units },
+    } = useContext(SettingsContext);
     const [data, setData] = useState(null);
     const [options, setOptions] = useState(null);
     const [colorTheme] = useDarkMode();
@@ -31,6 +36,7 @@ const Hourly = ({ weathers = [] }) => {
             .unix(weathers[0].dt)
             .tz(timezone)
             .format("HH");
+
         Object.keys(historyWeather).forEach((key) => {
             if (historyWeather[key]) {
                 const weatherMatchCurrent = historyWeather[key].filter(
@@ -49,7 +55,7 @@ const Hourly = ({ weathers = [] }) => {
             }
         });
 
-        const datasets = [
+        let datasets = [
             {
                 fill: true,
                 label: timezone,
@@ -69,10 +75,23 @@ const Hourly = ({ weathers = [] }) => {
         if (datasets.length > 1) {
             datasets[0].label = "Current";
         }
+        // convert unit
+        if (dataChart === "temp") {
+            datasets = datasets.map((dataset) => ({
+                ...dataset,
+                data: dataset.data.map((temp) => {
+                    return +convertCelsiusToFahrenheit(
+                        temp,
+                        units !== "metric"
+                    );
+                }),
+            }));
+        }
+
         setData({ datasets, labels });
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dataChart, historyWeather]);
+    }, [dataChart, historyWeather, units]);
 
     useEffect(() => {
         setOptions({

@@ -2,6 +2,9 @@ import { useContext } from "react";
 import { WeatherContext } from "../../contexts/WeatherContext";
 import setIconUrl from "../../utils/setIconUrl";
 import moment from "moment-timezone";
+import setTempByTime from "../../utils/setTempByTime";
+import convertCelsiusToFahrenheit from "../../utils/convertCelsiusToFahrenheit";
+import { SettingsContext } from "../../contexts/SettingsContext";
 
 const Weekly = ({ setIndexActive = () => {}, indexActive = 0 }) => {
     const {
@@ -9,6 +12,9 @@ const Weekly = ({ setIndexActive = () => {}, indexActive = 0 }) => {
             weatherData: { weeklyWeather, timezone },
         },
     } = useContext(WeatherContext);
+    const {
+        settingsState: { units },
+    } = useContext(SettingsContext);
     return (
         <div className="w-full relative ">
             <div className=" flex font-semibold -mx-2">
@@ -37,7 +43,7 @@ const Weekly = ({ setIndexActive = () => {}, indexActive = 0 }) => {
                                               .tz(timezone)
                                               .format("ddd")}
                                 </h3>
-                                <div className="flex gap-4 items-center">
+                                <div className="between">
                                     <div className="w-14 h-14">
                                         <img
                                             src={setIconUrl(
@@ -46,7 +52,20 @@ const Weekly = ({ setIndexActive = () => {}, indexActive = 0 }) => {
                                             alt={weather.weather[0].icon}
                                         />
                                     </div>
-                                    <p>{weather.temp.day.toFixed(0)}&deg;</p>
+                                    <p>
+                                        {convertCelsiusToFahrenheit(
+                                            weather.temp[
+                                                setTempByTime(
+                                                    moment
+                                                        .unix(weather.dt)
+                                                        .tz(timezone)
+                                                        .format("HH")
+                                                )
+                                            ],
+                                            units !== "metric"
+                                        )}
+                                        &deg;
+                                    </p>
                                 </div>
                             </div>
                         </div>

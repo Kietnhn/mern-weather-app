@@ -22,7 +22,7 @@ router.get("/only-current", async (req, res) => {
 
 // /api/weather
 router.get("/", async (req, res) => {
-    const { lat, lon } = req.query;
+    const { lat, lon, units } = req.query;
     if (!lat || !lon)
         return res.status(400).json({
             success: false,
@@ -30,7 +30,7 @@ router.get("/", async (req, res) => {
         });
     try {
         const response = await fetch(
-            `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${process.env.API_KEY}&units=metric`
+            `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${process.env.API_KEY}&units=${units}`
         ).then((res) => res.json());
         res.json({ success: true, message: "Success", weather: response });
     } catch (error) {

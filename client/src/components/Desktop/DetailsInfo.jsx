@@ -32,30 +32,34 @@ const DetailsInfo = ({ weather, weatherType = "hourlyWeather" }) => {
     if (!weather || !datas) return <></>;
     return (
         <>
-            <div className="lg:font-semibold capitalize flex  flex-wrap gap-4">
-                <div className="w-full lg:text-2xl lg:font-semibold">
+            <div className="lg:font-semibold capitalize ">
+                <div className="w-full lg:text-2xl lg:font-semibold lg:mb-3">
                     <h2>Data Chart:</h2>
                 </div>
-                {datas.map((data, index) => {
-                    return (
-                        <div
-                            className={`flex `}
-                            style={{
-                                animationDelay: `${index * 500}ms`,
-                            }}
-                            key={data.key}
-                        >
-                            <button
-                                onClick={() => setDataChart(data.key)}
-                                className={`w-full  button capitalize ${
-                                    dataChart === data.key ? "activeButton" : ""
-                                }`}
+                <div className="flex  flex-wrap gap-4">
+                    {datas.map((data, index) => {
+                        return (
+                            <div
+                                className={`flex `}
+                                style={{
+                                    animationDelay: `${index * 500}ms`,
+                                }}
+                                key={data.key}
                             >
-                                {data.key.split("_").join(" ")}
-                            </button>
-                        </div>
-                    );
-                })}
+                                <button
+                                    onClick={() => setDataChart(data.key)}
+                                    className={`w-full  button capitalize ${
+                                        dataChart === data.key
+                                            ? "activeButton"
+                                            : ""
+                                    }`}
+                                >
+                                    {data.key.split("_").join(" ")}
+                                </button>
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
         </>
     );

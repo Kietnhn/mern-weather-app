@@ -27,7 +27,7 @@ const Input = ({
         }
     };
     return (
-        <div className={`relative mb-8  ${className}`} >
+        <div className={`relative mb-8  ${className}`}>
             <input
                 id={name}
                 placeholder=" "
@@ -36,7 +36,7 @@ const Input = ({
                 onChange={onChange}
                 onBlur={handleValidate}
                 onFocus={handleFocus}
-                className="form-input theme "
+                className="form-input  "
             />
 
             <label htmlFor={name} className="form-label theme shadow-none ">

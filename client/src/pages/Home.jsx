@@ -55,8 +55,13 @@ function Home() {
                         Welcome to my website
                     </h3>
                     <div className="">
-                        <button className="text-lg font-semibold button rounded-full w-full">
-                            <Link to="/landing">Continue</Link>
+                        <button className="text-lg font-semibold button rounded-full w-full p-0">
+                            <Link
+                                to="/landing"
+                                className="w-full h-full block px-4 py-2"
+                            >
+                                Continue
+                            </Link>
                         </button>
                     </div>
                 </div>

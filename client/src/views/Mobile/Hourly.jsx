@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { WeatherContext } from "../../contexts/WeatherContext";
 import moment from "moment-timezone";
 import { set2xIconUrl } from "../../utils/setIconUrl";
+import convertCelsiusToFahrenheit from "../../utils/convertCelsiusToFahrenheit";
+import { SettingsContext } from "../../contexts/SettingsContext";
 
 const Hourly = () => {
     const {
@@ -9,6 +11,17 @@ const Hourly = () => {
             weatherData: { timezone, hourlyWeather },
         },
     } = useContext(WeatherContext);
+    const {
+        settingsState: { units },
+    } = useContext(SettingsContext);
+    const renderTemp = (weather) => {
+        const temp = convertCelsiusToFahrenheit(
+            weather?.temp ? weather?.temp : weather?.main?.temp,
+            units !== "metric"
+        );
+
+        return Number(temp).toFixed(0);
+    };
     return (
         <div className="flex w-full overflow-auto -mx-1  pb-2 border-b-2 ">
             {hourlyWeather.length > 0 &&
@@ -35,10 +48,9 @@ const Hourly = () => {
                                 />
                             </div>
                             <p className="font-semibold text-base  ">
-                                {weather?.temp
-                                    ? weather?.temp?.toFixed(0)
-                                    : weather?.main?.temp?.toFixed(0)}
-                                &deg;C
+                                {renderTemp(weather)}
+                                &deg;
+                                {units === "metric" ? "C" : "F"}
                             </p>
                         </div>
                     </div>

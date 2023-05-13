@@ -6,13 +6,18 @@ import setTempByTime from "../../utils/setTempByTime";
 import moment from "moment-timezone";
 import { WeatherContext } from "../../contexts/WeatherContext";
 import SwitchUnitTemp from "../Button/SwitchUnitTemp";
+import convertCelsiusToFahrenheit from "../../utils/convertCelsiusToFahrenheit";
+import { SettingsContext } from "../../contexts/SettingsContext";
 
 const MainView = ({ weather, timezone, indexActive }) => {
     const { setDataChart } = useContext(WeatherContext);
-
+    const {
+        settingsState: { units },
+    } = useContext(SettingsContext);
     const handleSetDataChart = (dataChart) => {
         setDataChart(dataChart);
     };
+
     const InfoItem = ({ item }) => {
         const Icon = item.icon;
         return (
@@ -37,6 +42,18 @@ const MainView = ({ weather, timezone, indexActive }) => {
             </div>
         );
     };
+    const renderTemp = (weather) => {
+        return convertCelsiusToFahrenheit(
+            indexActive === 0
+                ? weather.temp
+                : weather.temp[
+                      setTempByTime(
+                          moment.unix(weather.dt).tz(timezone).format("HH")
+                      )
+                  ],
+            units !== "metric"
+        );
+    };
     if (!weather) return <></>;
     return (
         <div className="">
@@ -58,16 +75,7 @@ const MainView = ({ weather, timezone, indexActive }) => {
                                 className="text-6xl font-semibold hover:cursor-pointer"
                                 onClick={() => handleSetDataChart("temp")}
                             >
-                                {indexActive === 0
-                                    ? weather.temp
-                                    : weather.temp[
-                                          setTempByTime(
-                                              moment
-                                                  .unix(weather.dt)
-                                                  .tz(timezone)
-                                                  .format("HH")
-                                          )
-                                      ]}
+                                {renderTemp(weather)}
                                 &deg;
                             </h1>
                             <p className="font-semibold">

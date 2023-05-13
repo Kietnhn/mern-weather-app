@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { WeatherContext } from "../../contexts/WeatherContext";
 import { TimesIcon } from "../icons";
+import SwitchUnitTemp from "../Button/SwitchUnitTemp";
 const Compare = () => {
     const {
         weatherState: { compare },
@@ -14,7 +15,10 @@ const Compare = () => {
     };
     return (
         <div>
-            <h2 className="text-2xl font-semibold mb-2">Comparing: </h2>
+            <div className="between">
+                <h2 className="text-2xl font-semibold mb-3">Comparing: </h2>
+                <SwitchUnitTemp />
+            </div>
             <div className="flex gap-2 w-full flex-wrap">
                 {compare?.map((weather, index) => (
                     <div

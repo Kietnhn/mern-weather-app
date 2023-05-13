@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { WeatherContext } from "../../contexts/WeatherContext";
 import { set2xIconUrl } from "../../utils/setIconUrl";
 import moment from "moment-timezone";
+import convertCelsiusToFahrenheit from "../../utils/convertCelsiusToFahrenheit";
+import { SettingsContext } from "../../contexts/SettingsContext";
 
 const Weekly = () => {
     const {
@@ -9,6 +11,20 @@ const Weekly = () => {
             weatherData: { weeklyWeather, timezone },
         },
     } = useContext(WeatherContext);
+    const {
+        settingsState: { units },
+    } = useContext(SettingsContext);
+    const renderMinMax = (type) => {
+        return (
+            <>
+                {convertCelsiusToFahrenheit(
+                    weeklyWeather[0]?.temp[type],
+                    units !== "metric"
+                )}
+                &deg;
+            </>
+        );
+    };
     return (
         <div className="my-2">
             {weeklyWeather.length > 0 &&
@@ -45,9 +61,7 @@ const Weekly = () => {
                             </div>
                         </div>
                         <p className="font-semibold text-base  ">
-                            {weeklyWeather[0].temp.max.toFixed(0)}
-                            &deg;C /{weeklyWeather[0].temp.min.toFixed(0)}
-                            &deg;C
+                            {renderMinMax("max")}/{renderMinMax("min")}
                         </p>
                     </div>
                 ))}

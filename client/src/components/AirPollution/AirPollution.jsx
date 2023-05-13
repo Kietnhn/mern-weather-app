@@ -39,7 +39,7 @@ const AirPollution = () => {
         <Wrapper
             title="Air Pollution"
             id="airpollution"
-            styleTitle="hidden lg:block"
+            styleTitle="hidden lg:block font-bold text-4xl text-center  mb-5"
         >
             <div className="w-full lg:px-5 lg:py-3">
                 <div className="flex flex-wrap-reverse -mx-3">

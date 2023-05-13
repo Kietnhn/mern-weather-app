@@ -3,10 +3,12 @@ import { NavLink } from "react-router-dom";
 import { CityContext } from "../contexts/CityContext";
 import { WeatherContext } from "../contexts/WeatherContext";
 import { AuthContext } from "../contexts/AuthContext";
+import { SettingsContext } from "../contexts/SettingsContext";
 import setIconUrl from "../utils/setIconUrl";
 import { DeleteIcon } from "./icons";
 import setBackgroundGradient from "../utils/setBackgroundGradient";
 import defaultData from "../utils/defaultCityData";
+import convertCelsiusToFahrenheit from "../utils/convertCelsiusToFahrenheit";
 
 const CitiesWeather = ({ isEdit, className }) => {
     const {
@@ -21,6 +23,9 @@ const CitiesWeather = ({ isEdit, className }) => {
     const {
         authState: { isAuthenticated },
     } = useContext(AuthContext);
+    const {
+        settingsState: { units },
+    } = useContext(SettingsContext);
     const [alert, setAlert] = useState(null);
     const [data, setData] = useState([]);
     useEffect(() => {
@@ -49,7 +54,8 @@ const CitiesWeather = ({ isEdit, className }) => {
         await deleteCity(_id);
         setAlert(null);
     };
-    const CityWeather = ({ weather }) => {
+
+    const CityWeather = ({ weather, isDefault = false }) => {
         return (
             <div
                 onClick={() => handleSelectCity(weather)}
@@ -82,12 +88,16 @@ const CitiesWeather = ({ isEdit, className }) => {
                             />
                         </div>
                         <h2 className="text-xl">
-                            {weather?.weather?.temp}&deg;
+                            {convertCelsiusToFahrenheit(
+                                weather?.weather?.temp,
+                                units !== "metric"
+                            )}
+                            &deg;
                         </h2>
                     </>
                 )}
 
-                {isEdit && (
+                {!isDefault && isEdit && (
                     <button onClick={() => setAlert(weather)}>
                         <span>
                             <DeleteIcon />
@@ -141,7 +151,7 @@ const CitiesWeather = ({ isEdit, className }) => {
                 </div>
             ) : (
                 <div className="flex-1">
-                    <h3 className="font-semibold text-xl mb-4">My Positions</h3>
+                    <h3 className="font-semibold text-xl mb-3">My Positions</h3>
                     {data.length > 0 ? (
                         <div className="h-full overflow-auto">
                             {data.map((weather) => (
@@ -166,7 +176,7 @@ const CitiesWeather = ({ isEdit, className }) => {
                 <div>
                     {defaultData.map((weather) => (
                         <div key={`${weather._id || weather?.weather.imgUrl}`}>
-                            <CityWeather weather={weather} />
+                            <CityWeather weather={weather} isDefault={true} />
                         </div>
                     ))}
                 </div>

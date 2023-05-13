@@ -3,7 +3,6 @@ import {
     SET_LOADING,
     TOGGLE_THEME,
     SET_FORECAST_WEATHER,
-    SET_UNIT,
     SET_IS_USE_ANIMATE_BACKGROUND,
     SET_DATA_CHART,
     SET_IS_COMPARE,
@@ -74,11 +73,7 @@ export const weatherReducer = (state, action) => {
                 forecastWeather: payload,
                 isLoading: false,
             };
-        case SET_UNIT:
-            return {
-                ...state,
-                unit: payload,
-            };
+
         case SET_LOADING:
             return {
                 ...state,
