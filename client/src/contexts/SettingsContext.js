@@ -1,6 +1,11 @@
 import { createContext, useReducer } from "react";
 import { settingsReducer } from "../reducers/settingsReducer";
-import { IS_SHOW_MODAL_LOGIN, SET_GLOBAL_ALERT, SET_UNITS } from "./constants";
+import {
+    IS_SHOW_MODAL_LOGIN,
+    IS_SHOW_MODAL_UPDATE_PROFILE,
+    SET_GLOBAL_ALERT,
+    SET_UNITS,
+} from "./constants";
 export const SettingsContext = createContext();
 
 const SettingsContextProvider = ({ children }) => {
@@ -8,6 +13,7 @@ const SettingsContextProvider = ({ children }) => {
     const [settingsState, dispatch] = useReducer(settingsReducer, {
         units: "metric",
         isShowModalLogin: false,
+        isShowModalUpdateProfile: false,
         globalAlert: null,
     });
     const changeUnitsTemperature = (payload) => {
@@ -15,6 +21,9 @@ const SettingsContextProvider = ({ children }) => {
     };
     const toggleModalLogin = (payload) => {
         dispatch({ type: IS_SHOW_MODAL_LOGIN, payload });
+    };
+    const toggleModalUpdateProfile = (payload) => {
+        dispatch({ type: IS_SHOW_MODAL_UPDATE_PROFILE, payload });
     };
     const setGlobalAlert = (payload) => {
         dispatch({ type: SET_GLOBAL_ALERT, payload });
@@ -24,6 +33,7 @@ const SettingsContextProvider = ({ children }) => {
         changeUnitsTemperature,
         toggleModalLogin,
         setGlobalAlert,
+        toggleModalUpdateProfile,
     };
     return (
         <SettingsContext.Provider value={SettingsData}>

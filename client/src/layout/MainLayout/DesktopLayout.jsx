@@ -2,6 +2,7 @@ import React from "react";
 import DesktopHeader from "../../views/Desktop/DesktopHeader";
 import { useEffect } from "react";
 import ModalLogin from "../../components/Modals/ModalLogin";
+import ModalUpdateProfile from "../../components/Modals/ModalUpdateProfile";
 const DesktopLayout = ({ children }) => {
     useEffect(() => {
         window.addEventListener("scroll", () => {
@@ -24,6 +25,7 @@ const DesktopLayout = ({ children }) => {
         <>
             <DesktopHeader />
             <ModalLogin />
+            <ModalUpdateProfile />
             <div
                 className={`theme h-[100vh] overflow-hidden`}
                 style={{ scrollBehavior: "smooth" }}

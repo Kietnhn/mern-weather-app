@@ -7,7 +7,8 @@ const User = () => {
         authState: { isAuthenticated, user },
         logoutUser,
     } = useContext(AuthContext);
-    const { toggleModalLogin } = useContext(SettingsContext);
+    const { toggleModalLogin, toggleModalUpdateProfile } =
+        useContext(SettingsContext);
     const [isShowMenu, setIsShowMenu] = useState(false);
     const handleShowModalLogin = () => {
         toggleModalLogin(true);
@@ -20,23 +21,22 @@ const User = () => {
                     onClick={() => setIsShowMenu(!isShowMenu)}
                 >
                     <h2 className="text-xl font-semibold">{user.username}</h2>
-                    <div className="w-10 h-10 rounded-full bg-text "></div>
                     {isShowMenu && (
-                        <div className="absolute top-full w-[230px]  px-6 py-2 right-0 dark:bg-[#232228] rounded-xl bg-[#dee1e6]">
-                            <div className="flex items-center">
-                                <div className="w-12 h-12">
+                        <div className="absolute top-full min-w-[230px]  px-6 py-2 right-0 theme modal-content  rounded-xl">
+                            <div
+                                className="flex items-center hover:cursor-pointer"
+                                onClick={() => toggleModalUpdateProfile(true)}
+                            >
+                                <div className="w-12 h-12 relative">
                                     <img src="" alt="" />
                                 </div>
                                 <div>
                                     <h2>{user.username}</h2>
-                                    <p></p>
+                                    <p>{user.email}</p>
                                 </div>
                             </div>
                             <hr />
-                            <div>
-                                <h2 className="py-2.5">Your account</h2>
-                                <hr />
-                            </div>
+
                             <div>
                                 <h2 className="py-2.5">Settings</h2>
                                 <h2

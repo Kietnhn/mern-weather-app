@@ -5,6 +5,33 @@ const router = express.Router();
 import User from "../models/User.js";
 import verifyToken from "../middleware/auth.js";
 
+// update profile and send Email
+
+//@router PUT api/auth/update
+router.put("/update/:id", verifyToken, async (req, res) => {
+    const { username, password, avatar } = req.body;
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user)
+            return res
+                .status(400)
+                .json({ success: false, message: "User not found" });
+        if (username) user.username = username;
+        // could't change email after registry
+        // user.email = email;
+        if (avatar) user.avatar = avatar;
+        if (password) user.password = await argon2.hash(password);
+        await user.save();
+        res.json({ success: true, message: "User changed successfully", user });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            success: false,
+            message: "Internal server error",
+        });
+    }
+});
+
 //@router GET api/auth
 //@desc Check if user is logged in
 //@access public
@@ -19,7 +46,7 @@ router.get("/", verifyToken, async (req, res) => {
     } catch (error) {
         console.log(error);
         res.status(500).json({
-            success: false, 
+            success: false,
             message: "Internal server error",
         });
     }

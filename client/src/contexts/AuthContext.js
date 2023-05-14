@@ -21,6 +21,19 @@ const AuthContextProvider = ({ children }) => {
             },
         });
     };
+    const updateUser = async ({ id, username, password, avatar }) => {
+        try {
+            const response = await axios.put(
+                `
+            ${apiUrl}/auth/update/${id}`,
+                null,
+                { params: { username, password, avatar } }
+            );
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     // register
     const registerUser = async (userForm) => {
@@ -74,7 +87,7 @@ const AuthContextProvider = ({ children }) => {
 
     const loginUser = async (userForm) => {
         try {
-            console.log({userForm});
+            console.log({ userForm });
             const response = await axios.post(`${apiUrl}/auth/login`, userForm);
             if (response.data.success) {
                 localStorage.setItem(
@@ -94,7 +107,13 @@ const AuthContextProvider = ({ children }) => {
     }, []);
 
     // context data
-    const authContextData = { loginUser, authState, registerUser, logoutUser };
+    const authContextData = {
+        loginUser,
+        authState,
+        registerUser,
+        logoutUser,
+        updateUser,
+    };
 
     // return component
     return (
