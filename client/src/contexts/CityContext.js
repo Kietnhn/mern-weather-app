@@ -22,7 +22,7 @@ const CityContextProvider = ({ children }) => {
                     type: "SET_CITIES",
                     payload: response.data.cities,
                 });
-                console.log("cities",response.data.cities);
+                console.log("cities", response.data.cities);
             }
         } catch (error) {
             console.error(error);
@@ -38,7 +38,9 @@ const CityContextProvider = ({ children }) => {
                 });
             }
             return response.data;
-        } catch (error) {}
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     const addCity = async ({ lat, lon }) => {

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import ToolTip from "../../components/ToolTip";
 import CitiesWeather from "../../components/CitiesWeather";
 import useScroll from "../../hooks/useScroll";
+import { TimesIcon } from "../../components/icons";
 const Cities = () => {
     const [isShow, setIsShow] = useState(false);
     const scrollPosition = useScroll();
@@ -15,15 +16,17 @@ const Cities = () => {
         <>
             {isShow ? (
                 <div className="fixed top-0 bottom-0 right-0 z-[9998] min-w-[260px] theme modal-content mt-[52px] p-4">
-                    <div className="absolute top-0 right-0">
+                    <div className="absolute top-0 right-0 z-[999] ">
                         <button
-                            className="px-3 py-2 hover:cursor-pointer"
+                            className="mx-1 my-2 px-3 py-2 hover:cursor-pointer"
                             onClick={() => setIsShow(false)}
                         >
-                            &times;
+                            <span>
+                                <TimesIcon width="20px" height="20px" />
+                            </span>
                         </button>
                     </div>
-                    <CitiesWeather />
+                    <CitiesWeather isEdit={true} />
                 </div>
             ) : (
                 <div className="fixed top-1/2 -translate-y-1/2 right-0 z-[9999]">

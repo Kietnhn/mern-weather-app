@@ -21,11 +21,7 @@ const SaveButton = () => {
         addCity,
         deleteCity,
     } = useContext(CityContext);
-    const {
-        settingsState: { globalAlert },
-        setGlobalAlert,
-        toggleModalLogin,
-    } = useContext(SettingsContext);
+    const { setGlobalAlert, toggleModalLogin } = useContext(SettingsContext);
     const [isMobile] = useDetectUserDevice();
     const [savedCity, setSavedCity] = useState(false);
     const navigate = useNavigate();
@@ -53,9 +49,13 @@ const SaveButton = () => {
         if (response?.success) {
             setSavedCity(false);
         }
-        console.log({ response });
-
-        setGlobalAlert({ type: response.success, content: response.message });
+        handleSetGlobalAlert(response);
+    };
+    const handleSetGlobalAlert = (response) => {
+        setGlobalAlert({
+            type: response.success ? "success" : "",
+            content: response.message,
+        });
         setTimeout(() => {
             setGlobalAlert(null);
         }, [3000]);
@@ -68,11 +68,7 @@ const SaveButton = () => {
         if (response?.success) {
             setSavedCity(true);
         }
-        console.log({ response });
-        setGlobalAlert({ type: response.success, content: response.message });
-        setTimeout(() => {
-            setGlobalAlert(null);
-        }, [3000]);
+        handleSetGlobalAlert(response);
     };
     useEffect(() => {
         const { lat, lon } = weatherData;
@@ -82,9 +78,7 @@ const SaveButton = () => {
         setSavedCity(existedCity ? true : false);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cities, weatherData]);
-    useEffect(() => {
-        console.log({ globalAlert });
-    }, [globalAlert]);
+
     return (
         <>
             <ToolTip

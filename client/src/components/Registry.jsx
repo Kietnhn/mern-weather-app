@@ -60,7 +60,7 @@ const Register = ({ onChangeForm }) => {
     };
     return (
         <div className="w-full flex flex-col items-center justify-between  font-semibold theme text-center p-8">
-            <h1 className="text-3xl font-bold mb-2">Sign up</h1>
+            <h1 className="text-3xl font-bold mb-4 uppercase">Sign up</h1>
 
             <form className="w-full" onSubmit={register}>
                 {[...Object.keys(registerForm)].map((item) => (

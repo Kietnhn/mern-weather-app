@@ -10,7 +10,6 @@ const User = () => {
     const { toggleModalLogin } = useContext(SettingsContext);
     const [isShowMenu, setIsShowMenu] = useState(false);
     const handleShowModalLogin = () => {
-        console.log("show");
         toggleModalLogin(true);
     };
     return (

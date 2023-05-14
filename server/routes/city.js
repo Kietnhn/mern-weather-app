@@ -6,10 +6,7 @@ import verifyToken from "../middleware/auth.js";
 
 router.delete("/:id", verifyToken, async (req, res) => {
     try {
-        const deletedCity = await City.findByIdAndDelete({
-            _id: req.params.id,
-        });
-        console.log(deletedCity);
+        const deletedCity = await City.findByIdAndDelete(req.params.id);
         if (!deletedCity) {
             return res.status(401).json({
                 success: false,
@@ -32,7 +29,7 @@ router.delete("/:id", verifyToken, async (req, res) => {
 
 // /api/cites
 router.post("/", verifyToken, async (req, res) => {
-    const { API_KEY, lat, lon } = req.query;
+    const { lat, lon } = req.query;
     const city = await City.findOne({ lat, lon, user: req.userId });
     if (city) {
         return res.json({ success: false, message: "City is exist" });
@@ -54,8 +51,7 @@ router.post("/", verifyToken, async (req, res) => {
         const newCityWeather = await getCityWeather({
             lat,
             lon,
-            _id: req.userId,
-            API_KEY,
+            _id: newCity._id,
         });
 
         res.json({
@@ -114,7 +110,6 @@ router.get("/", verifyToken, async (req, res) => {
         // .populate("users", [
         //     "username",
         // ]);
-        // console.log({cities});
         const citiesWeather = await getAllCityWeather({ cities });
         res.json({ success: true, cities: citiesWeather });
     } catch (error) {

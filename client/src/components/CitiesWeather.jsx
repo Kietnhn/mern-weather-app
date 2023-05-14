@@ -9,6 +9,7 @@ import { DeleteIcon } from "./icons";
 import setBackgroundGradient from "../utils/setBackgroundGradient";
 import defaultData from "../utils/defaultCityData";
 import convertCelsiusToFahrenheit from "../utils/convertCelsiusToFahrenheit";
+import ToolTip from "./ToolTip";
 
 const CitiesWeather = ({ isEdit, className }) => {
     const {
@@ -25,6 +26,8 @@ const CitiesWeather = ({ isEdit, className }) => {
     } = useContext(AuthContext);
     const {
         settingsState: { units },
+        toggleModalLogin,
+        setGlobalAlert,
     } = useContext(SettingsContext);
     const [alert, setAlert] = useState(null);
     const [data, setData] = useState([]);
@@ -51,15 +54,30 @@ const CitiesWeather = ({ isEdit, className }) => {
     };
     const handleDeleteCity = async (weather) => {
         const { _id } = weather;
-        await deleteCity(_id);
-        setAlert(null);
+        const response = await deleteCity(_id);
+        if (response?.success) {
+            setAlert(null);
+        }
+        handleSetGlobalAlert(response);
     };
-
+    const handleSetGlobalAlert = (response) => {
+        setGlobalAlert({
+            type: response.success ? "success" : "",
+            content: response.message,
+        });
+        setTimeout(() => {
+            setGlobalAlert(null);
+        }, [3000]);
+    };
+    const handleShowAlert = (e, weather) => {
+        e.stopPropagation();
+        setAlert(weather);
+    };
     const CityWeather = ({ weather, isDefault = false }) => {
         return (
             <div
                 onClick={() => handleSelectCity(weather)}
-                className={`w-full between overflow-hidden  rounded-2xl  
+                className={`w-full between   rounded-2xl  
                         ${
                             weather?.weather.imgUrl
                                 ? "bg-image "
@@ -98,62 +116,56 @@ const CitiesWeather = ({ isEdit, className }) => {
                 )}
 
                 {!isDefault && isEdit && (
-                    <button onClick={() => setAlert(weather)}>
-                        <span>
-                            <DeleteIcon />
-                        </span>
-                    </button>
+                    <ToolTip
+                        message={`Delete ${weather?.weather?.name}`}
+                        position="top-1/2 -left-2 -translate-y-1/2 -translate-x-full"
+                        arrow="top-1/2 -translate-y-1/2 right-[1px] translate-x-full border-[8px] border-[transparent_transparent_transparent_white] dark:border-[transparent_transparent_transparent_black]"
+                        customMessage="whitespace-nowrap text-sm px-2 py-1"
+                    >
+                        <button
+                            className="p-2 pr-0"
+                            onClick={(e) => handleShowAlert(e, weather)}
+                        >
+                            <span>
+                                <DeleteIcon width="16px" height="16px" />
+                            </span>
+                        </button>
+                    </ToolTip>
                 )}
             </div>
         );
     };
-    if (!data) return <></>;
     return (
         <div
-            className={`flex flex-col justify-between ${
+            className={`flex flex-col ${
                 isCompare ? "max-h-[300px] overflow-auto" : "h-full"
             }`}
         >
-            {alert && (
-                <div className={`"fixed inset-0 bg-[rgba(0,0,0,.4)] z-[50]"`}>
-                    <div className="bg-primaryText text-center text-dark p-6 rounded-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                        <h1>Remove {alert?.name} ?</h1>
-                        <div className="flex items-center justify-between gap-2">
-                            <button
-                                className="border px-2 py-1 rounded-lg bg-transparent text-dark border-dark"
-                                onClick={() => setAlert(false)}
-                            >
-                                Cancel
-                            </button>
-                            <button
-                                className="border px-2 py-1 rounded-lg bg-dark text-primaryText border-dark"
-                                onClick={() => handleDeleteCity(alert)}
-                            >
-                                Remove
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
             {!isAuthenticated ? (
-                <div className="flex-1">
-                    <div className="mb-4">
+                <div className={`max-h-[calc(100%-320px)]`}>
+                    <div className="my-4">
                         <h2 className="text-center mb-3">
                             Sign in to view your positions
                         </h2>
                         <NavLink
                             to="/login"
-                            className="block text-center w-full border px-4 py-2 rounded-lg bg-primaryText text-dark"
+                            className="block text-center w-full border px-4 py-2 rounded-lg bg-primaryText text-dark lg:hidden"
                         >
                             Sign in
                         </NavLink>
+                        <button
+                            onClick={() => toggleModalLogin(true)}
+                            className="button w-full hidden lg:block"
+                        >
+                            Sign in
+                        </button>
                     </div>
                 </div>
             ) : (
-                <div className="flex-1">
+                <div className="max-h-[calc(100%-320px)] relative">
                     <h3 className="font-semibold text-xl mb-3">My Positions</h3>
                     {data.length > 0 ? (
-                        <div className="h-full overflow-auto">
+                        <div className="max-h-[calc(100%-40px)]  overflow-auto">
                             {data.map((weather) => (
                                 <div
                                     key={`${
@@ -167,6 +179,31 @@ const CitiesWeather = ({ isEdit, className }) => {
                     ) : (
                         <div>
                             <h2>Add new position</h2>
+                        </div>
+                    )}
+                    {alert && (
+                        <div
+                            className={`absolute inset-0 modal-content z-[999999]`}
+                        >
+                            <div className="theme text-center p-6 rounded-2xl absolute-center">
+                                <h1 className="text-sm font-semibold mb-4">
+                                    Remove {alert.weather.name} ?
+                                </h1>
+                                <div className="flex items-center justify-between gap-2">
+                                    <button
+                                        className="button"
+                                        onClick={() => setAlert(false)}
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button
+                                        className="button-reverse"
+                                        onClick={() => handleDeleteCity(alert)}
+                                    >
+                                        Remove
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     )}
                 </div>

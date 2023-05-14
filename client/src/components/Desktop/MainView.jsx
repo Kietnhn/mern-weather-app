@@ -10,7 +10,10 @@ import convertCelsiusToFahrenheit from "../../utils/convertCelsiusToFahrenheit";
 import { SettingsContext } from "../../contexts/SettingsContext";
 
 const MainView = ({ weather, timezone, indexActive }) => {
-    const { setDataChart } = useContext(WeatherContext);
+    const {
+        setDataChart,
+        weatherState: { dataChart },
+    } = useContext(WeatherContext);
     const {
         settingsState: { units },
     } = useContext(SettingsContext);
@@ -22,7 +25,14 @@ const MainView = ({ weather, timezone, indexActive }) => {
         const Icon = item.icon;
         return (
             <div
-                className="flex items-center gap-3 px-3 py-2 rounded-lg  font-semibold hover:cursor-pointer hover:shadow-[0px_0px_10px_3px_#ccc] duration-100"
+                className={`flex items-center gap-3 px-3 py-2 rounded-lg  font-semibold 
+                hover:cursor-pointer hover:shadow-[0px_0px_10px_3px_#ccc] duration-100
+                ${
+                    dataChart === item.name
+                        ? "shadow-[0px_0px_10px_3px_#ccc]"
+                        : ""
+                }
+                `}
                 onClick={() => handleSetDataChart(item.name)}
             >
                 <div>
@@ -57,13 +67,13 @@ const MainView = ({ weather, timezone, indexActive }) => {
     if (!weather) return <></>;
     return (
         <div className="">
-            <div className="flex justify-between items-center mb-3">
+            <div className="between mb-3">
                 <Time timezone={timezone} weather={weather} />
                 <SwitchUnitTemp />
             </div>
-            <div className="flex justify-between items-center -mx-3">
+            <div className="between -mx-3">
                 <div className="w-2/5 px-3">
-                    <div className="flex items-center justify-center">
+                    <div className="center">
                         <div>
                             <img
                                 src={set2xIconUrl(weather.weather[0].icon)}

@@ -20,7 +20,6 @@ function MainLayout({ children }) {
     useEffect(() => {
         if (!weatherData) return navigate("/landing");
     }, [weatherData, navigate]);
-    console.log({ weatherData });
     return (
         <>
             {isLoading ? (

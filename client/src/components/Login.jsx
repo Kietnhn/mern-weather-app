@@ -42,7 +42,7 @@ const Login = ({ onChangeForm }) => {
     };
     return (
         <div className="w-full flex flex-col items-center justify-between  font-semibold theme text-center p-8">
-            <h1 className="text-3xl font-bold mb-2">Sign up</h1>
+            <h1 className="text-3xl font-bold mb-4 uppercase">Sign in</h1>
 
             <form className="w-full" onSubmit={login}>
                 {[...Object.keys(loginForm)].map((item) => (
@@ -58,18 +58,18 @@ const Login = ({ onChangeForm }) => {
                 ))}
 
                 {alert && <h1 className="text-[red]">{alert.message}</h1>}
-                <button className="mt-10 button ">Sign up</button>
+                <button className="mt-10 button ">Sign in</button>
             </form>
             <div className="text-start w-full">
-                <p className="text-text">Already have an account ?</p>
+                <p className="text-text">Don't have an account ?</p>
                 <p className="lg:hidden hover:cursor-pointer hover:underline">
-                    <Link to="/login">Sign in</Link>
+                    <Link to="/registry">Sign up</Link>
                 </p>
                 <p
                     className="hidden lg:block  hover:cursor-pointer hover:underline"
                     onClick={onChangeForm}
                 >
-                    Sign in
+                    Sign up
                 </p>
             </div>
         </div>

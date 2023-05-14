@@ -7,7 +7,7 @@ const Toast = ({ type = "success", content, onClose, onClick, className }) => {
         textColor = "text-[#51d26d]";
     }
     return (
-        <div className="fixed top-10 right-0 theme animate-fadeLeft">
+        <div className="fixed top-10 right-0 theme animate-fadeLeft z-[99999]">
             <div
                 className={`pr-3 pl-0 py-2 hover:cursor-pointer border-l-4 ${textColor}  m-1 between font-semibold relative`}
             >

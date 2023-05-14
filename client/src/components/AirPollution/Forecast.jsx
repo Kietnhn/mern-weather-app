@@ -6,7 +6,6 @@ const Forecast = ({ lat, lon, timezone }) => {
         airState: { forecast },
         getForecastAirPollution,
     } = useContext(AirContext);
-    console.log({ forecast, lat, lon });
 
     useEffect(() => {
         getForecastAirPollution({ lat, lon });

@@ -4,6 +4,7 @@ const ToolTip = ({
     message,
     arrow = "",
     className,
+    customMessage,
 }) => {
     return (
         <div className={`relative  ${className} tooltip`}>
@@ -15,7 +16,7 @@ const ToolTip = ({
                         : "top-[calc(-100%-4px)] left-1/2 -translate-x-1/2"
                 }`}
             >
-                <p>{message}</p>
+                <p className={customMessage}>{message}</p>
                 <div
                     className={`arrow ${
                         arrow
