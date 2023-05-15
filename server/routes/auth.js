@@ -9,7 +9,7 @@ import verifyToken from "../middleware/auth.js";
 
 //@router PUT api/auth/update
 router.put("/update/:id", verifyToken, async (req, res) => {
-    const { username, password, avatar } = req.body;
+    const { username, password, avatar, currentPosition } = req.body;
     try {
         const user = await User.findById(req.params.id);
         if (!user)
@@ -21,6 +21,7 @@ router.put("/update/:id", verifyToken, async (req, res) => {
         // user.email = email;
         if (avatar) user.avatar = avatar;
         if (password) user.password = await argon2.hash(password);
+        if (currentPosition) user.currentPosition = currentPosition;
         await user.save();
         res.json({ success: true, message: "User changed successfully", user });
     } catch (error) {
@@ -56,15 +57,19 @@ router.get("/", verifyToken, async (req, res) => {
 //@dec Register user
 //@access Public
 router.post("/register", async (req, res) => {
-    const { username, password, email } = req.body;
-    if (!username || !password)
+    const { password, email } = req.body;
+    let username = req.body.username;
+    if (!password)
         return res
             .status(400)
-            .json({ success: false, message: "Missing username or password" });
+            .json({ success: false, message: "Missing password" });
     if (!email) {
         return res
             .status(400)
             .json({ success: false, message: "Email is required" });
+    }
+    if (!username) {
+        username = email.split("@")[0];
     }
     try {
         const user = await User.findOne({ username });
@@ -94,28 +99,64 @@ router.post("/register", async (req, res) => {
         });
     }
 });
-//@route POST api/auth/login
-//@dec Login user
-//@access Public
-router.post("/login", async (req, res) => {
-    const { username, password } = req.body;
-    if (!username || !password)
+
+router.get("/verify-password/:id", async (req, res) => {
+    const { password } = req.body;
+    if (!password)
         return res
             .status(400)
-            .json({ success: false, message: "Missing username or password" });
+            .json({ success: false, message: "Missing email or password" });
     try {
-        const user = await User.findOne({ username });
+        const user = await User.findById(req.params.id);
         if (!user) {
             return res.status(400).json({
                 success: false,
-                message: "Incorect username or password",
+                message: "User not found",
             });
         }
         const passwordValid = await argon2.verify(user.password, password);
         if (!passwordValid) {
             return res.status(400).json({
                 success: false,
-                message: "Incorect username or password",
+                message: "Incorect password",
+            });
+        }
+
+        res.json({
+            success: true,
+            message: "Verified password",
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            success: false,
+            message: "Internal server error",
+        });
+    }
+});
+
+//@route POST api/auth/login
+//@dec Login user
+//@access Public
+router.post("/login", async (req, res) => {
+    const { email, password } = req.body;
+    if (!email || !password)
+        return res
+            .status(400)
+            .json({ success: false, message: "Missing email or password" });
+    try {
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(400).json({
+                success: false,
+                message: "Incorect email or password",
+            });
+        }
+        const passwordValid = await argon2.verify(user.password, password);
+        if (!passwordValid) {
+            return res.status(400).json({
+                success: false,
+                message: "Incorect email or password",
             });
         }
         const accessToken = jwt.sign(

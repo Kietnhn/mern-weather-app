@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { WeatherContext } from "../contexts/WeatherContext";
 import { useNavigate } from "react-router-dom";
-import { LocationIcon, TimesIcon } from "./icons";
+// import { LocationIcon, TimesIcon } from "./icons";
 import { PositionContext } from "../contexts/PositionContext";
 import Toast from "./Toast";
 const RecommendPosition = () => {

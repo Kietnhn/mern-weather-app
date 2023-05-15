@@ -12,7 +12,7 @@ const Login = ({ onChangeForm }) => {
     const navigate = useNavigate();
     const [alert, setAlert] = useState(null);
     const [loginForm, setLoginForm] = useState({
-        username: "",
+        email: "",
         password: "",
     });
     const { toggleModalLogin } = useContext(SettingsContext);

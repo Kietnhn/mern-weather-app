@@ -6,7 +6,8 @@ import ToolTip from "../../components/ToolTip";
 let getAutoCompleteTimeout;
 const SearchMap = ({ map, zoom, setWeatherOnMap }) => {
     const { getCurrentWeatherData } = useContext(WeatherContext);
-    const { getPosition, getPositionByLatLon } = useContext(PositionContext);
+    const { getPosition, getPositionByLatLon, setAreaOnMap } =
+        useContext(PositionContext);
     const [isShowAuto, setIsShowAuto] = useState(false);
     const [search, setSearch] = useState("");
     const [autoComplete, setAutoComplete] = useState([]);
@@ -34,7 +35,8 @@ const SearchMap = ({ map, zoom, setWeatherOnMap }) => {
         const { lat, lon, name } = position;
         map.setView([lat, lon], zoom);
         const newPosition = await getCurrentWeatherData({ lat, lon });
-        await getPositionByLatLon({ lat, lon });
+        const ps = await getPositionByLatLon({ lat, lon });
+        setAreaOnMap(ps);
         setWeatherOnMap(newPosition);
         setSearch(name);
     };

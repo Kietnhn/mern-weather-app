@@ -15,10 +15,9 @@ const ResetLocation = ({ map, center, zoom, className, setWeatherOnMap }) => {
     const onClick = useCallback(() => {
         setAreaOnMap("");
         setWeatherOnMap(weatherData);
-
         map.setView(center, zoom);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [map]);
+    }, [map, center]);
     useEffect(() => {
         map.setView(center, zoom);
     }, [center, map, zoom]);

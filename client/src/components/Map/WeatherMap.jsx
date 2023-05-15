@@ -6,13 +6,24 @@ import Controls from "./Controls";
 import ResetLocation from "./ResetLocation";
 import MarkerMap from "./MarkerMap";
 import InfoMap from "./InfoMap";
-const WeatherMap = () => {
+import { PositionContext } from "../../contexts/PositionContext";
+const WeatherMap = ({ isUseCurrentPosition = false }) => {
     const {
         weatherState: { weatherData },
     } = useContext(WeatherContext);
-    const [weatherOnMap, setWeatherOnMap] = useState({ ...weatherData });
+    const {
+        positionState: { currentPosition },
+    } = useContext(PositionContext);
+    const [weatherOnMap, setWeatherOnMap] = useState(() => {
+        if (isUseCurrentPosition) {
+            const lat = currentPosition.latitude;
+            const lon = currentPosition.longitude;
+            return { lat, lon };
+        } else {
+            return { ...weatherData };
+        }
+    });
     const [map, setMap] = useState(null);
-
     return (
         <div className="relative h-full">
             <MapContainer
@@ -27,7 +38,7 @@ const WeatherMap = () => {
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <Controls />
+                {!isUseCurrentPosition && <Controls />}
                 <MarkerMap
                     setWeatherOnMap={setWeatherOnMap}
                     lat={weatherOnMap.lat}
@@ -43,7 +54,7 @@ const WeatherMap = () => {
                     className="absolute right-2.5 bottom-2.5 z-[999]"
                 />
             )}
-            {map && (
+            {!isUseCurrentPosition && map && (
                 <InfoMap
                     setWeatherOnMap={setWeatherOnMap}
                     timezone={weatherData.timezone}

@@ -10,7 +10,27 @@ const AuthContextProvider = ({ children }) => {
         user: null,
         isAuthenticated: false,
     });
-
+    const verifyPassword = async (payload) => {
+        const { _id, password } = payload;
+        try {
+            const response = await axios.get(
+                `${apiUrl}/auth/verify-password/${_id}`,
+                { params: { password } }
+            );
+            return response.data;
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    const setUser = (payload) => {
+        dispatch({
+            type: "SET_AUTH",
+            payload: {
+                isAuthenticated: true,
+                user: payload,
+            },
+        });
+    };
     const logoutUser = () => {
         localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME);
         dispatch({
@@ -21,13 +41,19 @@ const AuthContextProvider = ({ children }) => {
             },
         });
     };
-    const updateUser = async ({ id, username, password, avatar }) => {
+    const updateUser = async ({
+        id,
+        username,
+        password,
+        avatar,
+        currentPosition,
+    }) => {
         try {
             const response = await axios.put(
                 `
             ${apiUrl}/auth/update/${id}`,
                 null,
-                { params: { username, password, avatar } }
+                { params: { username, password, avatar, currentPosition } }
             );
             console.log(response);
         } catch (error) {
@@ -70,7 +96,6 @@ const AuthContextProvider = ({ children }) => {
                         user: response.data.user,
                     },
                 });
-                console.log("isAuthenticated", response.data.success);
             }
         } catch (error) {
             localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME);
@@ -87,7 +112,6 @@ const AuthContextProvider = ({ children }) => {
 
     const loginUser = async (userForm) => {
         try {
-            console.log({ userForm });
             const response = await axios.post(`${apiUrl}/auth/login`, userForm);
             if (response.data.success) {
                 localStorage.setItem(
@@ -108,11 +132,13 @@ const AuthContextProvider = ({ children }) => {
 
     // context data
     const authContextData = {
+        setUser,
         loginUser,
         authState,
         registerUser,
         logoutUser,
         updateUser,
+        verifyPassword,
     };
 
     // return component

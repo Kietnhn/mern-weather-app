@@ -10,6 +10,7 @@ const MarkerMap = ({ lat, lon, setWeatherOnMap }) => {
     });
     const {
         getPositionByLatLon,
+        setAreaOnMap,
         positionState: { areaOnMap },
     } = useContext(PositionContext);
     const { getCurrentWeatherData } = useContext(WeatherContext);
@@ -41,7 +42,8 @@ const MarkerMap = ({ lat, lon, setWeatherOnMap }) => {
     }, [areaOnMap]);
 
     const handleGetPositionByLatLon = async ({ lat, lon }) => {
-        await getPositionByLatLon({ lat, lon });
+        const position = await getPositionByLatLon({ lat, lon });
+        setAreaOnMap(position);
     };
     const handleGetCurrentWeatherData = async ({ lat, lon }) => {
         const currentWeatherData = await getCurrentWeatherData({ lat, lon });

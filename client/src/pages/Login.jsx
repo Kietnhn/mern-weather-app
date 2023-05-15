@@ -15,10 +15,10 @@ const Login = () => {
     const [alert, setAlert] = useState(null);
 
     const [loginForm, setLoginForm] = useState({
-        username: "",
+        email: "",
         password: "",
     });
-    const { username, password } = loginForm;
+    const { email, password } = loginForm;
     const onChangeLoginForm = (e) =>
         setLoginForm({ ...loginForm, [e.target.name]: e.target.value });
     const login = async (e) => {
@@ -64,12 +64,12 @@ const Login = () => {
                         className="text-start block w-full capitalize"
                         htmlFor="username"
                     >
-                        username
+                        email{" "}
                     </label>
                     <input
                         id="username"
                         className="w-full outline-none border-b border-[white] pb-2 bg-transparent mb-4 "
-                        value={username}
+                        value={email}
                         name="username"
                         placeholder="Username"
                         required

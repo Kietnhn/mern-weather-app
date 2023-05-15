@@ -1,6 +1,7 @@
 import { useState } from "react";
 import validateEmail from "../../utils/validateEmail";
 const Input = ({
+    type = "text",
     name,
     value,
     onChange,
@@ -29,6 +30,7 @@ const Input = ({
     return (
         <div className={`relative mb-8  ${className}`}>
             <input
+                type={type}
                 id={name}
                 placeholder=" "
                 name={name}
@@ -36,15 +38,15 @@ const Input = ({
                 onChange={onChange}
                 onBlur={handleValidate}
                 onFocus={handleFocus}
-                className="form-input  "
+                className="form-input  theme shadow-none"
             />
 
-            <label htmlFor={name} className="form-label theme shadow-none ">
+            <label htmlFor={name} className="form-label  theme shadow-none ">
                 {placeholder}
             </label>
-            {alert && !value && (
+            {alert && (
                 <span className="absolute right-1 top-1/2 -translate-y-1/2 text-[red] ">
-                    {name} is required
+                    {!value ? `${name} is required` : alert}
                 </span>
             )}
             {inValid && (

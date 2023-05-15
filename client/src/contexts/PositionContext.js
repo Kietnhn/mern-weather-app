@@ -57,6 +57,7 @@ const PositionContextProvider = ({ children }) => {
                     type: SET_CURRENT_POSIITON,
                     payload: response.data.data,
                 });
+                return response.data.data;
             }
         } catch (error) {
             dispatch({
@@ -69,10 +70,6 @@ const PositionContextProvider = ({ children }) => {
         // await getNearByPosition({ lat: latitude, lon: longitude });
     };
     const getPositionByLatLon = async ({ lat, lon, limit = 1 }) => {
-        // dispatch({
-        //     type: SET_LOADING,
-        //     payload: true,
-        // });
         try {
             const response = await axios
                 .get(`${apiUrl}/position/reverse`, {
@@ -85,10 +82,8 @@ const PositionContextProvider = ({ children }) => {
                 .then((res) => {
                     return res.data;
                 });
-            dispatch({
-                type: SET_AREA_ON_MAP,
-                payload: response.data[0],
-            });
+
+            return response.data[0];
         } catch (e) {
             console.log(e);
         }
@@ -109,7 +104,26 @@ const PositionContextProvider = ({ children }) => {
         });
     };
     useEffect(() => {
-        getCurrenPosition();
+        // // if access in the first time
+        // const setCurrentPosition = async ()=>{
+        //     if(!user.currentPosition){
+        //         const currentPosition = await getCurrenPosition();
+        //         await updateUser({currentPosition:{
+        //             latitude: currentPosition.latitude,
+        //             longitude: currentPosition.longitude,
+        //             city: currentPosition.city,
+        //             countryCode: currentPosition.countryCode
+        //         }})
+
+        //     }else{
+        //         // if not sign in then only get the current position
+        //     }
+        // }
+        // setCurrentPosition();
+        const setCurrentPosition = async () => {
+            await getCurrenPosition();
+        };
+        setCurrentPosition();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     const PositionContextData = {

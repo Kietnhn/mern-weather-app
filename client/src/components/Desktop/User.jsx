@@ -20,21 +20,15 @@ const User = () => {
                     className="relative hover:cursor-pointer flex items-center gap-4"
                     onClick={() => setIsShowMenu(!isShowMenu)}
                 >
-                    <h2 className="text-xl font-semibold">{user.username}</h2>
+                    <h2 className="text-xl font-semibold">{user?.username}</h2>
                     {isShowMenu && (
                         <div className="absolute top-full min-w-[230px]  px-6 py-2 right-0 theme modal-content  rounded-xl">
-                            <div
-                                className="flex items-center hover:cursor-pointer"
+                            <h2
+                                className="py-2.5 hover:cursor-pointer"
                                 onClick={() => toggleModalUpdateProfile(true)}
                             >
-                                <div className="w-12 h-12 relative">
-                                    <img src="" alt="" />
-                                </div>
-                                <div>
-                                    <h2>{user.username}</h2>
-                                    <p>{user.email}</p>
-                                </div>
-                            </div>
+                                Your Account
+                            </h2>
                             <hr />
 
                             <div>
