@@ -5,20 +5,25 @@ const Input = ({
     name,
     value,
     onChange,
+    onBlur,
     placeholder,
     alert,
     className = "",
 }) => {
     const [inValid, setInValid] = useState(false);
     const handleValidate = (e) => {
-        if (name === "email") {
-            if (!value) return;
-            if (!validateEmail(value)) {
-                setInValid(true);
-                e.target.focus();
-                setTimeout(() => {
-                    setInValid(false);
-                }, 3000);
+        if (onBlur) {
+            onBlur();
+        } else {
+            if (name === "email") {
+                if (!value) return;
+                if (!validateEmail(value)) {
+                    setInValid(true);
+                    e.target.focus();
+                    setTimeout(() => {
+                        setInValid(false);
+                    }, 3000);
+                }
             }
         }
     };

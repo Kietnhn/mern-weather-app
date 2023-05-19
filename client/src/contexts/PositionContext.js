@@ -53,11 +53,22 @@ const PositionContextProvider = ({ children }) => {
         try {
             const response = await axios(`${apiUrl}/position/current`);
             if (response.data.success) {
+                const lat = response.data.data.latitude;
+                const lon = response.data.data.longitude;
+                const country = response.data.data.countryCode;
+                const city = response.data.data.city;
+                const currentPosition = {
+                    ...response.data.data,
+                    lat,
+                    lon,
+                    country,
+                    city,
+                };
                 dispatch({
                     type: SET_CURRENT_POSIITON,
-                    payload: response.data.data,
+                    payload: currentPosition,
                 });
-                return response.data.data;
+                return currentPosition;
             }
         } catch (error) {
             dispatch({

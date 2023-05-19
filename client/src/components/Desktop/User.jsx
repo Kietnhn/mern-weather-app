@@ -13,6 +13,7 @@ const User = () => {
     const handleShowModalLogin = () => {
         toggleModalLogin(true);
     };
+    console.log({ user });
     return (
         <div className="h-full flex justify-end items-center">
             {isAuthenticated ? (

@@ -19,9 +19,6 @@ const Sunview = () => {
         fetchApi();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    useEffect(() => {
-        console.log({ sunData });
-    }, [sunData]);
     return (
         <Wrapper title="Sun & Moon" id="sunmoon">
             <div className="relative h-[calc(100%-40px)] flex flex-col justify-end">

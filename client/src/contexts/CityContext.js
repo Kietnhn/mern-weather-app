@@ -2,7 +2,6 @@ import axios from "axios";
 import { useReducer, createContext } from "react";
 import { cityReducer } from "../reducers/cityReducer";
 import { apiUrl } from "./constants";
-import { API_KEY } from "../secret";
 export const CityContext = createContext();
 const CityContextProvider = ({ children }) => {
     const [cityState, dispatch] = useReducer(cityReducer, {
@@ -12,11 +11,7 @@ const CityContextProvider = ({ children }) => {
     });
     const getCities = async () => {
         try {
-            const response = await axios.get(`${apiUrl}/cities`, {
-                params: {
-                    API_KEY,
-                },
-            });
+            const response = await axios.get(`${apiUrl}/cities`);
             if (response.data.success) {
                 dispatch({
                     type: "SET_CITIES",
@@ -49,7 +44,6 @@ const CityContextProvider = ({ children }) => {
                 params: {
                     lat,
                     lon,
-                    API_KEY,
                 },
             });
             if (response.data.success) {

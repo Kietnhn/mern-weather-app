@@ -1,5 +1,8 @@
 export const TOGGLE_THEME = "TOGGLE_THEME";
 
+// auth
+export const SET_AUTH = "SET_AUTH";
+export const SET_AUTH_POSITION = "SET_AUTH_POSITION";
 // weather
 export const SET_CURRENT_WEATHER = "SET_CURRENT_WEATHER";
 export const SET_WEATHER_DATA = "SET_WEATHER_DATA";

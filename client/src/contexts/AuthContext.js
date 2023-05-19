@@ -2,7 +2,7 @@ import { createContext, useReducer, useEffect } from "react";
 import { authReducer } from "../reducers/authReducer";
 import setAuthToken from "../utils/setAuthToken";
 import axios from "axios";
-import { LOCAL_STORAGE_TOKEN_NAME, apiUrl } from "./constants";
+import { LOCAL_STORAGE_TOKEN_NAME, SET_AUTH, apiUrl } from "./constants";
 export const AuthContext = createContext();
 const AuthContextProvider = ({ children }) => {
     const [authState, dispatch] = useReducer(authReducer, {
@@ -11,12 +11,11 @@ const AuthContextProvider = ({ children }) => {
         isAuthenticated: false,
     });
     const verifyPassword = async (payload) => {
-        const { _id, password } = payload;
+        const { password } = payload;
         try {
-            const response = await axios.get(
-                `${apiUrl}/auth/verify-password/${_id}`,
-                { params: { password } }
-            );
+            const response = await axios.get(`${apiUrl}/auth/verify-password`, {
+                params: { password },
+            });
             return response.data;
         } catch (error) {
             console.log(error);
@@ -24,7 +23,7 @@ const AuthContextProvider = ({ children }) => {
     };
     const setUser = (payload) => {
         dispatch({
-            type: "SET_AUTH",
+            type: SET_AUTH,
             payload: {
                 isAuthenticated: true,
                 user: payload,
@@ -34,28 +33,38 @@ const AuthContextProvider = ({ children }) => {
     const logoutUser = () => {
         localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME);
         dispatch({
-            type: "SET_AUTH",
+            type: SET_AUTH,
             payload: {
                 isAuthenticated: false,
                 user: null,
             },
         });
     };
-    const updateUser = async ({
-        id,
-        username,
-        password,
-        avatar,
-        currentPosition,
-    }) => {
+    const updateUserPosition = async (formData) => {
         try {
-            const response = await axios.put(
-                `
-            ${apiUrl}/auth/update/${id}`,
-                null,
-                { params: { username, password, avatar, currentPosition } }
+            const response = await axios.post(
+                `${apiUrl}/auth/update/current-position`,
+                formData
             );
-            console.log(response);
+
+            if (response.data.success) {
+                await loadUser();
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    const updateUser = async (formData) => {
+        try {
+            const response = await axios.post(
+                `${apiUrl}/auth/update`,
+                formData
+            );
+
+            if (response.data.success) {
+                await loadUser();
+            }
+            return response;
         } catch (error) {
             console.log(error);
         }
@@ -90,7 +99,7 @@ const AuthContextProvider = ({ children }) => {
             const response = await axios.get(`${apiUrl}/auth`);
             if (response.data.success) {
                 dispatch({
-                    type: "SET_AUTH",
+                    type: SET_AUTH,
                     payload: {
                         isAuthenticated: true,
                         user: response.data.user,
@@ -100,7 +109,7 @@ const AuthContextProvider = ({ children }) => {
         } catch (error) {
             localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME);
             dispatch({
-                type: "SET_AUTH",
+                type: SET_AUTH,
                 payload: {
                     isAuthenticated: false,
                     user: null,
@@ -139,6 +148,7 @@ const AuthContextProvider = ({ children }) => {
         logoutUser,
         updateUser,
         verifyPassword,
+        updateUserPosition,
     };
 
     // return component

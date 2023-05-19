@@ -1,29 +1,41 @@
 import express from "express";
 import argon2 from "argon2";
+import fs from "fs";
 import jwt from "jsonwebtoken";
-const router = express.Router();
+import multer from "multer";
 import User from "../models/User.js";
+import Position from "../models/Position.js";
 import verifyToken from "../middleware/auth.js";
+const router = express.Router();
+const upload = multer({ dest: "uploads/" });
 
-// update profile and send Email
-
-//@router PUT api/auth/update
-router.put("/update/:id", verifyToken, async (req, res) => {
-    const { username, password, avatar, currentPosition } = req.body;
+function base64_encode(avatar) {
+    const data = fs.readFileSync(avatar.path);
+    const base64Image = Buffer.from(data).toString("base64");
+    return base64Image;
+}
+router.post("/update/current-position", verifyToken, async (req, res) => {
+    const { lat, lon, country, city } = req.body;
+    if (!lat || !lon) {
+        return res.status(400).json({
+            success: false,
+            message: "lat, lon is required",
+        });
+    }
     try {
-        const user = await User.findById(req.params.id);
-        if (!user)
-            return res
-                .status(400)
-                .json({ success: false, message: "User not found" });
-        if (username) user.username = username;
-        // could't change email after registry
-        // user.email = email;
-        if (avatar) user.avatar = avatar;
-        if (password) user.password = await argon2.hash(password);
-        if (currentPosition) user.currentPosition = currentPosition;
-        await user.save();
-        res.json({ success: true, message: "User changed successfully", user });
+        const newPosition = new Position({
+            lat,
+            lon,
+            country,
+            city,
+            user: req.userId,
+        });
+        await newPosition.save();
+        return res.json({
+            success: true,
+            message: "success",
+            position: newPosition,
+        });
     } catch (error) {
         console.log(error);
         res.status(500).json({
@@ -32,6 +44,41 @@ router.put("/update/:id", verifyToken, async (req, res) => {
         });
     }
 });
+// update profile and send Email
+//@router PUT api/auth/update
+router.post(
+    "/update",
+    verifyToken,
+    upload.single("avatar"),
+    async (req, res) => {
+        const { username, password } = req.body;
+        const avatar = req.file;
+
+        try {
+            const user = await User.findById(req.userId);
+            if (!user)
+                return res
+                    .status(400)
+                    .json({ success: false, message: "User not found" });
+
+            if (username) user.username = username;
+            if (avatar) user.avatar = base64_encode(avatar);
+            if (password) user.password = await argon2.hash(password);
+            await user.save();
+            res.json({
+                success: true,
+                message: "User changed successfully",
+                user,
+            });
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({
+                success: false,
+                message: "Internal server error",
+            });
+        }
+    }
+);
 
 //@router GET api/auth
 //@desc Check if user is logged in
@@ -39,11 +86,19 @@ router.put("/update/:id", verifyToken, async (req, res) => {
 router.get("/", verifyToken, async (req, res) => {
     try {
         const user = await User.findById(req.userId).select("-password");
+        const position = (await Position.findOne({ user: req.userId })) || null;
         if (!user)
             return res
                 .status(400)
                 .json({ success: false, message: "User not found" });
-        res.json({ success: true, user });
+        const infoUser = {
+            ...user._doc,
+            position,
+        };
+        res.json({
+            success: true,
+            user: infoUser,
+        });
     } catch (error) {
         console.log(error);
         res.status(500).json({
@@ -100,14 +155,14 @@ router.post("/register", async (req, res) => {
     }
 });
 
-router.get("/verify-password/:id", async (req, res) => {
-    const { password } = req.body;
+router.get("/verify-password", verifyToken, async (req, res) => {
+    const { password } = req.query;
     if (!password)
         return res
             .status(400)
             .json({ success: false, message: "Missing email or password" });
     try {
-        const user = await User.findById(req.params.id);
+        const user = await User.findById(req.userId);
         if (!user) {
             return res.status(400).json({
                 success: false,

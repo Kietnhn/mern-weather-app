@@ -4,14 +4,12 @@ import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import { PositionContext } from "../../contexts/PositionContext";
 import ResetLocation from "../Map/ResetLocation";
 import L from "leaflet";
-import { useEffect } from "react";
 
-const MapUpdateProfile = ({ setUpdateForm, positionOnMap }) => {
+const MapUpdateProfile = ({ setPositionOnMap, positionOnMap }) => {
     const {
         getPositionByLatLon,
         positionState: { currentPosition },
     } = useContext(PositionContext);
-
     const [map, setMap] = useState(null);
     const [position, setPosition] = useState([
         currentPosition.latitude,
@@ -37,10 +35,9 @@ const MapUpdateProfile = ({ setUpdateForm, positionOnMap }) => {
     const handleGetPositionByLatLon = async ({ lat, lon }) => {
         const newPosition = await getPositionByLatLon({ lat, lon });
         setPosition(newPosition);
+        setPositionOnMap(newPosition);
     };
-    useEffect(() => {
-        console.log("change", position);
-    }, [position]);
+
     return (
         <div className="h-full relative">
             <MapContainer
@@ -67,8 +64,10 @@ const MapUpdateProfile = ({ setUpdateForm, positionOnMap }) => {
                 className="absolute bottom-3 left-3 z-[999] theme-reverse "
                 style={{ backgroundColor: "transparent" }}
             >
-                <h2 className="text-4xl font-bold bg-transparent">
-                    {positionOnMap}
+                <h2 className="text-2xl font-bold text-black bg-transparent ">
+                    {positionOnMap
+                        ? `${positionOnMap?.country} - ${positionOnMap?.name}`
+                        : `${currentPosition.countryCode} - ${currentPosition.city}`}
                 </h2>
             </div>
             {map && (

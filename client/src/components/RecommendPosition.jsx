@@ -13,8 +13,7 @@ const RecommendPosition = () => {
     const [showToast, setShowToast] = useState(false);
 
     const handleSetCurrentWeather = async () => {
-        const lat = currentPosition.latitude;
-        const lon = currentPosition.longitude;
+        const { lat, lon } = currentPosition;
         await getWeatherData({ lat, lon });
         setShowToast(false);
         navigate("/today");

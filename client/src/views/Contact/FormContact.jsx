@@ -26,7 +26,6 @@ const FormContact = () => {
     };
     const handleSendEmail = (e) => {
         e.preventDefault();
-        console.log("send");
         const { name, email, message } = inputs;
         if (!name || !email || !message) {
             setAlert(true);
@@ -35,7 +34,6 @@ const FormContact = () => {
             }, 3000);
             return;
         }
-        console.log({ inputs });
     };
 
     return (
