@@ -135,6 +135,20 @@ const AuthContextProvider = ({ children }) => {
             else return { success: false, message: error.message };
         }
     };
+
+    const sendEmail = async ({ email, username }) => {
+        try {
+            const response = await axios.post(`${apiUrl}/auth/email`, {
+                email,
+                username,
+            });
+            if (response.data.success) {
+                console.log("here sent");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
     useEffect(() => {
         loadUser();
     }, []);
@@ -149,6 +163,7 @@ const AuthContextProvider = ({ children }) => {
         updateUser,
         verifyPassword,
         updateUserPosition,
+        sendEmail,
     };
 
     // return component

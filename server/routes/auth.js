@@ -45,7 +45,7 @@ router.post("/update/current-position", verifyToken, async (req, res) => {
     }
 });
 // update profile and send Email
-//@router PUT api/auth/update
+//@router POST api/auth/update
 router.post(
     "/update",
     verifyToken,
@@ -232,4 +232,38 @@ router.post("/login", async (req, res) => {
     }
 });
 
+const transporter = nodemailer.createTransport({
+    service: "YourEmailService",
+    auth: {
+        user: "your-email@example.com",
+        pass: "your-email-password",
+    },
+});
+//@route POST api/auth/send
+//@access public
+router.post("/send", verifyToken, async (req, res) => {
+    const { username, email } = req.body;
+
+    // Create the email message
+    const message = {
+        from: "your-email@example.com",
+        to: email,
+        subject: "Thank you for contacting us",
+        text: `Dear ${username},\n\nThank you for reaching out to us. We appreciate your message.\n\nBest regards,\nYour Team`,
+    };
+
+    // Send the email using Nodemailer
+    transporter.sendMail(message, (error, info) => {
+        if (error) {
+            console.log("Error occurred while sending email:", error.message);
+            res.status(error.status).json({
+                success: false,
+                message: error.message,
+            });
+        } else {
+            console.log("Email sent successfully:", info.response);
+            res.json({ success: true, message: "sent successfully" });
+        }
+    });
+});
 export default router;
