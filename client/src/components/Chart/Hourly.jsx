@@ -9,6 +9,7 @@ import useDarkMode from "../../hooks/useDarkMode";
 import LoadingComponent from "../Loading/LoadingComponent";
 import { SettingsContext } from "../../contexts/SettingsContext";
 import convertCelsiusToFahrenheit from "../../utils/convertCelsiusToFahrenheit";
+import { unitInfoData } from "../../routes/viewInfoData";
 const Hourly = ({ weathers = [] }) => {
     const {
         weatherState: {
@@ -106,6 +107,12 @@ const Hourly = ({ weathers = [] }) => {
                     textTransform: "capitalize",
                     position: "bottom",
                 },
+                tooltip: {
+                    callbacks: {
+                        label: (context) =>
+                            `${context.parsed.y} ${unitInfoData[dataChart]}`,
+                    },
+                },
             },
             scales: {
                 x: {
@@ -125,7 +132,7 @@ const Hourly = ({ weathers = [] }) => {
                 },
             },
         });
-    }, [colorTheme]);
+    }, [colorTheme, dataChart]);
     if (!data) return <></>;
     return (
         <>

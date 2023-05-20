@@ -6,13 +6,16 @@ import { UploadFileIcon, InfoIcon } from "../../components/icons";
 import UserInfo from "../../components/UserInfo";
 import { AuthContext } from "../../contexts/AuthContext";
 import ToolTip from "../../components/ToolTip";
+import { SettingsContext } from "../../contexts/SettingsContext";
 const FormContact = () => {
     const {
-        authState: { isAuthenticated },
+        authState: { isAuthenticated, user },
+        sendEmail,
     } = useContext(AuthContext);
+    const { setGlobalAlert } = useContext(SettingsContext);
     const [inputs, setInputs] = useState({
-        name: "",
-        email: "",
+        username: user?.username || "",
+        email: user?.email || "",
         message: "",
         file: "",
     });
@@ -24,15 +27,43 @@ const FormContact = () => {
             [e.target.name]: e.target.value,
         });
     };
-    const handleSendEmail = (e) => {
+    const handleClearInput = () => {
+        setInputs({
+            username: user?.username || "",
+            email: user?.email || "",
+            message: "",
+            file: "",
+        });
+    };
+    const handleSendEmail = async (e) => {
         e.preventDefault();
-        const { name, email, message } = inputs;
-        if (!name || !email || !message) {
+        const { username, email, message } = inputs;
+        if (!isAuthenticated) {
+            if (!username || !email) {
+                setAlert(true);
+                setTimeout(() => {
+                    setAlert(false);
+                }, 3000);
+                return;
+            }
+        }
+        if (!message) {
             setAlert(true);
             setTimeout(() => {
                 setAlert(false);
             }, 3000);
             return;
+        }
+        const response = await sendEmail(inputs);
+        setGlobalAlert({
+            type: response.success ? "success" : "",
+            content: response.message,
+        });
+        setTimeout(() => {
+            setGlobalAlert(null);
+        }, [3000]);
+        if (response.success) {
+            handleClearInput();
         }
     };
 
@@ -43,7 +74,7 @@ const FormContact = () => {
                     Feedback form
                 </h3>
                 <ToolTip
-                    className="flex"
+                    className="flex relative"
                     message={
                         <span className="text-xs font-normal">
                             We only use your email to send thanks <br />
@@ -72,7 +103,7 @@ const FormContact = () => {
                         <UserInfo />
                     </div>
                 ) : (
-                    ["name", "email"].map((item, index) => (
+                    ["username", "email"].map((item, index) => (
                         <div key={index}>
                             <Input
                                 alert={alert}

@@ -8,6 +8,7 @@ import useDarkMode from "../../hooks/useDarkMode";
 // import setTempByTime from "../../utils/setTempByTime";
 import LoadingComponent from "../Loading/LoadingComponent";
 import setTempByTime from "../../utils/setTempByTime";
+import { unitInfoData } from "../../routes/viewInfoData";
 const Weekly = ({ weathers = [] }) => {
     const {
         weatherState: {
@@ -65,6 +66,12 @@ const Weekly = ({ weathers = [] }) => {
                     textTransform: "capitalize",
                     position: "bottom",
                 },
+                tooltip: {
+                    callbacks: {
+                        label: (context) =>
+                            `${context.parsed.y} ${unitInfoData[dataChart]}`,
+                    },
+                },
             },
             scales: {
                 x: {
@@ -84,7 +91,7 @@ const Weekly = ({ weathers = [] }) => {
                 },
             },
         });
-    }, [colorTheme]);
+    }, [colorTheme, dataChart]);
     if (!data) return <></>;
     return (
         <>

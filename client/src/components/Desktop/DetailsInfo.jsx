@@ -13,6 +13,8 @@ const DetailsInfo = ({ weather, weatherType = "hourlyWeather" }) => {
         const weatherData = { ...weather };
         delete weatherData.dt;
         delete weatherData.weather;
+        delete weatherData?.rain;
+        delete weatherData?.wind_gust;
         if (location.pathname !== "/comparative") {
             delete weatherData.sunrise;
             delete weatherData.sunset;

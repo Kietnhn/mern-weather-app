@@ -109,6 +109,11 @@ function ChartSun({ className, weather, timezone }) {
                     textTransform: "capitalize",
                     position: "bottom",
                 },
+                tooltip: {
+                    callbacks: {
+                        label: () => null, // Return null to hide the tooltip label
+                    },
+                },
                 scales: {
                     x: {
                         ticks: {

@@ -40,7 +40,21 @@ const viewInfoData = [
         icon: EyeIcon,
     },
 ];
+const unitInfoData = {
+    temp: "\u00B0",
+    clouds: "%",
+    feels_like: "\u00B0",
+    dew_point: "\u00B0",
+    sunrises: "h:00",
+    sunset: "h:00",
+    moonrise: "h:00",
+    moonset: "h:00",
+};
+viewInfoData.forEach((value) => {
+    unitInfoData[value.name] = value.unit;
+});
 
+export { unitInfoData };
 export const viewInFoDataMobile = [
     {
         name: "feels_like",

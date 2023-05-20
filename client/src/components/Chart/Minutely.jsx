@@ -36,6 +36,11 @@ const Minutely = ({ minutelies, timezone }) => {
                     textTransform: "capitalize",
                     position: "bottom",
                 },
+                tooltip: {
+                    callbacks: {
+                        label: (context) => `${context.parsed.y} mm/h`,
+                    },
+                },
             },
             scales: {
                 x: {

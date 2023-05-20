@@ -7,7 +7,7 @@ const ToolTip = ({
     customMessage,
 }) => {
     return (
-        <div className={`relative  ${className} tooltip`}>
+        <div className={`  ${className ? className : "relative"}  tooltip`}>
             {children}
             <div
                 className={`tooltip-message z-[9999] ${

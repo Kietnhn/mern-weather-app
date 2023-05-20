@@ -48,6 +48,7 @@ const AirChart = ({ list = [], timezone }) => {
                     textTransform: "capitalize",
                     position: "bottom",
                 },
+
                 tooltip: {
                     callbacks: {
                         title: function (chart) {
@@ -56,6 +57,7 @@ const AirChart = ({ list = [], timezone }) => {
                                 .tz(timezone)
                                 .format("YYYY/MM/DD-HH:mm");
                         },
+                        label: (context) => `${context.parsed.y} μg/m3`,
                     },
                 },
             },

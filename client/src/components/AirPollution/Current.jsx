@@ -32,7 +32,8 @@ const Current = ({ current }) => {
                 <div className="flex flex-wrap  border-t border-l">
                     <div className="ml-[calc(100%/9-1px)] w-[calc((100%/9)*8+1px)] px-3 border-r border-l ">
                         <div className="font-semibold capitalize text-center">
-                            Pollutant concentration in ug/m3
+                            Pollutant concentration in
+                            <span className="normal-case"> μg/m3</span>
                         </div>
                     </div>
                     {[

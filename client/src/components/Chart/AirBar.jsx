@@ -35,6 +35,11 @@ const AirBar = ({ datas }) => {
                 legend: {
                     display: false,
                 },
+                tooltip: {
+                    callbacks: {
+                        label: (context) => `${context.parsed.y} μg/m3`,
+                    },
+                },
             },
             scales: {
                 x: {

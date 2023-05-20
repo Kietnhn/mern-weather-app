@@ -9,6 +9,8 @@ import setTempByTime from "../../utils/setTempByTime";
 import Alert from "../Alert";
 import convertCelsiusToFahrenheit from "../../utils/convertCelsiusToFahrenheit";
 import { SettingsContext } from "../../contexts/SettingsContext";
+import { unitInfoData } from "../../routes/viewInfoData";
+
 const CompareChart = ({ weatherType = "hourlyWeather", isAlert = false }) => {
     // weatherType is "hourlyWeather" or "weeklyWeather"
     const {
@@ -97,6 +99,12 @@ const CompareChart = ({ weatherType = "hourlyWeather", isAlert = false }) => {
                     textTransform: "capitalize",
                     position: "bottom",
                 },
+                tooltip: {
+                    callbacks: {
+                        label: (context) =>
+                            `${context.parsed.y} ${unitInfoData[dataChart]}`,
+                    },
+                },
                 title: {
                     display: true,
                     position: "top",
@@ -126,7 +134,7 @@ const CompareChart = ({ weatherType = "hourlyWeather", isAlert = false }) => {
                 },
             },
         });
-    }, [colorTheme]);
+    }, [colorTheme, dataChart]);
     if (!data || !compare) return <></>;
     return (
         <>

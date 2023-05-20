@@ -138,13 +138,11 @@ const AuthContextProvider = ({ children }) => {
 
     const sendEmail = async ({ email, username }) => {
         try {
-            const response = await axios.post(`${apiUrl}/auth/email`, {
+            const response = await axios.post(`${apiUrl}/auth/send`, {
                 email,
                 username,
             });
-            if (response.data.success) {
-                console.log("here sent");
-            }
+            return response.data;
         } catch (error) {
             console.log(error);
         }

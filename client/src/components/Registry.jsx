@@ -12,8 +12,8 @@ const Register = ({ onChangeForm }) => {
     const { registerUser } = useContext(AuthContext);
     const [alert, setAlert] = useState(null);
     const [registerForm, setRegisterForm] = useState({
-        username: "",
         email: "",
+        username: "",
         password: "",
         confirmPassword: "",
     });
@@ -66,7 +66,6 @@ const Register = ({ onChangeForm }) => {
                 {[...Object.keys(registerForm)].map((item) => (
                     <div key={item} className="w-full">
                         <Input
-                            alert={alert}
                             name={item}
                             value={registerForm[item]}
                             onChange={onChangeRegistryForm}

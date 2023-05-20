@@ -8,7 +8,7 @@ import Position from "../models/Position.js";
 import verifyToken from "../middleware/auth.js";
 const router = express.Router();
 const upload = multer({ dest: "uploads/" });
-
+import nodemailer from "nodemailer";
 function base64_encode(avatar) {
     const data = fs.readFileSync(avatar.path);
     const base64Image = Buffer.from(data).toString("base64");
@@ -231,22 +231,28 @@ router.post("/login", async (req, res) => {
         });
     }
 });
-
+// const transporter = nodemailer.createTransport({
+//     service: "yahoo",
+//     auth: {
+//         user: process.env.EMAIL_TRANSPORT,
+//         pass: process.env.EMAIL_PASSWORD_TRANSPORT,
+//     },
+// });
 const transporter = nodemailer.createTransport({
-    service: "YourEmailService",
+    host: "smtp.ethereal.email",
+    port: 587,
     auth: {
-        user: "your-email@example.com",
-        pass: "your-email-password",
+        user: "jaime24@ethereal.email",
+        pass: "PrB6aQzke9wkbJG5UU",
     },
 });
 //@route POST api/auth/send
 //@access public
 router.post("/send", verifyToken, async (req, res) => {
     const { username, email } = req.body;
-
     // Create the email message
     const message = {
-        from: "your-email@example.com",
+        from: "jaime24@ethereal.email",
         to: email,
         subject: "Thank you for contacting us",
         text: `Dear ${username},\n\nThank you for reaching out to us. We appreciate your message.\n\nBest regards,\nYour Team`,
@@ -255,13 +261,11 @@ router.post("/send", verifyToken, async (req, res) => {
     // Send the email using Nodemailer
     transporter.sendMail(message, (error, info) => {
         if (error) {
-            console.log("Error occurred while sending email:", error.message);
-            res.status(error.status).json({
+            res.json({
                 success: false,
                 message: error.message,
             });
         } else {
-            console.log("Email sent successfully:", info.response);
             res.json({ success: true, message: "sent successfully" });
         }
     });

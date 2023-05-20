@@ -15,7 +15,7 @@ const ModalUpdateProfile = () => {
         settingsState: { isShowModalUpdateProfile },
         toggleModalUpdateProfile,
     } = useContext(SettingsContext);
-
+    console.log({ isShowModalUpdateProfile });
     const [updateForm, setUpdateForm] = useState({
         username: user?.username || "",
         avatar: user?.avatar || "",
@@ -62,6 +62,7 @@ const ModalUpdateProfile = () => {
         await updateUserPosition(positionToUpdate);
     };
     const update = async (e) => {
+        console.log("submit");
         e.preventDefault();
         if (position) {
             addUserPosition();
@@ -157,7 +158,9 @@ const ModalUpdateProfile = () => {
                                                 </span>
                                             </label>
                                         </div>
-                                        <h3 className="">{user.email}</h3>
+                                        <h3 className="max-w-[200px] break-words">
+                                            {user.email}
+                                        </h3>
                                     </div>
                                 </div>
                                 <div className="flex-1 flex flex-col justify-between">

@@ -48,7 +48,6 @@ const Login = ({ onChangeForm }) => {
                 {[...Object.keys(loginForm)].map((item) => (
                     <div key={item} className="w-full">
                         <Input
-                            alert={alert}
                             name={item}
                             value={loginForm[item]}
                             onChange={onChangeLoginForm}
