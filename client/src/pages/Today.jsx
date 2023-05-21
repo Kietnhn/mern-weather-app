@@ -34,6 +34,7 @@ function Today() {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentWeather]);
+
     if (!weeklyWeather || !currentWeather) return <Navigate to="/landing" />;
     if (isLoading) return <SkeletonToday />;
     return (

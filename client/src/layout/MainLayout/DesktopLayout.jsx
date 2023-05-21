@@ -4,23 +4,23 @@ import { useEffect } from "react";
 import ModalLogin from "../../components/Modals/ModalLogin";
 import ModalUpdateProfile from "../../components/Modals/ModalUpdateProfile";
 const DesktopLayout = ({ children }) => {
-    useEffect(() => {
-        window.addEventListener("scroll", () => {
-            const top =
-                window.pageYOffset || document.documentElement.scrollTop;
-            const left =
-                window.pageXOffset || document.documentElement.scrollLeft;
-            window.scrollTo(left, top);
-        });
-        return () =>
-            window.removeEventListener("scroll", () => {
-                const top =
-                    window.pageYOffset || document.documentElement.scrollTop;
-                const left =
-                    window.pageXOffset || document.documentElement.scrollLeft;
-                window.scrollTo(left, top);
-            });
-    }, []);
+    // useEffect(() => {
+    //     window.addEventListener("scroll", () => {
+    //         const top =
+    //             window.pageYOffset || document.documentElement.scrollTop;
+    //         const left =
+    //             window.pageXOffset || document.documentElement.scrollLeft;
+    //         window.scrollTo(left, top);
+    //     });
+    //     return () =>
+    //         window.removeEventListener("scroll", () => {
+    //             const top =
+    //                 window.pageYOffset || document.documentElement.scrollTop;
+    //             const left =
+    //                 window.pageXOffset || document.documentElement.scrollLeft;
+    //             window.scrollTo(left, top);
+    //         });
+    // }, []);
     return (
         <>
             <DesktopHeader />

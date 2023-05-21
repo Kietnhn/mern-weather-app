@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { SettingsContext } from "../../contexts/SettingsContext";
 import { AuthContext } from "../../contexts/AuthContext";
 import { PencilIcon, UploadFileIcon } from "../icons";
@@ -15,7 +15,6 @@ const ModalUpdateProfile = () => {
         settingsState: { isShowModalUpdateProfile },
         toggleModalUpdateProfile,
     } = useContext(SettingsContext);
-    console.log({ isShowModalUpdateProfile });
     const [updateForm, setUpdateForm] = useState({
         username: user?.username || "",
         avatar: user?.avatar || "",
@@ -62,7 +61,6 @@ const ModalUpdateProfile = () => {
         await updateUserPosition(positionToUpdate);
     };
     const update = async (e) => {
-        console.log("submit");
         e.preventDefault();
         if (position) {
             addUserPosition();
@@ -85,9 +83,7 @@ const ModalUpdateProfile = () => {
             url = URL.createObjectURL(urlImg);
         return `url(${urlImg ? url : ""})`;
     };
-    useEffect(() => {
-        console.log({ updateForm });
-    }, [updateForm]);
+
     return (
         <>
             {isAuthenticated && isShowModalUpdateProfile && (

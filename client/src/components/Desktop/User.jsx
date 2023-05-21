@@ -13,13 +13,20 @@ const User = () => {
     const handleShowModalLogin = () => {
         toggleModalLogin(true);
     };
-    console.log({ user });
+    const handleShowMenu = () => {
+        setIsShowMenu(!isShowMenu);
+        if (isShowMenu) {
+            setTimeout(() => {
+                setIsShowMenu(false);
+            }, [5000]);
+        }
+    };
     return (
         <div className="h-full flex justify-end items-center">
             {isAuthenticated ? (
                 <div
                     className="relative hover:cursor-pointer flex items-center gap-4"
-                    onClick={() => setIsShowMenu(!isShowMenu)}
+                    onClick={handleShowMenu}
                 >
                     <h2 className="text-xl font-semibold">{user?.username}</h2>
                     {isShowMenu && (

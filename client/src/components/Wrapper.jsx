@@ -16,7 +16,7 @@ const Wrapper = ({
         >
             <div
                 className={` mx-auto h-full ${
-                    sizeFull ? "w-full" : "lg:w-[1300px] lg:p-3"
+                    sizeFull ? "w-full" : "lg:w-[1300px] lg:max-w-full lg:p-3"
                 } max-w-full `}
             >
                 {title && (

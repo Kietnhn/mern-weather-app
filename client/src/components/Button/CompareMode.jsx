@@ -11,7 +11,7 @@ const CompareMode = () => {
         navigate("/comparative");
     };
     return (
-        <div className="absolute right-0 top-[100px]">
+        <div className="absolute right-0 top-[100px] z-[9999]">
             <ToolTip
                 message="Compare Mode"
                 position="left-[calc(-100%-8px)] top-0 -translate-x-1/2"

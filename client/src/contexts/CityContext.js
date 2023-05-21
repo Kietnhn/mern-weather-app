@@ -17,7 +17,6 @@ const CityContextProvider = ({ children }) => {
                     type: "SET_CITIES",
                     payload: response.data.cities,
                 });
-                console.log("cities", response.data.cities);
             }
         } catch (error) {
             console.error(error);
