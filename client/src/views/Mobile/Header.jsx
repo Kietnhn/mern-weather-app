@@ -15,9 +15,9 @@ function Header() {
                     }`}
                 />
 
-                {location.pathname !== "/get-in-touch" && (
-                    <SearchCountryState size="small" />
-                )}
+                {!["/get-in-touch", "/settings"].includes(
+                    location.pathname
+                ) && <SearchCountryState size="small" />}
             </div>
         </div>
     );

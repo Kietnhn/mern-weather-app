@@ -14,7 +14,7 @@ const Footer = forwardRef((_, ref) => {
         >
             <div className="h-full flex flex-col justify-end ">
                 <Contact />
-                <footer className="bg-transparent sm:theme-reverse z-10 lg:z-0 px-6 lg:px-0  sm:pt-12 sm:pb-12 md:pb-24">
+                <footer className="bg-transparent sm:theme-reverse z-10 lg:z-0 px-6 lg:px-0 py-6 sm:pt-12 sm:pb-12 md:pb-24">
                     <div className="w-full xl:max-w-full lg:w-[900px] xl:w-[1300px] lg:mt-5 xl:mt-0  mx-auto">
                         <div className="flex flex-wrap -mx-3 ">
                             <div className="w-full lg:hidden xl:block xl:w-1/4 px-3"></div>

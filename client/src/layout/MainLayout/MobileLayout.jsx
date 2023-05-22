@@ -16,13 +16,17 @@ const MobileLayout = ({ children }) => {
     return (
         <>
             <Header />
-            <div className="fixed right-3 top-20  z-[49]">
-                <Theme />
-            </div>
+            {!["/settings"].includes(location.pathname) && (
+                <div className="fixed right-3 top-20  z-[49]">
+                    <Theme />
+                </div>
+            )}
             {/* <Navigation /> */}
             <BackgroundGradient />
             <div className="w-full  relative z-20 xl:hidden">
-                {!["/my-city", "/get-in-touch"].includes(location.pathname) && (
+                {!["/my-city", "/get-in-touch", "/settings"].includes(
+                    location.pathname
+                ) && (
                     <div className="relative my-4 z-10 flex items-center mt-10">
                         <h3 className="text-2xl font-semibold mr-2 ">
                             {timezone ? timezone : "Current Location"}

@@ -77,7 +77,7 @@ const menu = [
     {
         title: "Setting",
         icon: SettingIcon,
-        to: null,
+        to: "/settings",
         isPublic: true,
     },
     // {

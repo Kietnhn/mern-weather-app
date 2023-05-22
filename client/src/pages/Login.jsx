@@ -62,16 +62,16 @@ const Login = () => {
                 <div className="w-full">
                     <label
                         className="text-start block w-full capitalize"
-                        htmlFor="username"
+                        htmlFor="email"
                     >
                         email{" "}
                     </label>
                     <input
-                        id="username"
+                        id="email"
                         className="w-full outline-none border-b border-[white] pb-2 bg-transparent mb-4 "
                         value={email}
-                        name="username"
-                        placeholder="Username"
+                        name="email"
+                        placeholder="email"
                         required
                         onChange={onChangeLoginForm}
                     />

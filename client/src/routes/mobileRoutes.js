@@ -4,6 +4,7 @@ import Footer from "../views/Footer/Footer";
 import ChartPage from "../pages/ChartPage";
 import { City, Login, Next7Day, Register } from "../pages";
 import MainLayout from "../layout/MainLayout/MainLayout";
+import Settings from "../pages/Settings";
 
 const mobileRoutes = [
     {
@@ -59,6 +60,12 @@ const mobileRoutes = [
         layout: MainLayout,
 
         element: Footer,
+    },
+    {
+        path: "/settings",
+        layout: MainLayout,
+
+        element: Settings,
     },
 ];
 export default mobileRoutes;

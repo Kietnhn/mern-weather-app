@@ -163,7 +163,7 @@ const SearchCountryState = ({ size = "normal" }) => {
                     ref={positionRef}
                     className={`w-full ${
                         size === "small" ? "p-1 pl-[146px]" : "p-4 pl-[176px]"
-                    }  font-semibold rounded-full  border-2 border-theme  theme bg-transparent sm:bg-theme`}
+                    }  font-semibold rounded-full  border-2 border-theme  theme bg-[transparent!important] sm:bg-theme`}
                     placeholder="Enter place..."
                     value={input}
                     onChange={(e) => handleChangeInput(e)}
