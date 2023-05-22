@@ -95,7 +95,7 @@ function Next7Day() {
     return (
         <>
             {window.innerWidth < 992 ? (
-                <div className="fixed bottom-0 left-6 right-6 h-[75vh] overflow-auto lg:hidden">
+                <div className="fixed bottom-0 left-6 right-6 h-[75vh] overflow-auto xl:hidden">
                     <div className={`flex flex-wrap mb-16`}>
                         {weatherData.weeklyWeather?.length > 0 &&
                             weatherData.weeklyWeather.map((weather, index) => {
@@ -194,7 +194,7 @@ function Next7Day() {
                     </div>
                 </div>
             ) : (
-                <div className="hidden lg:block relative w-full h-full">
+                <div className="hidden xl:block relative w-full h-full">
                     {isCompare ? (
                         <>
                             <ModalCompare

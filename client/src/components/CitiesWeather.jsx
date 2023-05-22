@@ -149,13 +149,13 @@ const CitiesWeather = ({ isEdit, className }) => {
                         </h2>
                         <NavLink
                             to="/login"
-                            className="block text-center w-full border px-4 py-2 rounded-lg bg-primaryText text-dark lg:hidden"
+                            className="block text-center w-full border px-4 py-2 rounded-lg bg-primaryText text-dark xl:hidden"
                         >
                             Sign in
                         </NavLink>
                         <button
                             onClick={() => toggleModalLogin(true)}
-                            className="button w-full hidden lg:block"
+                            className="button w-full hidden xl:block"
                         >
                             Sign in
                         </button>

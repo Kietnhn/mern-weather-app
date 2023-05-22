@@ -10,7 +10,7 @@ function Calendar() {
                 <p className="text-center text-lg">
                     Return{" "}
                     <span className="underline">
-                        <Link to="/">Home page</Link>
+                        <Link to="/today">Today page</Link>
                     </span>
                 </p>
             </div>

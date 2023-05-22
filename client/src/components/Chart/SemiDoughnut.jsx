@@ -20,13 +20,13 @@ const SemiDoughnut = ({
                     </button>
                 </div>
             )}
-            <div className="relative px-4 my-4 h-full w-full">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:-translate-y-full text-center">
-                    <h3 className="font-semibold capitalize text-center">
+            <div className="relative px-4 my-4 lg:h-fit  w-full">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  text-center">
+                    <h3 className="lg:hidden xl:block font-semibold capitalize text-center">
                         {message}
                     </h3>
 
-                    <h2>{percen}%</h2>
+                    <h2 className="lg:mb-3 xl:mb-0">{percen}%</h2>
                 </div>
 
                 <div className="h-full">
@@ -56,6 +56,9 @@ const SemiDoughnut = ({
                         }}
                     />
                 </div>
+                <h3 className="hidden lg:block xl:hidden font-semibold capitalize text-center">
+                    {message}
+                </h3>
             </div>
         </div>
     );

@@ -172,10 +172,6 @@ const WeatherContextProvider = ({ children }) => {
         datetime,
     }) => {
         try {
-            dispatch({
-                type: SET_LOADING,
-                payload: true,
-            });
             const response = await axios(`${apiUrl}/weather/history/2.5`, {
                 params: {
                     lat,
@@ -184,10 +180,6 @@ const WeatherContextProvider = ({ children }) => {
                 },
             }).then((res) => res.data);
             if (response.success) {
-                dispatch({
-                    type: SET_LOADING,
-                    payload: false,
-                });
                 return getTodayHourlyWeatherData(
                     response.weather,
                     timezone,
@@ -195,10 +187,6 @@ const WeatherContextProvider = ({ children }) => {
                 );
             }
         } catch (error) {
-            dispatch({
-                type: SET_LOADING,
-                payload: false,
-            });
             console.error(error);
         }
     };

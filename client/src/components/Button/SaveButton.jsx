@@ -82,6 +82,7 @@ const SaveButton = () => {
     return (
         <>
             <ToolTip
+                className="flex relative"
                 message="Add to love list"
                 position="top-[calc(100%+12px)] left-1/2 -translate-x-1/2"
                 arrow="-top-2 -translate-y-1/2 left-1/2 -translate-x-1/2 

@@ -43,7 +43,7 @@ const Weekly = ({ setIndexActive = () => {}, indexActive = 0 }) => {
                                               .tz(timezone)
                                               .format("ddd")}
                                 </h3>
-                                <div className="between">
+                                <div className="between sm:flex-col xl:flex-row">
                                     <div className="w-14 h-14">
                                         <img
                                             src={setIconUrl(

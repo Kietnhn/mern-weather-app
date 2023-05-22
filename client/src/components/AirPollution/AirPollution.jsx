@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, forwardRef } from "react";
 import LoadingComponent from "../Loading/LoadingComponent";
 import Wrapper from "../Wrapper";
 import { AirContext } from "../../contexts/AirContext";
@@ -6,7 +6,7 @@ import { WeatherContext } from "../../contexts/WeatherContext";
 import Current from "./Current";
 import History from "./History";
 import Forecast from "./Forecast";
-const AirPollution = () => {
+const AirPollution = forwardRef((_, ref) => {
     const [mode, setMode] = useState("current");
 
     const {
@@ -37,9 +37,10 @@ const AirPollution = () => {
     }, [weatherData]);
     return (
         <Wrapper
+            ref={ref}
             title="Air Pollution"
             id="airpollution"
-            styleTitle="hidden lg:block font-bold text-4xl text-center  mb-5"
+            styleTitle="hidden sm:block font-bold text-4xl text-center  mb-5"
         >
             <div className="w-full lg:px-5 lg:py-3">
                 <div className="flex flex-wrap-reverse -mx-3">
@@ -55,11 +56,11 @@ const AirPollution = () => {
                             {["current", "history", "forecast"].map((item) => (
                                 <div
                                     key={item}
-                                    className="w-1/3 px-3 lg:w-1/2 lg:mb-3"
+                                    className="w-1/3 lg:px-3 sm:px-5 sm:w-full sm:mb-3"
                                 >
                                     <button
                                         onClick={() => handleSetMode(item)}
-                                        className={`lg:w-full capitalize ${
+                                        className={`sm:w-full capitalize ${
                                             mode === item
                                                 ? "button-reverse"
                                                 : " button"
@@ -75,5 +76,5 @@ const AirPollution = () => {
             </div>
         </Wrapper>
     );
-};
+});
 export default AirPollution;

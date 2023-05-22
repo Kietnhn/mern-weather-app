@@ -61,11 +61,11 @@ const Login = ({ onChangeForm }) => {
             </form>
             <div className="text-start w-full">
                 <p className="text-text">Don't have an account ?</p>
-                <p className="lg:hidden hover:cursor-pointer hover:underline">
+                <p className="xl:hidden hover:cursor-pointer hover:underline">
                     <Link to="/registry">Sign up</Link>
                 </p>
                 <p
-                    className="hidden lg:block  hover:cursor-pointer hover:underline"
+                    className="hidden xl:block  hover:cursor-pointer hover:underline"
                     onClick={onChangeForm}
                 >
                     Sign up

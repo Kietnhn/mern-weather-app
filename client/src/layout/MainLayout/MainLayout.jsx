@@ -35,7 +35,7 @@ function MainLayout({ children }) {
                     {!isMobile ? (
                         <DesktopLayout>{children}</DesktopLayout>
                     ) : (
-                        <div className="theme p-6 h-screen lg:brightness-100 brightness-[0.95] duration-200 lg:w-[unset] lg:h-[unset] lg:p-0">
+                        <div className="theme p-6 h-screen xl:brightness-100 brightness-[0.95] duration-200 xl:w-[unset] xl:h-[unset] xl:p-0">
                             <MobileLayout>{children}</MobileLayout>
                         </div>
                     )}

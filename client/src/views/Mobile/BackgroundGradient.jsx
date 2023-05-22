@@ -12,7 +12,7 @@ const BackgroundGradient = () => {
     } = useContext(WeatherContext);
     return (
         <div
-            className={`lg:hidden fixed inset-0 bg-image duration-500 ${setBackgroundGradient(
+            className={`xl:hidden fixed inset-0 bg-image duration-500 ${setBackgroundGradient(
                 currentWeather?.weather[0]?.icon
             )} ${isUseAnimateBackground ? "brightness-75" : ""}`}
             style={{

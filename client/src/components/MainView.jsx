@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { forwardRef, useContext, useState } from "react";
 import { WeatherContext } from "../contexts/WeatherContext";
 import Weekly from "./Desktop/Weekly";
 import Hourly from "./Chart/Hourly";
@@ -11,7 +11,7 @@ import Wrapper from "./Wrapper";
 import Alert from "./Alert";
 import CompareMode from "./Button/CompareMode";
 
-const MainView = () => {
+const MainView = forwardRef((_, ref) => {
     const [indexActive, setIndexActive] = useState(0);
 
     const {
@@ -31,11 +31,11 @@ const MainView = () => {
         return indexActive === 0 ? currentWeather : weeklyWeather[indexActive];
     };
     return (
-        <Wrapper id="mainview">
+        <Wrapper id="mainview" ref={ref}>
             <CompareMode />
 
-            <div className="flex h-full -mx-3  flex-wrap">
-                <div className="w-4/5 px-3 mb-3 ">
+            <div className="flex h-full -mx-3  flex-wrap sm:pt-[52px] lg:pt-0">
+                <div className="w-full lg:w-4/5 px-3 mb-3 ">
                     <ViewInfo
                         weather={weather()}
                         indexActive={indexActive}
@@ -47,7 +47,7 @@ const MainView = () => {
                     />
                 </div>
 
-                <div className="w-1/5 px-3 mb-3 ">
+                <div className="hidden lg:block lg:w-1/5 px-3 mb-3 ">
                     <h3 className="text-xl font-semibold mb-3">
                         Minutely precipitation:
                     </h3>
@@ -61,8 +61,8 @@ const MainView = () => {
                         )}
                     </div>
                 </div>
-                <div className="w-4/5 px-3 mb-3">
-                    <div className="flex items-center justify-between ">
+                <div className="w-full lg:w-4/5 px-3 mb-3">
+                    <div className="flex items-center justify-between lg:px-3 xl:px-0">
                         <h3 className="text-xl font-semibold">
                             Hourly weather infomation:
                             <span className="ml-1 capitalize">{dataChart}</span>
@@ -74,9 +74,9 @@ const MainView = () => {
                         {indexActive !== 0 && <Alert message="Limited API" />}
                     </div>
                 </div>
-                <div className="w-1/5 px-3 mb-3">
+                <div className="hidden lg:block lg:w-1/5 px-3 mb-3">
                     <SemiDoughnut
-                        className="p-2 h-full pt-12  between flex-col"
+                        className="p-2 pt-12 h-full between xl:justify-start flex-col"
                         name="clouds"
                         percen={weather().clouds}
                         message={weather().weather[0].description}
@@ -86,5 +86,5 @@ const MainView = () => {
             </div>
         </Wrapper>
     );
-};
+});
 export default MainView;

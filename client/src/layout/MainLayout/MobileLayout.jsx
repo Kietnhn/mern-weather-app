@@ -21,7 +21,7 @@ const MobileLayout = ({ children }) => {
             </div>
             {/* <Navigation /> */}
             <BackgroundGradient />
-            <div className="w-full  relative z-20 lg:hidden">
+            <div className="w-full  relative z-20 xl:hidden">
                 {!["/my-city", "/get-in-touch"].includes(location.pathname) && (
                     <div className="relative my-4 z-10 flex items-center mt-10">
                         <h3 className="text-2xl font-semibold mr-2 ">

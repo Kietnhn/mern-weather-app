@@ -62,16 +62,13 @@ function Landing() {
     }, [isMobile, navigate]);
     return (
         <div
-            className={`bg-no-repeat bg-cover bg-center brightness-90 lg:brightness-100 w-full
-             h-screen dark:bg-[#101014] bg-white px-[26px] relative lg:w-screen overflow-hidden lg:h-screen lg:mx-auto  "
+            className={`bg-image brightness-90 xl:brightness-100 w-full
+             h-screen theme  relative xl:w-screen overflow-hidden xl:h-screen xl:mx-auto  "
             `}
             style={{ backgroundImage: `url(${homepage})` }}
         >
-            <div className="fixed top-5 left-6 right-6 z-50 lg:hidden">
-                <ModalMenu />
-            </div>
             {!isAuthenticated && (
-                <div className="fixed left-8 top-8 lg:hidden">
+                <div className="fixed left-8 top-8 xl:hidden">
                     <button
                         className="p-2 rounded-full bg-[rgba(150,28,28,0.4)] text-text"
                         onClick={() => window.history.back()}
@@ -82,9 +79,9 @@ function Landing() {
                     </button>
                 </div>
             )}
-            <div className="relative mx-auto pt-5 pb-10  w-[300px] z-[49] lg:w-[900px] h-screen flex flex-col justify-between  ">
+            <div className="relative mx-auto pt-5 pb-10 max-w-full w-[420px] sm:w-[500px] md:w-[680px] z-[49] xl:w-[900px] h-screen flex flex-col justify-between  ">
                 <div>
-                    <div className="mb-4 lg:flex lg:justify-center lg:items-end">
+                    <div className="mb-4 xl:flex xl:justify-center xl:items-end">
                         <h1 className="text-6xl font-bold text-center title ">
                             WeT
                         </h1>

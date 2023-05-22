@@ -68,7 +68,7 @@ const FormContact = () => {
     };
 
     return (
-        <div className="mt-10 lg:m-0 theme h-full lg:min-w-[360px] px-5 py-4 flex flex-col justify-between">
+        <div className="mt-10 xl:m-0 theme h-full xl:min-w-[360px] px-5 py-4 flex flex-col justify-between">
             <div className="mb-5 center justify-start">
                 <h3 className="uppercase inline-block text-xs font-semibold tracking-widest mr-2">
                     Feedback form

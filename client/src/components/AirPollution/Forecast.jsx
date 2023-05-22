@@ -16,7 +16,7 @@ const Forecast = ({ lat, lon, timezone }) => {
             <h1 className="text-xl font-semibold mb-4">
                 Forecast Air Pollution:
             </h1>
-            <div>
+            <div className="sm:h-[280px] lg:h-[360px]">
                 {forecast && (
                     <AirChart list={forecast.list} timezone={timezone} />
                 )}

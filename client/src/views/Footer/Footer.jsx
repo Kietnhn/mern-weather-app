@@ -3,28 +3,35 @@ import socials from "../../routes/socials";
 import ToolTip from "../../components/ToolTip";
 import Wrapper from "../../components/Wrapper";
 import Contact from "../Contact/Contact";
-const Footer = () => {
+import { forwardRef } from "react";
+const Footer = forwardRef((_, ref) => {
     return (
-        <Wrapper id="getintouch" sizeFull={true} className="fixed inset-0">
+        <Wrapper
+            ref={ref}
+            id="getintouch"
+            sizeFull={true}
+            className="fixed inset-0 lg:static"
+        >
             <div className="h-full flex flex-col justify-end ">
                 <Contact />
-                <footer className="bg-transparent lg:theme-reverse z-10 lg:z-0 px-6 lg:px-0  lg:pt-12 lg:pb-24">
-                    <div className="w-full lg:max-w-full lg:w-[1300px] mx-auto">
-                        <div className="flex flex-wrap -mx-3">
-                            <div className="w-full lg:w-1/4 px-3"></div>
-                            <div className="w-1/2 text-xs lg:text-base text-[white] lg:text-[unset]  lg:w-1/4 px-3 mb-3">
+                <footer className="bg-transparent sm:theme-reverse z-10 lg:z-0 px-6 lg:px-0  sm:pt-12 sm:pb-12 md:pb-24">
+                    <div className="w-full xl:max-w-full lg:w-[900px] xl:w-[1300px] lg:mt-5 xl:mt-0  mx-auto">
+                        <div className="flex flex-wrap -mx-3 ">
+                            <div className="w-full lg:hidden xl:block xl:w-1/4 px-3"></div>
+                            <div className="w-1/2 text-xs md:text-base text-[white] sm:text-[unset]  xl:w-1/4 px-3 mb-3">
                                 <div>
                                     <h3 className="font-semibold">
                                         Contact me
                                     </h3>
                                     <h4>
                                         nguyenhoangkiet0810@gmail.com
+                                        <br />
                                         +84797372607
                                     </h4>
                                 </div>
                             </div>
-                            <div className="w-1/2 lg:w-2/4 px-3 ">
-                                <div className="flex flex-wrap  lg:gap-4 -mx-2">
+                            <div className="w-1/2 xl:w-2/4 px-3 ">
+                                <div className="flex flex-wrap lg:justify-end xl:justify-start lg:gap-4 -mx-2">
                                     {socials.map((social) => {
                                         const Icon = social.icon;
                                         return (
@@ -59,5 +66,5 @@ const Footer = () => {
             </div>
         </Wrapper>
     );
-};
+});
 export default Footer;

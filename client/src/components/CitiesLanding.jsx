@@ -24,7 +24,7 @@ const CitiesLanding = () => {
                         onClick={() => handleSelectPosition(item)}
                     >
                         <div className="flex items-center justify-center relative h-full">
-                            <div className="w-[127px] h-[127px] lg:w-full lg:h-[300px] brightness-75 hover:brightness-90 rounded-[12px]  overflow-hidden">
+                            <div className="w-[127px] h-[127px] xl:w-full md:h-[240px] xl:h-[300px] brightness-75 hover:brightness-90 rounded-[12px]  overflow-hidden">
                                 <img
                                     src={item.weather.imgUrl}
                                     alt={`${item.weather.name}-img`}

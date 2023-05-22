@@ -86,7 +86,7 @@ const AirChart = ({ list = [], timezone }) => {
     if (!data) return <></>;
     return (
         <>
-            <Line options={options} data={data} height={360} width="100%" />
+            <Line options={options} data={data} height="100%" width="100%" />
         </>
     );
 };

@@ -88,7 +88,7 @@ const Hourly = ({ weathers = [] }) => {
                 }),
             }));
         }
-
+        console.log({ datasets });
         setData({ datasets, labels });
 
         // eslint-disable-next-line react-hooks/exhaustive-deps

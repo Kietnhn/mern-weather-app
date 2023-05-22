@@ -41,7 +41,7 @@ function Today() {
         <>
             {isMobile ? (
                 <>
-                    <div className="fixed bottom-0 left-0 right-0 h-[70vh] overflow-auto p-6 lg:hidden">
+                    <div className="fixed bottom-0 left-0 right-0 h-[70vh] overflow-auto p-6 xl:hidden">
                         <MainView />
                         <Hourly />
                         <Weekly />

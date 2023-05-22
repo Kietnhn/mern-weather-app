@@ -21,16 +21,23 @@ const DesktopLayout = ({ children }) => {
     //             window.scrollTo(left, top);
     //         });
     // }, []);
+
     return (
         <>
             <DesktopHeader />
             <ModalLogin />
             <ModalUpdateProfile />
             <div
-                className={`theme h-[100vh] overflow-hidden`}
+                className={`hidden sm:block theme xl:h-[100vh] overflow-hidden`}
                 style={{ scrollBehavior: "smooth" }}
             >
                 {children}
+            </div>
+            <div className="block sm:hidden fixed inset-0">
+                <div className="absolute-center">
+                    <h1>Something wrong !!!</h1>
+                    <h2>Refresh </h2>
+                </div>
             </div>
         </>
     );

@@ -31,7 +31,7 @@ function getStateOfAir(index) {
         },
     ];
     return (
-        air[index] || {
+        air[index - 1] || {
             status: "Unknow",
             icon: UnknowIcon,
         }

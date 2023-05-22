@@ -10,18 +10,7 @@ const ShowHistoryButton = () => {
         getHistoryWeather2_5,
         setHistoryWeather,
     } = useContext(WeatherContext);
-    // const handleShowHistory = async () => {
-    //     if (!historyWeather) {
-    //         const secondsOf7Days = 604800;
-    //         const date = moment
-    //             .unix(dt - secondsOf7Days)
-    //             .tz(timezone)
-    //             .format("yyyy-MM-DD");
-    //         await getHistoryWeather({ lat, lon, start: date, end: date });
-    //     } else {
-    //         setHistoryWeather(null);
-    //     }
-    // };
+
     const handleGetHistoryWeather = async (e, { datetime, prop }) => {
         // prevent double or more click
         e.target.disabled = true;
@@ -57,7 +46,6 @@ const ShowHistoryButton = () => {
             history7_day: null,
         });
     };
-
     useEffect(() => {
         handleClearAllHistoryWeather();
         // eslint-disable-next-line react-hooks/exhaustive-deps

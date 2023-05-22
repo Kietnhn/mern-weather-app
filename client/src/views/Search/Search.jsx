@@ -37,7 +37,7 @@ function Search() {
 
     return (
         <div className="relative">
-            <div className="dark:bg-secondDark bg-[#dee1e6]  text-dark dark:text-primaryText between font-semibold lg:px-3 w-full">
+            <div className="dark:bg-secondDark bg-[#dee1e6]  text-dark dark:text-primaryText between font-semibold xl:px-3 w-full">
                 <button className="absolute top-[50%] left-4 translate-y-[-50%] ">
                     <span>
                         <SearchIcon />

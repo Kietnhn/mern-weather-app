@@ -93,12 +93,12 @@ const ModalUpdateProfile = () => {
                 >
                     <div
                         className={`theme absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  
-                           min-w-[768px]
-                        duration-500 h-[80vh] flex `}
+                           md:min-w-[768px] sm:min-w-[480px]
+                        duration-500 md:h-[80vh]  flex  sm:flex-wrap`}
                         onClick={(e) => e.stopPropagation()}
                     >
                         <form
-                            className="w-1/2 p-5 h-full flex flex-col justify-between"
+                            className="sm:w-full md:w-1/2 p-5 h-full flex flex-col justify-between"
                             onSubmit={update}
                             encType="multipart/form-data"
                         >
@@ -138,7 +138,7 @@ const ModalUpdateProfile = () => {
                                     <div className="mb-3 mr-auto">
                                         <div className="relative">
                                             <input
-                                                className="font-semibold "
+                                                className="font-semibold theme"
                                                 placeholder="User name"
                                                 value={updateForm.username}
                                                 name="username"
@@ -187,7 +187,7 @@ const ModalUpdateProfile = () => {
                                 </button>
                             </div>
                         </form>
-                        <div className="w-1/2 h-full">
+                        <div className="sm:w-full sm:h-[240px]  md:w-1/2 md:h-full">
                             <MapUpdateProfile
                                 setPositionOnMap={setPositionOnMap}
                                 positionOnMap={positionOnMap}

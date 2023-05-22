@@ -14,7 +14,7 @@ const History = ({ timezone }) => {
                 History Air Pollution
             </h1>
             <DateForm />
-            <div>
+            <div className="sm:h-[280px] lg:h-[360px]">
                 {history && (
                     <AirChart list={history.list} timezone={timezone} />
                 )}

@@ -50,7 +50,7 @@ const DateForm = () => {
     return (
         <div className="w-full flex flex-wrap lg:between lg:-mx-3">
             {[...Object.keys(inputs)].map((input, index) => (
-                <div className="w-1/2 mb-3 lg:mb-0 lg:w-2/5 px-3 " key={index}>
+                <div className="w-1/2 mb-3 lg:mb-0 md:w-2/5 px-3 " key={index}>
                     <div className="relative">
                         <input
                             className="w-full py-2 px-3 theme"
@@ -62,7 +62,7 @@ const DateForm = () => {
                         />
                         <div className="absolute right-0 top-0 bottom-0">
                             <input
-                                className="w-[44px] h-full px-3 hover:cursor-pointer"
+                                className="w-[44px] h-full px-3 hover:cursor-pointer theme"
                                 type="date"
                                 onChange={handleSetInput}
                                 name={`${input}`}
@@ -72,7 +72,7 @@ const DateForm = () => {
                 </div>
             ))}
 
-            <div className="w-full lg:flex-1 px-3">
+            <div className="w-full md:flex-1 px-3">
                 <button
                     className="button w-full lg:w-[unset]"
                     onClick={handleGetHistoryAirPollution}

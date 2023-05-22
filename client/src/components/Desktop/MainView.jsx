@@ -8,6 +8,7 @@ import { WeatherContext } from "../../contexts/WeatherContext";
 import SwitchUnitTemp from "../Button/SwitchUnitTemp";
 import convertCelsiusToFahrenheit from "../../utils/convertCelsiusToFahrenheit";
 import { SettingsContext } from "../../contexts/SettingsContext";
+import SaveButton from "../Button/SaveButton";
 
 const MainView = ({ weather, timezone, indexActive }) => {
     const {
@@ -67,13 +68,20 @@ const MainView = ({ weather, timezone, indexActive }) => {
     if (!weather) return <></>;
     return (
         <div className="">
-            <div className="between mb-3">
+            <div className="sm:hidden md:flex between mb-3">
                 <Time timezone={timezone} weather={weather} />
                 <SwitchUnitTemp />
             </div>
-            <div className="between -mx-3">
-                <div className="w-2/5 px-3">
-                    <div className="center">
+            <div className="between -mx-3 sm:flex-wrap md:flex-nowrap">
+                <div className="sm:w-full sm:items-start sm:between md:block md:w-[30%] xl:w-2/5 px-3">
+                    <div className="hidden sm:block md:hidden">
+                        <div className="flex items-center gap-4 mb-1">
+                            <h1 className="font-semibold">{timezone}</h1>
+                            <SaveButton />
+                        </div>
+                        <Time timezone={timezone} weather={weather} />
+                    </div>
+                    <div className="center ">
                         <div>
                             <img
                                 src={set2xIconUrl(weather.weather[0].icon)}
@@ -82,7 +90,7 @@ const MainView = ({ weather, timezone, indexActive }) => {
                         </div>
                         <div>
                             <h1
-                                className="text-6xl font-semibold hover:cursor-pointer"
+                                className="text-4xl sm:text-6xl md:text-4xl lg:text-6xl font-semibold hover:cursor-pointer"
                                 onClick={() => handleSetDataChart("temp")}
                             >
                                 {renderTemp(weather)}
@@ -94,7 +102,7 @@ const MainView = ({ weather, timezone, indexActive }) => {
                         </div>
                     </div>
                 </div>
-                <div className="w-3/5 px-3">
+                <div className="md:w-[70%] xl:w-3/5 px-3">
                     <div className="flex flex-wrap -mx-3">
                         {data.map((item) => (
                             <div

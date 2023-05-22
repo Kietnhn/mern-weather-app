@@ -71,7 +71,7 @@ const Input = ({ mode, position, setPosition }) => {
             <input
                 className={`w-full p-2  text-sm 
                 rounded-full  outline-none
-                lg:p-3 lg:text-xl lg:rounded-none
+                xl:p-3 xl:text-xl xl:rounded-none
                 `}
                 onFocus={() => setTimeout(() => setShowAuto(mode.name), 500)}
                 onBlur={() => setTimeout(() => setShowAuto(""), 250)}

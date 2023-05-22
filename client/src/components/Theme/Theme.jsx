@@ -18,7 +18,7 @@ function Theme({ className }) {
                     arrow="top-0 -translate-y-full left-1/2 -translate-x-1/2 
                     border-[transparent_transparent_white_transparent] dark:border-[transparent_transparent_black_transparent]"
                 >
-                    <button className="p-3 rounded-full theme  duration-200">
+                    <button className="p-3 rounded-full theme bg-transparent border-theme border-2 duration-200">
                         <span>
                             {colorTheme === "dark" ? (
                                 <LightIcon />

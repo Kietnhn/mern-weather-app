@@ -15,7 +15,7 @@ const DesktopHeader = () => {
         },
     } = useContext(WeatherContext);
     return (
-        <div className="fixed top-0 left-0 right-0 theme dark:border-[unset]   z-[9999]">
+        <div className="hidden sm:block fixed top-0 left-0 right-0 theme dark:border-[unset]   z-[9999999]">
             <div className=" w-[1300px] max-w-full px-3 mx-auto">
                 <div
                     className={`flex items-center -mx-3 ${
@@ -33,7 +33,7 @@ const DesktopHeader = () => {
                                         WeT
                                     </NavLink>
                                 )}
-                                <div className="flex items-center gap-4">
+                                <div className="sm:hidden md:flex items-center gap-4">
                                     {isCompare ? (
                                         <NavLink to="/today">
                                             <h1
@@ -59,7 +59,7 @@ const DesktopHeader = () => {
 
                     <div className="w-1/5 px-3">
                         <div className="between h-full">
-                            <Theme className="" />
+                            <Theme className="sm:hidden md:block" />
                             <User />
                         </div>
                     </div>

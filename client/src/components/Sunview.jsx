@@ -1,9 +1,9 @@
-import React, { useContext, useEffect } from "react";
+import React, { forwardRef, useContext, useEffect } from "react";
 import ChartSun from "./Chart/ChartSun";
 import Wrapper from "./Wrapper";
 import { WeatherContext } from "../contexts/WeatherContext";
 
-const Sunview = () => {
+const Sunview = forwardRef((_, ref) => {
     const {
         weatherState: {
             weatherData: { currentWeather, timezone, lat, lon },
@@ -20,9 +20,9 @@ const Sunview = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
-        <Wrapper title="Sun & Moon" id="sunmoon">
+        <Wrapper title="Sun & Moon" id="sunmoon" ref={ref}>
             <div className="relative h-[calc(100%-40px)] flex flex-col justify-end">
-                <div className="absolute min-w-[260px] top-0 left-0 bg-transparent animate-moveLeftToRight lg:animate-moveInSideWrap hover:pause">
+                <div className="absolute min-w-[260px] top-0 left-0 bg-transparent animate-moveLeftToRight xl:animate-moveInSideWrap hover:pause">
                     {sunData && (
                         <div className="theme modal-content border-1 rounded-2xl p-3">
                             {[...Object.keys(sunData)].map((item) => (
@@ -40,16 +40,18 @@ const Sunview = () => {
                     )}
                 </div>
 
-                <div className="mt-[282px] lg:mt-0">
+                <div className="mt-[282px] xl:mt-0">
                     <ChartSun
                         weather={currentWeather}
                         timezone={timezone}
-                        className={"h-[180px] lg:h-[360px]"}
+                        className={
+                            "h-[180px] lg:h-[360px] sm:h-[240px] md:h-[280px]"
+                        }
                     />
                 </div>
             </div>
         </Wrapper>
     );
-};
+});
 
 export default Sunview;

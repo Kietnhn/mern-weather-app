@@ -34,8 +34,8 @@ const DetailsInfo = ({ weather, weatherType = "hourlyWeather" }) => {
     if (!weather || !datas) return <></>;
     return (
         <>
-            <div className="lg:font-semibold capitalize ">
-                <div className="w-full lg:text-2xl lg:font-semibold lg:mb-3">
+            <div className="xl:font-semibold capitalize ">
+                <div className="w-full xl:text-2xl xl:font-semibold xl:mb-3">
                     <h2>Data Chart:</h2>
                 </div>
                 <div className="flex  flex-wrap gap-4">
@@ -50,7 +50,7 @@ const DetailsInfo = ({ weather, weatherType = "hourlyWeather" }) => {
                             >
                                 <button
                                     onClick={() => setDataChart(data.key)}
-                                    className={`w-full  button capitalize ${
+                                    className={`w-full md:text-sm lg:text-base button capitalize ${
                                         dataChart === data.key
                                             ? "activeButton"
                                             : ""
