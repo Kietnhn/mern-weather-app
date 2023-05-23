@@ -24,10 +24,10 @@ const ModalLogin = () => {
                     <div
                         className={`theme absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex ${
                             isLogin ? "flex-row-reverse" : "flex-row"
-                        } duration-500 min-w-[768px] h-[80vh]`}
+                        } duration-500 md:min-w-[768px] h-[80vh] sm:min-w-[480px]`}
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <div className="w-1/2 ">
+                        <div className="w-1/2 md:block sm:hidden">
                             <div
                                 className={`bg-image w-full h-full duration-200 p-8 theme font-semibold brightness-90
                             `}
@@ -42,7 +42,7 @@ const ModalLogin = () => {
                                 </h3>
                             </div>
                         </div>
-                        <div className="w-1/2 flex">
+                        <div className={`sm:w-full md:w-1/2 flex `}>
                             {isLogin ? (
                                 <Login onChangeForm={() => setIsLogin(false)} />
                             ) : (

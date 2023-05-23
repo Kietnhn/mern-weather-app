@@ -82,7 +82,7 @@ const CitiesWeather = ({ isEdit, className }) => {
                             weather?.weather.imgUrl
                                 ? "bg-image "
                                 : setBackgroundGradient(weather?.weather?.icon)
-                        } theme mb-2 hover:cursor-pointer px-3 min-h-[48px]`}
+                        } theme mb-2 hover:cursor-pointer px-3 min-h-[48px] group`}
                 style={{
                     backgroundImage: `${
                         weather?.weather.imgUrl
@@ -91,8 +91,8 @@ const CitiesWeather = ({ isEdit, className }) => {
                     }`,
                 }}
             >
-                <span className=" max-w-[100px] overflow-hidden ">
-                    <h2 className="font-semibold capitalize text-xl drop-shadow-md whitespace-nowrap hover:-translate-x-1/2 duration-[2s]">
+                <span className=" max-w-[100px] overflow-hidden group-hover:text-[white] ">
+                    <h2 className="font-semibold capitalize text-xl drop-shadow-md whitespace-nowrap hover:-translate-x-1/2 duration-1000">
                         {weather?.weather?.name}
                     </h2>
                 </span>
@@ -138,7 +138,9 @@ const CitiesWeather = ({ isEdit, className }) => {
     return (
         <div
             className={`flex flex-col ${
-                isCompare ? "max-h-[300px] overflow-auto" : "h-full"
+                isCompare
+                    ? "max-h-[300px] xl:max-h-[360px] overflow-auto"
+                    : "h-full"
             }`}
         >
             {!isAuthenticated ? (

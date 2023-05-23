@@ -39,8 +39,11 @@ const Footer = forwardRef((_, ref) => {
                                                 key={social.name}
                                                 className="w-1/2 lg:w-[unset] px-2 mb-3 center"
                                             >
-                                                <ToolTip message={social.name}>
-                                                    <button className="p-2 rounded-full theme brightness-[.7] hover:brightness-[1]">
+                                                <ToolTip
+                                                    message={social.name}
+                                                    customMessage="capitalize"
+                                                >
+                                                    <button className=" p-2 rounded-full theme brightness-[.7] hover:brightness-[1]">
                                                         <Link
                                                             to={social.link}
                                                             target="_blank"

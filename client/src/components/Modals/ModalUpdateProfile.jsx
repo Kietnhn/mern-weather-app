@@ -83,7 +83,6 @@ const ModalUpdateProfile = () => {
             url = URL.createObjectURL(urlImg);
         return `url(${urlImg ? url : ""})`;
     };
-
     return (
         <>
             {isAuthenticated && isShowModalUpdateProfile && (

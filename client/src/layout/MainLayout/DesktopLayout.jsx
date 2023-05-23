@@ -1,8 +1,8 @@
 import React from "react";
 import DesktopHeader from "../../views/Desktop/DesktopHeader";
-import { useEffect } from "react";
 import ModalLogin from "../../components/Modals/ModalLogin";
 import ModalUpdateProfile from "../../components/Modals/ModalUpdateProfile";
+import ErrorPage from "../../pages/ErrorPage";
 const DesktopLayout = ({ children }) => {
     // useEffect(() => {
     //     window.addEventListener("scroll", () => {
@@ -33,11 +33,8 @@ const DesktopLayout = ({ children }) => {
             >
                 {children}
             </div>
-            <div className="block sm:hidden fixed inset-0">
-                <div className="absolute-center">
-                    <h1>Something wrong !!!</h1>
-                    <h2>Refresh </h2>
-                </div>
+            <div className="block sm:hidden ">
+                <ErrorPage />
             </div>
         </>
     );

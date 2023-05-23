@@ -6,6 +6,7 @@ import { WeatherContext } from "../../contexts/WeatherContext";
 import Header from "../../views/Mobile/Header";
 import { useLocation } from "react-router-dom";
 import BackgroundGradient from "../../views/Mobile/BackgroundGradient";
+import ErrorPage from "../../pages/ErrorPage";
 const MobileLayout = ({ children }) => {
     const {
         weatherState: {
@@ -35,6 +36,9 @@ const MobileLayout = ({ children }) => {
                     </div>
                 )}
                 {children}
+            </div>
+            <div className="hidden sm:block">
+                <ErrorPage />
             </div>
         </>
     );

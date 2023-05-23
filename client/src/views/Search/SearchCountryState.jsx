@@ -216,7 +216,7 @@ const SearchCountryState = ({ size = "normal" }) => {
             <button
                 className={`absolute right-0 top-0 bottom-0 ${
                     size === "small" ? "w-10" : "w-14"
-                } rounded-r-full border-2 bg-text  center`}
+                } rounded-r-full border-2  center`}
                 onClick={handleSearch}
                 disabled={!position}
             >

@@ -15,7 +15,7 @@ const Comparative = () => {
         <Wrapper>
             <div className="md:h-[calc(100vh-24px)] lg:h-full p-3 flex flex-col justify-between  md:pt-[52px]  lg:pt-0">
                 <div className="flex w-full flex-wrap mb-3">
-                    <div className="md:w-3/5 w-2/5 px-3 mb-3 max-h-[300px] overflow-auto flex flex-wrap">
+                    <div className="md:w-3/5 xl:w-2/5 px-3 mb-3 max-h-[300px] xl:max-h-[360px] overflow-auto flex flex-wrap">
                         <div>
                             <h2 className="xl:text-2xl xl:font-semibold xl:mb-3">
                                 Weather Type:
@@ -43,7 +43,7 @@ const Comparative = () => {
                             <DetailsInfo weather={weatherData[type][0]} />
                         </div>
                     </div>
-                    <div className=" w-2/5 px-3 mb-3 max-h-[300px] overflow-auto">
+                    <div className=" w-2/5 px-3 mb-3 max-h-[300px] xl:max-h-[360px] overflow-auto">
                         <Compare />
                     </div>
                     <div className="md:hidden lg:block w-1/5 px-3 mb-3">

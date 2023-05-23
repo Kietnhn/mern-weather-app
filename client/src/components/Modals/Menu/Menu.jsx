@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { WeatherContext } from "../../../contexts/WeatherContext";
 import { LogOutIcon, MenuBarIcon } from "../../icons";
@@ -14,6 +14,7 @@ function Menu({ className }) {
         setIsUseAnimateBackground,
         weatherState: { isUseAnimateBackground },
     } = useContext(WeatherContext);
+    const location = useLocation();
     const [showMenu, setShowMenu] = useState(false);
     return (
         <>
@@ -75,14 +76,21 @@ function Menu({ className }) {
                                             isAuthenticated ? (
                                             <li
                                                 key={category.title}
-                                                className={`mb-2`}
+                                                className={`mb-2 hover:text-[white] dark:hover:text-dark duration-200
+                                                ${
+                                                    location.pathname ===
+                                                    category.to
+                                                        ? "text-[white] dark:text-dark"
+                                                        : ""
+                                                }
+                                                `}
                                                 onClick={() =>
                                                     setShowMenu(false)
                                                 }
                                             >
                                                 <Link
                                                     to={category.to}
-                                                    className={`flex justify-start items-center gap-2  ${
+                                                    className={`flex justify-start items-center text-[inherit] gap-2  ${
                                                         category.to
                                                             ? ""
                                                             : "text-text"
@@ -94,7 +102,9 @@ function Menu({ className }) {
                                                             height="20px"
                                                         />
                                                     </span>
-                                                    <span className={`text-xl`}>
+                                                    <span
+                                                        className={`text-xl `}
+                                                    >
                                                         {category.title}
                                                     </span>
                                                 </Link>
@@ -133,8 +143,8 @@ function Menu({ className }) {
                                                 </span>
                                             </button>
                                         </div>
-                                        <p
-                                            className="flex w-full justify-center items-center gap-2 border border-dark dark:border-primaryText rounded-lg mt-2 py-2"
+                                        <button
+                                            className="center w-full gap-2 button mt-2"
                                             onClick={() => logoutUser()}
                                         >
                                             <span>
@@ -146,7 +156,7 @@ function Menu({ className }) {
                                             <span className="text-base ">
                                                 Logout
                                             </span>
-                                        </p>
+                                        </button>
                                     </>
                                 )}
                             </div>
