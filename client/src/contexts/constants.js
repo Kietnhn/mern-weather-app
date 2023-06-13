@@ -36,5 +36,8 @@ export const SET_HISTORY_AIR = "SET_HISTORY_AIR";
 export const SET_FORECAST_AIR = "SET_FORECAST_AIR";
 
 //system
-export const apiUrl = "http://localhost:5000/api";
+export const apiUrl =
+    process.env.NODE_ENV !== "production"
+        ? "http://localhost:5000/api"
+        : "https://sheltered-island-57187.herokuapp.com/api";
 export const LOCAL_STORAGE_TOKEN_NAME = "weather";
